@@ -1,4 +1,7 @@
 project.greenfoot
+*.greenfoot
 *.class
 *.ctxt
-*.greenfoot
+.DS_Store
+.idea/
+*.iml
