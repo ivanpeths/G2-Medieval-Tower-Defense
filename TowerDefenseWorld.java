@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Main Game World
  * 
- * @author Ivan
+ * @author Ivan and Kolby
  * @version (a version number or a date)
  */
 public class TowerDefenseWorld extends World
@@ -76,7 +76,9 @@ public class TowerDefenseWorld extends World
                         continue;
                     }
                     gameArray[currentY - 1][currentX] = 1;
-                    currentSteps++;
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps += 2;
+                    currentX++;
                 } else if (choice == 5) {
                     currentY -= 2;
                     if (currentY < 0) {
@@ -84,7 +86,9 @@ public class TowerDefenseWorld extends World
                         continue;
                     }
                     gameArray[currentY + 1][currentX] = 1;
-                    currentSteps++;
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps += 2;
+                    currentX++;
                 }
             } else {
                 if (choice <= 3) {
@@ -96,7 +100,9 @@ public class TowerDefenseWorld extends World
                         continue;
                     }
                     gameArray[currentY][currentX - 1] = 1;
-                    currentSteps++;
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps += 2;
+                    currentY++;
                 } else if (choice == 5) {
                     currentX -= 2;
                     if (currentX < 0) {
@@ -104,7 +110,9 @@ public class TowerDefenseWorld extends World
                         continue;
                     }
                     gameArray[currentY][currentX + 1] = 1;
-                    currentSteps++;
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps += 2;
+                    currentX++;
                 }
             }
             
