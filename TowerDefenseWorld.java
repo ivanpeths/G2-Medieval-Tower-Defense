@@ -28,8 +28,8 @@ public class TowerDefenseWorld extends World
     }
     
     public void populateArray () {
-        for (int i = 0; i < 0; i++) {
-            for (int j = 0; j < 0; j++) {
+        for (int i = 0; i < gameArray.length; i++) {
+            for (int j = 0; j < gameArray[i].length; j++) {
                 gameArray[i][j] = 0;
             }
         }
@@ -38,15 +38,28 @@ public class TowerDefenseWorld extends World
         int randomEnd = Greenfoot.getRandomNumber(31);
         
         if (randomStart < 16) {
-            gameArray[0][randomStart] = 1;
+            for (int i = 0; i < gameArray.length; i++) {
+                gameArray[i][randomStart] = 1;
+            }
         } else {
-            gameArray[randomStart - 15][0] = 1;
+            for (int i = 0; i < gameArray.length; i++) {
+               gameArray[randomStart - 15][i] = 1;
+            }
         }
         
         if (randomEnd < 16) {
-            gameArray[15][randomEnd] = 1;
+            for (int i = 0; i < gameArray.length; i++) {
+                if (gameArray[i][randomEnd] == 1) {
+                    gameArray[i][randomEnd] = 3;
+                    break;
+                } else {
+                    gameArray[i][randomEnd] = 2;
+                }
+            }
         } else {
-            gameArray[randomEnd - 15][15] = 1;
+            for (int i = 0; i < gameArray.length; i++) {
+               gameArray[randomEnd - 15][i] = 2;
+            }
         }
         
         
