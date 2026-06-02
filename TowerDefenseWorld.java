@@ -18,7 +18,16 @@ public class TowerDefenseWorld extends World
         super(1200, 800, 1); 
         
         setBackground();
+        populateArray();
         
+    }
+    
+    public void setBackground () {
+        background = new GreenfootImage("background.png");
+        setBackground(background);
+    }
+    
+    public void populateArray () {
         for (int i = 0; i < 0; i++) {
             for (int j = 0; j < 0; j++) {
                 gameArray[i][j] = 0;
@@ -31,20 +40,15 @@ public class TowerDefenseWorld extends World
         if (randomStart < 16) {
             gameArray[0][randomStart] = 1;
         } else {
-            randomStart -= 15;
-            gameArray[randomStart][0] = 1;
+            gameArray[randomStart - 15][0] = 1;
         }
         
         if (randomEnd < 16) {
             gameArray[15][randomEnd] = 1;
         } else {
-            randomEnd -= 15;
-            gameArray[randomEnd][15] = 1;
+            gameArray[randomEnd - 15][15] = 1;
         }
-    }
-    
-    public void setBackground () {
-        background = new GreenfootImage("background.png");
-        setBackground(background);
+        
+        
     }
 }
