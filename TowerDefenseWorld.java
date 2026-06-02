@@ -21,6 +21,7 @@ public class TowerDefenseWorld extends World
         
         setBackground();
         populateArray();
+        drawUi();
         
     }
     
@@ -64,6 +65,10 @@ public class TowerDefenseWorld extends World
             }
         }
         
+        
+    }
+    
+    private void drawUi(){
         
     }
 }
