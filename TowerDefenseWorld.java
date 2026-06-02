@@ -9,8 +9,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class TowerDefenseWorld extends World
 {
     private GreenfootImage background;
-    
-    int[][] gameArray = new int[16][16];
+    int worldSize = 16;
+    int tileLength = 60;
+    int tileHeight = 40;
+    int[][] gameArray = new int[worldSize][worldSize];
     
     public TowerDefenseWorld()
     {    
@@ -23,7 +25,7 @@ public class TowerDefenseWorld extends World
     }
     
     public void setBackground () {
-        background = new GreenfootImage("background.png");
+        GreenfootImage background = new GreenfootImage("background.png");
         setBackground(background);
     }
     
