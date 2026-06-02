@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Main Game World
  * 
- * @author (your name) 
+ * @author Ivan
  * @version (a version number or a date)
  */
 public class TowerDefenseWorld extends World
@@ -12,6 +12,11 @@ public class TowerDefenseWorld extends World
     
     int[][] gameArray = new int[16][16];
     
+    private int gridWidth = 1200 / 24;
+    private int gridHeight = 800 / 16;
+    
+    private int stepsLimit = 20;
+    
     public TowerDefenseWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
@@ -19,6 +24,7 @@ public class TowerDefenseWorld extends World
         
         setBackground();
         populateArray();
+        generatePath();
         
     }
     
@@ -27,41 +33,102 @@ public class TowerDefenseWorld extends World
         setBackground(background);
     }
     
-    public void populateArray () {
+    public void populateArray() {
         for (int i = 0; i < gameArray.length; i++) {
             for (int j = 0; j < gameArray[i].length; j++) {
                 gameArray[i][j] = 0;
             }
         }
+    }
+    
+    public void generatePath () {
+        int currentSteps = 0;
+        int currentX = 0;
+        int currentY = 0;
         
-        int randomStart = Greenfoot.getRandomNumber(31);
-        int randomEnd = Greenfoot.getRandomNumber(31);
+        int startingDirection = 0;
         
-        if (randomStart < 16) {
-            for (int i = 0; i < gameArray.length; i++) {
-                gameArray[i][randomStart] = 1;
-            }
+        if (Greenfoot.getRandomNumber(2) == 0) {
+            currentY = Greenfoot.getRandomNumber(12) + 2;
+            startingDirection = 1;
         } else {
-            for (int i = 0; i < gameArray.length; i++) {
-               gameArray[randomStart - 15][i] = 1;
-            }
+            currentX = Greenfoot.getRandomNumber(12) + 2;
+            startingDirection = 2;
         }
         
-        if (randomEnd < 16) {
-            for (int i = 0; i < gameArray.length; i++) {
-                if (gameArray[i][randomEnd] == 1) {
-                    gameArray[i][randomEnd] = 3;
-                    break;
-                } else {
-                    gameArray[i][randomEnd] = 2;
+        gameArray[currentY][currentX] = 1;
+        currentSteps = 1;
+        
+        while (currentSteps <= stepsLimit && (currentX != 15 || currentY != 15)) {
+            int choice = 0;
+            choice = Greenfoot.getRandomNumber(6);
+            
+            if (startingDirection == 1) {
+                if (choice <= 3) {
+                    currentX++;
+                } else if (choice == 4) {
+                    currentY += 2;
+                    if (currentY > 15) {
+                        currentY -= 2;
+                        continue;
+                    }
+                    gameArray[currentY - 1][currentX] = 1;
+                    currentSteps++;
+                } else if (choice == 5) {
+                    currentY -= 2;
+                    if (currentY < 0) {
+                        currentY += 2;
+                        continue;
+                    }
+                    gameArray[currentY + 1][currentX] = 1;
+                    currentSteps++;
+                }
+            } else {
+                if (choice <= 3) {
+                    currentY++;
+                } else if (choice == 4) {
+                    currentX += 2;
+                    if (currentX > 15) {
+                        currentX -= 2;
+                        continue;
+                    }
+                    gameArray[currentY][currentX - 1] = 1;
+                    currentSteps++;
+                } else if (choice == 5) {
+                    currentX -= 2;
+                    if (currentX < 0) {
+                        currentX += 2;
+                        continue;
+                    }
+                    gameArray[currentY][currentX + 1] = 1;
+                    currentSteps++;
                 }
             }
-        } else {
-            for (int i = 0; i < gameArray.length; i++) {
-               gameArray[randomEnd - 15][i] = 2;
-            }
+            
+            gameArray[currentY][currentX] = 1;
+            currentSteps++;
         }
         
-        
+        while (currentX < 15 && currentY < 15) {
+            if (currentY >= currentX) {
+                currentY++;
+            } else {
+                currentX++;
+            }
+            gameArray[currentY][currentX] = 1;
+        }
+    }
+    
+    public void drawPath () {
+        for (int i = 0; i < gameArray.length; i++) {
+            for (int j = 0; j < gameArray[i].length; j++) {
+                if (gameArray[i][j] == 1) {
+                    int xPos = (j * gridWidth) + (gridWidth / 2);
+                    int yPos = (i * gridHeight) + (gridHeight / 2);
+                    
+                    addObject(new Path(), xPos, yPos);
+                }
+            }
+        }
     }
 }
