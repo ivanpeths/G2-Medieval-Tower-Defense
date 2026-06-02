@@ -9,8 +9,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class TowerDefenseWorld extends World
 {
     private GreenfootImage background;
-    
-    int[][] gameArray = new int[16][16];
+    int worldSize = 16;
+    int tileLength = 60;
+    int tileHeight = 40;
+    int[][] gameArray = new int[worldSize][worldSize];
     
     private int gridWidth = 1200 / 24;
     private int gridHeight = 800 / 16;
@@ -25,11 +27,12 @@ public class TowerDefenseWorld extends World
         setBackground();
         populateArray();
         generatePath();
+        drawUi();
         
     }
     
     public void setBackground () {
-        background = new GreenfootImage("background.png");
+        GreenfootImage background = new GreenfootImage("background.png");
         setBackground(background);
     }
     
@@ -130,5 +133,9 @@ public class TowerDefenseWorld extends World
                 }
             }
         }
+    }
+    
+    private void drawUi(){
+        
     }
 }
