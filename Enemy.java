@@ -1,6 +1,6 @@
 import greenfoot.*;
 
-public class Enemies extends Actor
+public class Enemy extends Actor
 {
     int hp;
     int maxHp;

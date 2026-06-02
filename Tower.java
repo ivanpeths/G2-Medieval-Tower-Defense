@@ -5,8 +5,8 @@ public class Tower extends Actor
 {
     private int radius;
     
-    private List<Enemies> getEnemies(){
-        return getObjectsInRange(radius, Enemies.class);
+    private List<Enemy> getEnemies(){
+        return getObjectsInRange(radius, Enemy.class);
     }
     
     public int getRadius(){
