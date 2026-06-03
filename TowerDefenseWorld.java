@@ -19,10 +19,12 @@ public class TowerDefenseWorld extends World
     
     private int stepsLimit = 20;
     
-    public TowerDefenseWorld()
+    private SoundManager soundMan;
+    public TowerDefenseWorld(SoundManager soundMan)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
+        this.soundMan = soundMan;
         
         setBackground();
         populateArray();
