@@ -28,18 +28,18 @@ public class TitleScreen extends World
     
     // Start and stop menu music as needed
     public void stopped(){
-        soundMan.pauseMenu();
+        // soundMan.pauseMenu();
     }
     
     public void started(){
-        soundMan.playMenu();
+        // soundMan.playMenu();
     }
     
     // Draw labels, start button and background
     public void setupLabel(){
-        titleLabel = new Label("Factory Simulation", fontSize);
+        titleLabel = new Label("Medieval Tower Defense", fontSize);
         addObject(titleLabel, getWidth() / 2, getHeight() / 4);
-        nameLabel = new Label("Created by Group 6", fontSize);
+        nameLabel = new Label("Created by Group 2", fontSize);
         addObject(nameLabel, getWidth() / 2, getHeight() / 2);
     }
     
@@ -59,8 +59,8 @@ public class TitleScreen extends World
     // Change world to SettingsWorld with a SoundManager passed
     public void act(){
         if(Greenfoot.mouseClicked(buttonActor) || Greenfoot.mouseClicked(startLabel)){
-            soundMan.playMenuClick();
-            Greenfoot.setWorld(new SettingsWorld(soundMan));
+            //soundMan.playMenuClick();
+            Greenfoot.setWorld(new TowerDefenseWorld(soundMan));
         }
     }
 }

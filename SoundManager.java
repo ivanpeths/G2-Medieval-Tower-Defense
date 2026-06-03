@@ -84,6 +84,11 @@ public class SoundManager
     }
     
     public void setFiles(){
+        return;
+    }
+    
+    /*
+    public void setFiles(){
         // Long audios
         startingSound = new GreenfootSound("starting_beep.mp3");
         startingSound.setVolume(startingSoundVolume);
@@ -155,7 +160,9 @@ public class SoundManager
             spawnSounds[i].setVolume(spawnVolume);
         }
     }
-    
+    */
+   
+    /*
     // Coins
     public void playLeftCoin(){
         leftCoinSounds[leftCoinIndex].play();
@@ -245,4 +252,5 @@ public class SoundManager
         qualitySounds[qualityIndex].play();
         qualityIndex = (qualityIndex + 1) % upgradeLength;
     }
+    */
 }
