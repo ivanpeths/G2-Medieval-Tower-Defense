@@ -2,8 +2,10 @@ import greenfoot.*;
 
 public class Enemy extends Actor
 {
-    int hp;
-    int maxHp;
+    private int hp;
+    private int maxHp;
+    private int x;
+    private int y;
     
     public int getHp(){
         return hp;
@@ -11,5 +13,13 @@ public class Enemy extends Actor
     
     public int getMaxHp(){
         return maxHp;
+    }
+    
+    public int x(){
+        return x;
+    }
+    
+    public int y(){
+        return y;
     }
 }

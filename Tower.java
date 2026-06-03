@@ -5,6 +5,9 @@ public class Tower extends Actor
 {
     private int radius;
     private int dmg;
+    private int type;
+    private int x;
+    private int y;
     
     private List<Enemy> getEnemies(){
         return getObjectsInRange(radius, Enemy.class);
@@ -24,5 +27,17 @@ public class Tower extends Actor
     
     public int getDmg(){
         return dmg;
+    }
+    
+    public int getType(){
+        return type;
+    }
+    
+    public int getX(){
+        return x;
+    }
+    
+    public int getY(){
+        return y;
     }
 }
