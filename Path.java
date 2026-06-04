@@ -11,6 +11,7 @@ public class Path extends Actor
     private GreenfootImage image;
     public Path () {
         image = new GreenfootImage("path.png");
+        image.scale(50, 50);
         setImage(image);
     }
 }
