@@ -27,8 +27,8 @@ public class TowerDefenseWorld extends World
         this.soundMan = soundMan;
         
         setBackground();
-        populateArray();
         generatePath();
+        drawPath();
         drawUi();
         
     }
@@ -36,14 +36,6 @@ public class TowerDefenseWorld extends World
     public void setBackground () {
         GreenfootImage background = new GreenfootImage("background.png");
         setBackground(background);
-    }
-    
-    public void populateArray() {
-        for (int i = 0; i < gameArray.length; i++) {
-            for (int j = 0; j < gameArray[i].length; j++) {
-                gameArray[i][j] = 0;
-            }
-        }
     }
     
     public void generatePath () {
@@ -146,6 +138,10 @@ public class TowerDefenseWorld extends World
     }
     
     private void drawUi(){
+        
+    }
+    
+    public void act(){
         
     }
 }
