@@ -19,6 +19,9 @@ public class TowerDefenseWorld extends World
     
     private int stepsLimit = 20;
     
+    private int spawnChance = 60;
+    private int spawnDelay = 60;
+    
     private SoundManager soundMan;
     public TowerDefenseWorld(SoundManager soundMan)
     {    
@@ -142,6 +145,11 @@ public class TowerDefenseWorld extends World
     }
     
     public void act(){
-        
+        if (spawnDelay >= 60){
+            if (Greenfoot.getRandomNumber(spawnChance) == 0){
+                return;
+            }
+        }
+        spawnDelay++;
     }
 }
