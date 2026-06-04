@@ -18,6 +18,7 @@ public class TowerDefenseWorld extends World
     private int gridHeight = 800 / 16;
     
     private int stepsLimit = 20;
+    private int turnChances = 6; //the higher the straighter, min of 2
     
     private SoundManager soundMan;
     public TowerDefenseWorld(SoundManager soundMan)
@@ -29,7 +30,7 @@ public class TowerDefenseWorld extends World
         setBackground();
         populateArray();
         generatePath();
-        drawUi();
+        drawPath();
         
     }
     
@@ -66,12 +67,12 @@ public class TowerDefenseWorld extends World
         
         while (currentSteps <= stepsLimit && (currentX != 15 || currentY != 15)) {
             int choice = 0;
-            choice = Greenfoot.getRandomNumber(6);
+            choice = Greenfoot.getRandomNumber(turnChances);
             
             if (startingDirection == 1) {
-                if (choice <= 3) {
+                if (choice >= 3) {
                     currentX++;
-                } else if (choice == 4) {
+                } else if (choice == 1) {
                     currentY += 2;
                     if (currentY > 15) {
                         currentY -= 2;
@@ -81,7 +82,10 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
                     currentX++;
-                } else if (choice == 5) {
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps++;
+                    currentX++;
+                } else if (choice == 2) {
                     currentY -= 2;
                     if (currentY < 0) {
                         currentY += 2;
@@ -91,11 +95,14 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
                     currentX++;
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps++;
+                    currentX++;
                 }
             } else {
-                if (choice <= 3) {
+                if (choice >= 3) {
                     currentY++;
-                } else if (choice == 4) {
+                } else if (choice == 1) {
                     currentX += 2;
                     if (currentX > 15) {
                         currentX -= 2;
@@ -105,7 +112,10 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
                     currentY++;
-                } else if (choice == 5) {
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps++;
+                    currentY++;
+                } else if (choice == 2) {
                     currentX -= 2;
                     if (currentX < 0) {
                         currentX += 2;
@@ -114,8 +124,19 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX + 1] = 1;
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
-                    currentX++;
+                    currentY++;
+                    gameArray[currentY][currentX] = 1;
+                    currentSteps++;
+                    currentY++;
                 }
+            }
+            
+            if (currentY >= 16) {
+                currentY = 15;
+            }
+            
+            if (currentX >= 16) {
+                currentX = 15;
             }
             
             gameArray[currentY][currentX] = 1;
