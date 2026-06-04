@@ -21,6 +21,10 @@ public class Tower extends Actor
         return enemies[Greenfoot.getRandomNumber(enemies.length)];
     }
     
+    private void doDmg(Enemy e, int dmg){
+        e.hurt(dmg);
+    }
+    
     public int getRadius(){
         return radius;
     }

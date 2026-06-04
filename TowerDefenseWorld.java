@@ -20,6 +20,9 @@ public class TowerDefenseWorld extends World
     private int stepsLimit = 20;
     private int turnChances = 6; //the higher the straighter, min of 2
     
+    private int spawnChance = 60;
+    private int spawnDelay = 60;
+    
     private SoundManager soundMan;
     public TowerDefenseWorld(SoundManager soundMan)
     {    
@@ -28,23 +31,15 @@ public class TowerDefenseWorld extends World
         this.soundMan = soundMan;
         
         setBackground();
-        populateArray();
         generatePath();
         drawPath();
+        drawUi();
         
     }
     
     public void setBackground () {
         GreenfootImage background = new GreenfootImage("background.png");
         setBackground(background);
-    }
-    
-    public void populateArray() {
-        for (int i = 0; i < gameArray.length; i++) {
-            for (int j = 0; j < gameArray[i].length; j++) {
-                gameArray[i][j] = 0;
-            }
-        }
     }
     
     public void generatePath () {
@@ -168,5 +163,14 @@ public class TowerDefenseWorld extends World
     
     private void drawUi(){
         
+    }
+    
+    public void act(){
+        if (spawnDelay >= 60){
+            if (Greenfoot.getRandomNumber(spawnChance) == 0){
+                return;
+            }
+        }
+        spawnDelay++;
     }
 }
