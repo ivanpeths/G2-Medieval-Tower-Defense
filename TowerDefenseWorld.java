@@ -17,8 +17,8 @@ public class TowerDefenseWorld extends World
     private int gridWidth = 1200 / 24;
     private int gridHeight = 800 / 16;
     
-    private int stepsLimit = 20;
-    private int turnChances = 6; //the higher the straighter, min of 2
+    private int stepsLimit = 25;
+    private int turnChances = 5; //the higher the straighter, min of 2
     
     private int spawnChance = 60;
     private int spawnDelay = 60;
@@ -34,7 +34,6 @@ public class TowerDefenseWorld extends World
         generatePath();
         drawPath();
         drawUi();
-        
     }
     
     public void setBackground () {
@@ -50,10 +49,10 @@ public class TowerDefenseWorld extends World
         int startingDirection = 0;
         
         if (Greenfoot.getRandomNumber(2) == 0) {
-            currentY = Greenfoot.getRandomNumber(12) + 2;
+            currentY = Greenfoot.getRandomNumber(5) + 5;
             startingDirection = 1;
         } else {
-            currentX = Greenfoot.getRandomNumber(12) + 2;
+            currentX = Greenfoot.getRandomNumber(5) + 5;
             startingDirection = 2;
         }
         
