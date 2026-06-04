@@ -7,6 +7,14 @@ public class Enemy extends Actor
     private int x;
     private int y;
     
+    public void hurt(int dmgAmt){
+        hp -= dmgAmt;
+    }
+    
+    public void heal(int healAmt){
+        hp += healAmt;
+    }
+    
     public int getHp(){
         return hp;
     }
@@ -15,11 +23,11 @@ public class Enemy extends Actor
         return maxHp;
     }
     
-    public int x(){
+    public int getX(){
         return x;
     }
     
-    public int y(){
+    public int getY(){
         return y;
     }
 }
