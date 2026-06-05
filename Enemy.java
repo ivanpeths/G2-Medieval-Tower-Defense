@@ -9,6 +9,7 @@ public abstract class Enemy extends SuperSmoothMover
     private int step = 1;
     // L, R, U, D
     private char direction;
+    private char nextDirection = 'N';
     
     private GreenfootImage front;
     private GreenfootImage back;
@@ -51,6 +52,9 @@ public abstract class Enemy extends SuperSmoothMover
     
     public void act(){
         walk();
+        if (onEdge()){
+            turn();
+        }
     }
     
     private void walk(){
@@ -63,5 +67,13 @@ public abstract class Enemy extends SuperSmoothMover
         } else{
             setLocation(getPreciseX(), getPreciseY() - step);
         }
+    }
+    
+    private boolean onEdge(){
+        return true;
+    }
+    
+    private void turn(){
+        
     }
 }
