@@ -3,8 +3,6 @@
  * you have time, make sure they are all in the same style as each other and all
  * fit in the scene, if u dont know what im talking about, search it up and look at bloons to see what the inspiration kinda is
  * 
- * please also generate the front, back, left and right side of all the enemies
- * 
  * Archer
  * Knight
  * Mage
