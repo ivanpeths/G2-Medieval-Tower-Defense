@@ -17,6 +17,9 @@ public class TowerDefenseWorld extends World
     private int gridWidth = 1200 / 24;
     private int gridHeight = 800 / 16;
     
+    private int startX;
+    private int startY;
+    
     private int stepsLimit = 25;
     private int turnChances = 5; //the higher the straighter, min of 2
     
@@ -55,6 +58,9 @@ public class TowerDefenseWorld extends World
             currentX = Greenfoot.getRandomNumber(5) + 5;
             startingDirection = 2;
         }
+        
+        startX = currentX;
+        startY = currentY;
         
         gameArray[currentY][currentX] = 1;
         currentSteps = 1;
@@ -161,7 +167,13 @@ public class TowerDefenseWorld extends World
     }
     
     private void drawUi(){
+        GreenfootImage separator = new GreenfootImage(6, getHeight());
+        separator.setColor(Color.DARK_GRAY);
+        separator.fill();
         
+        BlankActor separatorActor = new BlankActor();
+        separatorActor.setImage(separator);
+        addObject(separatorActor, 800, 400);
     }
     
     public void act(){
