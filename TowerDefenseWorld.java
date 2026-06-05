@@ -23,8 +23,11 @@ public class TowerDefenseWorld extends World
     private int stepsLimit = 25;
     private int turnChances = 5; //the higher the straighter, min of 2
     
-    private int spawnChance = 60;
+    private int spawnRate = 60;
     private int spawnDelay = 60;
+    
+    // Archer, Knight, Mage, Trapper
+    private double[] spawnChance = {0.3, 0.2, 0.25, 0.25};
     
     private SoundManager soundMan;
     public TowerDefenseWorld(SoundManager soundMan)
@@ -174,12 +177,23 @@ public class TowerDefenseWorld extends World
         BlankActor separatorActor = new BlankActor();
         separatorActor.setImage(separator);
         addObject(separatorActor, 800, 400);
+        
+        
     }
     
     public void act(){
         if (spawnDelay >= 60){
-            if (Greenfoot.getRandomNumber(spawnChance) == 0){
-                return;
+            if (Greenfoot.getRandomNumber(spawnRate) == 0){
+                double type = Math.random();
+                if (type <= spawnChance[0]){
+                    addObject(new Archer(), startX, startY);
+                } else if (type <= spawnChance[1]){
+                    addObject(new Knight(), startX, startY);
+                } else if (type <= spawnChance[2]){
+                    addObject(new Mage(), startX, startY);
+                } else{
+                    addObject(new Trapper(), startX, startY);
+                }
             }
         }
         spawnDelay++;
