@@ -26,8 +26,10 @@ public class TowerDefenseWorld extends World
     private int spawnRate = 60;
     private int spawnDelay = 60;
     
+    /*
     // Archer, Knight, Mage, Trapper
     private double[] spawnChance = {0.3, 0.2, 0.25, 0.25};
+    */
     
     private SoundManager soundMan;
     public TowerDefenseWorld(SoundManager soundMan)
@@ -182,6 +184,7 @@ public class TowerDefenseWorld extends World
     }
     
     public void act(){
+        /* these are actually towers not enemies, whoops
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
                 double type = Math.random();
@@ -196,6 +199,7 @@ public class TowerDefenseWorld extends World
                 }
             }
         }
+        */
         spawnDelay++;
     }
 }
