@@ -1,12 +1,13 @@
 import greenfoot.*;
 
-public abstract class Enemy extends Actor
+public abstract class Enemy extends SuperSmoothMover
 {
     private int hp;
     private int maxHp;
     private int x;
     private int y;
-    // L, R, F, B
+    private int step = 1;
+    // L, R, U, D
     private char direction;
     
     private GreenfootImage front;
@@ -49,10 +50,18 @@ public abstract class Enemy extends Actor
     }
     
     public void act(){
-        followPath();
+        walk();
     }
     
-    private void followPath(){
-        return;
+    private void walk(){
+        if (direction == 'L'){
+            setLocation(getPreciseX() - step, getPreciseY());
+        } else if (direction == 'R'){
+            setLocation(getPreciseX() + step, getPreciseY());
+        } else if (direction == 'U'){
+            setLocation(getPreciseX(), getPreciseY() + step);
+        } else{
+            setLocation(getPreciseX(), getPreciseY() - step);
+        }
     }
 }
