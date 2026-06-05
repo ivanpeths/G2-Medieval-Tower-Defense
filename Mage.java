@@ -8,12 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Mage extends Tower
 {
-    /**
-     * Act - do whatever the Mage wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    public Mage () {
+        image = new GreenfootImage("mage.png");
+        setImage(image);
+    }
+    
+    protected void attack () {
+        
     }
 }

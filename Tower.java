@@ -22,19 +22,21 @@
 import java.util.List;
 import greenfoot.*;
 
-public class Tower extends Actor
+public abstract class Tower extends Actor
 {
-    private int radius;
-    private int dmg;
-    private int type;
-    private int x;
-    private int y;
+    protected int radius;
+    protected int dmg;
+    protected int type;
+    protected int x;
+    protected int y;
+    protected GreenfootImage image;
+    protected int cooldown;
     
-    private List<Enemy> getEnemies(){
+    protected List<Enemy> getEnemies(){
         return getObjectsInRange(radius, Enemy.class);
     }
     
-    private Enemy getOneEnemy(){
+    protected Enemy getOneEnemy(){
         Enemy[] enemies = getEnemies().toArray(new Enemy[0]);
         if (enemies.length == 0){
             return null;
@@ -42,9 +44,11 @@ public class Tower extends Actor
         return enemies[Greenfoot.getRandomNumber(enemies.length)];
     }
     
-    private void doDmg(Enemy e, int dmg){
+    protected void doDmg(Enemy e, int dmg){
         e.hurt(dmg);
     }
+    
+    protected abstract void attack ();
     
     public int getRadius(){
         return radius;

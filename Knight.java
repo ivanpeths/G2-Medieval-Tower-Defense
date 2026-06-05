@@ -8,12 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Knight extends Tower
 {
-    /**
-     * Act - do whatever the Knight wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    public Knight () {
+        image = new GreenfootImage("knight.png");
+        setImage(image);
+    }
+    
+    protected void attack () {
+        
     }
 }

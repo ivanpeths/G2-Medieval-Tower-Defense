@@ -8,12 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Archer extends Tower
 {
-    /**
-     * Act - do whatever the Archer wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
+    public Archer () {
+        image = new GreenfootImage("archer.png");
+        setImage(image);
+    }
+    
+    protected void attack () {
+        
     }
 }
