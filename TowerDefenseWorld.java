@@ -171,16 +171,29 @@ public class TowerDefenseWorld extends World
         }
     }
     
-    private void drawUi(){
+    private void drawUi()
+    {
+        // sidebar background
+        GreenfootImage sidebar = new GreenfootImage(400, getHeight());
+        sidebar.setColor(new Color(90, 60, 30));
+        sidebar.fill();
+    
+        BlankActor sidebarActor = new BlankActor();
+        sidebarActor.setImage(sidebar);
+        addObject(sidebarActor, 1000, 400);
+    
+        // separtor
         GreenfootImage separator = new GreenfootImage(6, getHeight());
-        separator.setColor(Color.DARK_GRAY);
+        separator.setColor(Color.BLACK);
         separator.fill();
-        
+    
         BlankActor separatorActor = new BlankActor();
         separatorActor.setImage(separator);
         addObject(separatorActor, 800, 400);
-        
-        
+    
+        // title
+        Label sidebarTitle = new Label("TOWERS", 40);
+        addObject(sidebarTitle, 1000, 50);
     }
     
     public void act(){
