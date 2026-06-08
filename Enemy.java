@@ -4,12 +4,15 @@ public abstract class Enemy extends SuperSmoothMover
 {
     private int hp;
     private int maxHp;
-    private int x;
-    private int y;
+    private int gridX;
+    private int gridY;
     private int step = 1;
     // L, R, U, D
+    private char lastDirection;
     private char direction;
     private char nextDirection = 'N';
+    
+    private int[][] gameGrid;
     
     private GreenfootImage front;
     private GreenfootImage back;
@@ -38,12 +41,12 @@ public abstract class Enemy extends SuperSmoothMover
         return maxHp;
     }
     
-    public int getX(){
-        return x;
+    public int getGridX(){
+        return gridX;
     }
     
-    public int getY(){
-        return y;
+    public int getGridY(){
+        return gridY;
     }
     
     public int getDirection(){
@@ -74,6 +77,39 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     private void turn(){
-        
+        // Do not check direction where it came from
+        if (lastDirection == 'L'){
+            if (gameGrid[gridX - 1][gridY] == 1){
+                nextDirection = 'L';
+            } else if (gameGrid[gridX][gridY + 1] == 1){
+                nextDirection = 'U';
+            } else if (gameGrid[gridX][gridY - 1] == 1){
+                nextDirection = 'D';
+            }
+        } else if (lastDirection == 'R'){
+            if (gameGrid[gridX + 1][gridY] == 1){
+                nextDirection = 'R';
+            } else if (gameGrid[gridX][gridY + 1] == 1){
+                nextDirection = 'U';
+            } else if (gameGrid[gridX][gridY - 1] == 1){
+                nextDirection = 'D';
+            }
+        } else if (lastDirection == 'U'){
+            if (gameGrid[gridX - 1][gridY] == 1){
+                nextDirection = 'L';
+            } else if (gameGrid[gridX][gridY + 1] == 1){
+                nextDirection = 'U';
+            } else if (gameGrid[gridX + 1][gridY] == 1){
+                nextDirection = 'R';
+            }
+        } else{
+            if (gameGrid[gridX - 1][gridY] == 1){
+                nextDirection = 'L';
+            } else if (gameGrid[gridX + 1][gridY] == 1){
+                nextDirection = 'R';
+            } else if (gameGrid[gridX][gridY - 1] == 1){
+                nextDirection = 'D';
+            }
+        }
     }
 }

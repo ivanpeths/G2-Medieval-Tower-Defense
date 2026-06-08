@@ -216,4 +216,8 @@ public class TowerDefenseWorld extends World
         */
         spawnDelay++;
     }
+    
+    public int[][] getGrid(){
+        return gameArray;
+    }
 }
