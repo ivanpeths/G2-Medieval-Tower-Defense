@@ -1,22 +1,3 @@
-/*
- * for issac: generate the following images over the weekend, or whenever
- * you have time, make sure they are all in the same style as each other and all
- * fit in the scene, if u dont know what im talking about, search it up and look at bloons to see what the inspiration kinda is
- * 
- * Archer
- * Knight
- * Mage
- * Spearman
- * Trapper
- * 
- * Arrow
- * Mage fireball
- * Bear trap
- * Spear
- * 
- * Also images / timers / etc for the side bar, google the sidebar for bloons for inspiration
- */
-
 import java.util.List;
 import greenfoot.*;
 
@@ -29,6 +10,15 @@ public abstract class Tower extends Actor
     protected int y;
     protected GreenfootImage image;
     protected int cooldown;
+    protected int cooldownCounter;
+    
+    public void act () {
+        cooldownCounter++;
+        if (cooldownCounter >= cooldown) {
+            attack();
+            cooldownCounter = 0;
+        }
+    }
     
     protected List<Enemy> getEnemies(){
         return getObjectsInRange(radius, Enemy.class);
