@@ -66,9 +66,9 @@ public abstract class Enemy extends SuperSmoothMover
         } else if (direction == 'R'){
             setLocation(getPreciseX() + step, getPreciseY());
         } else if (direction == 'U'){
-            setLocation(getPreciseX(), getPreciseY() + step);
-        } else{
             setLocation(getPreciseX(), getPreciseY() - step);
+        } else{
+            setLocation(getPreciseX(), getPreciseY() + step);
         }
     }
     
@@ -81,23 +81,23 @@ public abstract class Enemy extends SuperSmoothMover
         if (lastDirection == 'L'){
             if (gameGrid[gridX - 1][gridY] == 1){
                 nextDirection = 'L';
-            } else if (gameGrid[gridX][gridY + 1] == 1){
-                nextDirection = 'U';
             } else if (gameGrid[gridX][gridY - 1] == 1){
+                nextDirection = 'U';
+            } else if (gameGrid[gridX][gridY + 1] == 1){
                 nextDirection = 'D';
             }
         } else if (lastDirection == 'R'){
             if (gameGrid[gridX + 1][gridY] == 1){
                 nextDirection = 'R';
-            } else if (gameGrid[gridX][gridY + 1] == 1){
-                nextDirection = 'U';
             } else if (gameGrid[gridX][gridY - 1] == 1){
+                nextDirection = 'U';
+            } else if (gameGrid[gridX][gridY + 1] == 1){
                 nextDirection = 'D';
             }
         } else if (lastDirection == 'U'){
             if (gameGrid[gridX - 1][gridY] == 1){
                 nextDirection = 'L';
-            } else if (gameGrid[gridX][gridY + 1] == 1){
+            } else if (gameGrid[gridX][gridY - 1] == 1){
                 nextDirection = 'U';
             } else if (gameGrid[gridX + 1][gridY] == 1){
                 nextDirection = 'R';
@@ -107,9 +107,11 @@ public abstract class Enemy extends SuperSmoothMover
                 nextDirection = 'L';
             } else if (gameGrid[gridX + 1][gridY] == 1){
                 nextDirection = 'R';
-            } else if (gameGrid[gridX][gridY - 1] == 1){
+            } else if (gameGrid[gridX][gridY + 1] == 1){
                 nextDirection = 'D';
             }
         }
+        lastDirection = direction;
+        direction = nextDirection;
     }
 }
