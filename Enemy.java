@@ -20,12 +20,29 @@ public abstract class Enemy extends SuperSmoothMover
     private GreenfootImage left;
     private GreenfootImage right;
     
-    public Enemy(){
-        TowerDefenseWorld w = (TowerDefenseWorld) getWorld();
+    public Enemy(int hp){
+        this.hp = hp;
+        this.maxHp = hp;
+    }
+
+    @Override
+    protected void addedToWorld(World world){
+        TowerDefenseWorld w = (TowerDefenseWorld) world;
         gameGrid = w.getGrid();
         gridX = w.getStartX();
         gridY = w.getStartY();
+        direction = w.getStartDirection();
+        lastDirection = opposite(direction);
         setImages();
+    }
+
+    private char opposite(char dir){
+        switch (dir) {
+            case 'L': return 'R';
+            case 'R': return 'L';
+            case 'U': return 'D';
+            default:  return 'U'; // 'D'
+        }
     }
     
     public abstract void setImages();
@@ -85,6 +102,13 @@ public abstract class Enemy extends SuperSmoothMover
         return false;
     }
     
+    private void updateImage(){
+        if (direction == 'L') setImage(left);
+        else if (direction == 'R') setImage(right);
+        else if (direction == 'U') setImage(back);
+        else setImage(front);
+    }
+
     private void turn(){
         // Do not check direction where it came from
         if (lastDirection == 'L'){
@@ -134,6 +158,7 @@ public abstract class Enemy extends SuperSmoothMover
         }
         lastDirection = direction;
         direction = nextDirection;
+        updateImage();
     }
     
     private void checkOob(){
