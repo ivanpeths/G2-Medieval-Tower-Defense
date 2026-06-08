@@ -254,7 +254,7 @@ public abstract class SuperSmoothMover extends Actor
      *   
      *   @return double the exact y coordinate, as a double
      */
-    public double exactY(){
+    public double getExactY(){
         return exactY;
     }
 

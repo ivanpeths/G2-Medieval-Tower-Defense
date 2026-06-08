@@ -1,9 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class Trapper here.
  * 
- * @author (your name) 
+ * @author Ivan Ma 
  * @version (a version number or a date)
  */
 public class Trapper extends Tower
@@ -14,6 +15,16 @@ public class Trapper extends Tower
     }
     
     protected void attack () {
+        List<Path> paths = getObjectsInRange(75, Path.class);
+        Path nearestPath = null;
+        for (Path path : paths) {
+            nearestPath = path;
+            break;
+        }
         
+        if (nearestPath == null) {
+            return;
+        }
+        getWorld().addObject(new Trap(dmg), nearestPath.getX(), nearestPath.getY());
     }
 }

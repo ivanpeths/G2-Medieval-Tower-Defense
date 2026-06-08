@@ -5,7 +5,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @author Ivan and Kolby
  * Sidebar by Isaac
- * @version (a version number or a date)
  */
 public class TowerDefenseWorld extends World
 {
@@ -20,6 +19,9 @@ public class TowerDefenseWorld extends World
     
     private int startX;
     private int startY;
+    
+    private int endX;
+    private int endY;
     
     private int stepsLimit = 25;
     private int turnChances = 5; //the higher the straighter, min of 2
@@ -157,6 +159,9 @@ public class TowerDefenseWorld extends World
             }
             gameArray[currentY][currentX] = 1;
         }
+        
+        endX = currentX;
+        endY = currentY;
     }
     
     public void drawPath () {
@@ -195,6 +200,21 @@ public class TowerDefenseWorld extends World
         // title
         Label sidebarTitle = new Label("TOWERS", 40);
         addObject(sidebarTitle, 1000, 50);
+
+        TowerButton archerButton = new TowerButton("Archer", "archer.png");
+        TowerButton knightButton = new TowerButton("Knight", "knight.png");
+        
+        TowerButton mageButton = new TowerButton("Mage", "mage.png");
+        
+        TowerButton spearmanButton = new TowerButton("Spearman", "spearman.png");
+        
+        TowerButton trapperButton = new TowerButton("Trapper", "trapper.png");
+
+        addObject(archerButton, 950, 150);
+        addObject(knightButton, 1050, 150);
+        addObject(mageButton, 950, 250);
+        addObject(spearmanButton, 1050, 250);
+        addObject(trapperButton, 1000, 350);
     }
     
     public void act(){
@@ -219,5 +239,13 @@ public class TowerDefenseWorld extends World
     
     public int[][] getGrid(){
         return gameArray;
+    }
+    
+    public int getStartX(){
+        return startX;
+    }
+    
+    public int getStartY(){
+        return startY;
     }
 }

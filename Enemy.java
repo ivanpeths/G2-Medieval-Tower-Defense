@@ -7,10 +7,11 @@ public abstract class Enemy extends SuperSmoothMover
     private int gridX;
     private int gridY;
     private int step = 1;
+    private int tileSize = 50;
     // L, R, U, D
     private char lastDirection;
-    private char direction;
-    private char nextDirection = 'N';
+    private char direction = 'R';
+    private char nextDirection;
     
     private int[][] gameGrid;
     
@@ -70,7 +71,7 @@ public abstract class Enemy extends SuperSmoothMover
         return gridY;
     }
     
-    public int getDirection(){
+    public char getDirection(){
         return direction;
     }
     
@@ -79,6 +80,7 @@ public abstract class Enemy extends SuperSmoothMover
         if (onEdge()){
             turn();
         }
+        checkOob();
     }
     
     private void walk(){
@@ -94,7 +96,10 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     private boolean onEdge(){
-        return true;
+        if (Math.abs((getPreciseX() - 25) % tileSize) < 0.5 && Math.abs((getPreciseY() - 25) % tileSize) < 0.5){
+            return true;
+        }
+        return false;
     }
     
     private void updateImage(){
@@ -107,40 +112,58 @@ public abstract class Enemy extends SuperSmoothMover
     private void turn(){
         // Do not check direction where it came from
         if (lastDirection == 'L'){
-            if (gameGrid[gridX - 1][gridY] == 1){
+            if ((gridX - 1) >= 0 && gameGrid[gridX - 1][gridY] == 1){
                 nextDirection = 'L';
-            } else if (gameGrid[gridX][gridY - 1] == 1){
+                gridX--;
+            } else if ((gridY - 1) >= 0 && gameGrid[gridX][gridY - 1] == 1){
                 nextDirection = 'U';
-            } else if (gameGrid[gridX][gridY + 1] == 1){
+                gridY--;
+            } else if ((gridY + 1) <= 15 && gameGrid[gridX][gridY + 1] == 1){
                 nextDirection = 'D';
+                gridY++;
             }
         } else if (lastDirection == 'R'){
-            if (gameGrid[gridX + 1][gridY] == 1){
+            if ((gridX + 1) <= 15 && gameGrid[gridX + 1][gridY] == 1){
                 nextDirection = 'R';
-            } else if (gameGrid[gridX][gridY - 1] == 1){
+                gridX++;
+            } else if ((gridY - 1) >= 0 && gameGrid[gridX][gridY - 1] == 1){
                 nextDirection = 'U';
-            } else if (gameGrid[gridX][gridY + 1] == 1){
+                gridY--;
+            } else if ((gridY + 1) <= 15 && gameGrid[gridX][gridY + 1] == 1){
                 nextDirection = 'D';
+                gridY++;
             }
         } else if (lastDirection == 'U'){
-            if (gameGrid[gridX - 1][gridY] == 1){
+            if ((gridX - 1) >= 0 && gameGrid[gridX - 1][gridY] == 1){
                 nextDirection = 'L';
-            } else if (gameGrid[gridX][gridY - 1] == 1){
+                gridX--;    
+            } else if ((gridY - 1) >= 0 && gameGrid[gridX][gridY - 1] == 1){
                 nextDirection = 'U';
-            } else if (gameGrid[gridX + 1][gridY] == 1){
+                gridY--;
+            } else if ((gridX + 1) <= 15 && gameGrid[gridX + 1][gridY] == 1){
                 nextDirection = 'R';
+                gridX++;
             }
         } else{
-            if (gameGrid[gridX - 1][gridY] == 1){
+            if ((gridX - 1) >= 0 && gameGrid[gridX - 1][gridY] == 1){
                 nextDirection = 'L';
-            } else if (gameGrid[gridX + 1][gridY] == 1){
+                gridX--;
+            } else if ((gridX + 1) <= 15 && gameGrid[gridX + 1][gridY] == 1){
                 nextDirection = 'R';
-            } else if (gameGrid[gridX][gridY + 1] == 1){
+                gridX++;
+            } else if ((gridY + 1) <= 15 && gameGrid[gridX][gridY + 1] == 1){
                 nextDirection = 'D';
+                gridY++;
             }
         }
         lastDirection = direction;
         direction = nextDirection;
         updateImage();
+    }
+    
+    private void checkOob(){
+        if (getPreciseX() >= 800){
+            getWorld().removeObject(this);
+        }
     }
 }

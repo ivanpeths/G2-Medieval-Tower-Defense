@@ -8,7 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TowerButton extends Actor
 {
-    public TowerButton () {
-        
+    private String towerName;
+    
+    public TowerButton (String towerName, String imageFile) {
+        this.towerName = towerName;
+        setImage(new GreenfootImage(imageFile));
     }
+
+    public String getTowerName() {
+        return towerName;
+    }    
 }

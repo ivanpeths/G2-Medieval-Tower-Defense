@@ -4,22 +4,22 @@ import java.util.List;
 /**
  * Write a description of class Knight here.
  * 
- * @author (your name) 
+ * @author Ivan Ma
  * @version (a version number or a date)
  */
 public class Knight extends Tower
 {
-    int radius = 50;
-    
     public Knight () {
         image = new GreenfootImage("knight.png");
         setImage(image);
+        radius = 50;
+        cooldown = 120;
     }
     
     protected void attack () {
-        List<Enemy> enemies = getObjectsInRange(radius, Enemy.class);
+        List<Enemy> enemies = getEnemies();
         for (Enemy enemy : enemies) {
-            enemy.hurt(dmg);
+            doDmg (enemy, dmg);
         }
     }
 }
