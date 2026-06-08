@@ -9,9 +9,7 @@ public abstract class Enemy extends SuperSmoothMover
     private int step = 1;
     private int tileSize = 50;
     // L, R, U, D
-    private char lastDirection;
     private char direction = 'R';
-    private char nextDirection;
     
     private int[][] gameGrid;
     
@@ -33,6 +31,7 @@ public abstract class Enemy extends SuperSmoothMover
         gridY = w.getStartY();
         direction = w.getStartDirection();
         setImages();
+        updateImage();
     }
 
     private char opposite(char dir){
