@@ -248,4 +248,8 @@ public class TowerDefenseWorld extends World
     public int getStartY(){
         return startY;
     }
+
+    public char getStartDirection(){
+        
+    }
 }
