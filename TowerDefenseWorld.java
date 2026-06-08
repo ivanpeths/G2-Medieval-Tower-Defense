@@ -174,7 +174,7 @@ public class TowerDefenseWorld extends World
     private void drawUi()
     {
         // sidebar background
-        GreenfootImage sidebar = new GreenfootImage(400, getHeight());
+        GreenfootImage sidebar = new GreenfootImage(300, getHeight());
         sidebar.setColor(new Color(90, 60, 30));
         sidebar.fill();
     
