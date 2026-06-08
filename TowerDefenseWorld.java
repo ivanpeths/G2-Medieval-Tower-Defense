@@ -230,4 +230,12 @@ public class TowerDefenseWorld extends World
     public int[][] getGrid(){
         return gameArray;
     }
+    
+    public int getStartX(){
+        return startX;
+    }
+    
+    public int getStartY(){
+        return startY;
+    }
 }
