@@ -4,6 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Main Game World
  * 
  * @author Ivan and Kolby
+ * Sidebar by Isaac
  * @version (a version number or a date)
  */
 public class TowerDefenseWorld extends World
