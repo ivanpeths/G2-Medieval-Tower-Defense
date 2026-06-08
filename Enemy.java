@@ -7,10 +7,11 @@ public abstract class Enemy extends SuperSmoothMover
     private int gridX;
     private int gridY;
     private int step = 1;
+    private int tileSize = 50;
     // L, R, U, D
     private char lastDirection;
-    private char direction;
-    private char nextDirection = 'N';
+    private char direction = 'R';
+    private char nextDirection;
     
     private int[][] gameGrid;
     
@@ -20,6 +21,10 @@ public abstract class Enemy extends SuperSmoothMover
     private GreenfootImage right;
     
     public Enemy(){
+        TowerDefenseWorld w = (TowerDefenseWorld) getWorld();
+        gameGrid = w.getGrid();
+        gridX = w.getStartX();
+        gridY = w.getStartY();
         setImages();
     }
     
@@ -49,7 +54,7 @@ public abstract class Enemy extends SuperSmoothMover
         return gridY;
     }
     
-    public int getDirection(){
+    public char getDirection(){
         return direction;
     }
     
@@ -58,6 +63,7 @@ public abstract class Enemy extends SuperSmoothMover
         if (onEdge()){
             turn();
         }
+        checkOob();
     }
     
     private void walk(){
@@ -73,7 +79,10 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     private boolean onEdge(){
-        return true;
+        if (Math.abs((getPreciseX() - 25) % tileSize) < 0.5 && Math.abs((getPreciseY() - 25) % tileSize) < 0.5){
+            return true;
+        }
+        return false;
     }
     
     private void turn(){
@@ -103,7 +112,7 @@ public abstract class Enemy extends SuperSmoothMover
         } else if (lastDirection == 'U'){
             if ((gridX - 1) >= 0 && gameGrid[gridX - 1][gridY] == 1){
                 nextDirection = 'L';
-                gridX--;
+                gridX--;    
             } else if ((gridY - 1) >= 0 && gameGrid[gridX][gridY - 1] == 1){
                 nextDirection = 'U';
                 gridY--;
@@ -125,5 +134,11 @@ public abstract class Enemy extends SuperSmoothMover
         }
         lastDirection = direction;
         direction = nextDirection;
+    }
+    
+    private void checkOob(){
+        if (getPreciseX() >= 800){
+            getWorld().removeObject(this);
+        }
     }
 }
