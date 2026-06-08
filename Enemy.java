@@ -32,7 +32,6 @@ public abstract class Enemy extends SuperSmoothMover
         gridX = w.getStartX();
         gridY = w.getStartY();
         direction = w.getStartDirection();
-        lastDirection = opposite(direction);
         setImages();
     }
 
@@ -110,54 +109,22 @@ public abstract class Enemy extends SuperSmoothMover
     }
 
     private void turn(){
-        // Do not check direction where it came from
-        if (lastDirection == 'L'){
-            if ((gridX - 1) >= 0 && gameGrid[gridX - 1][gridY] == 1){
-                nextDirection = 'L';
-                gridX--;
-            } else if ((gridY - 1) >= 0 && gameGrid[gridX][gridY - 1] == 1){
-                nextDirection = 'U';
-                gridY--;
-            } else if ((gridY + 1) <= 15 && gameGrid[gridX][gridY + 1] == 1){
-                nextDirection = 'D';
-                gridY++;
-            }
-        } else if (lastDirection == 'R'){
-            if ((gridX + 1) <= 15 && gameGrid[gridX + 1][gridY] == 1){
-                nextDirection = 'R';
-                gridX++;
-            } else if ((gridY - 1) >= 0 && gameGrid[gridX][gridY - 1] == 1){
-                nextDirection = 'U';
-                gridY--;
-            } else if ((gridY + 1) <= 15 && gameGrid[gridX][gridY + 1] == 1){
-                nextDirection = 'D';
-                gridY++;
-            }
-        } else if (lastDirection == 'U'){
-            if ((gridX - 1) >= 0 && gameGrid[gridX - 1][gridY] == 1){
-                nextDirection = 'L';
-                gridX--;    
-            } else if ((gridY - 1) >= 0 && gameGrid[gridX][gridY - 1] == 1){
-                nextDirection = 'U';
-                gridY--;
-            } else if ((gridX + 1) <= 15 && gameGrid[gridX + 1][gridY] == 1){
-                nextDirection = 'R';
-                gridX++;
-            }
-        } else{
-            if ((gridX - 1) >= 0 && gameGrid[gridX - 1][gridY] == 1){
-                nextDirection = 'L';
-                gridX--;
-            } else if ((gridX + 1) <= 15 && gameGrid[gridX + 1][gridY] == 1){
-                nextDirection = 'R';
-                gridX++;
-            } else if ((gridY + 1) <= 15 && gameGrid[gridX][gridY + 1] == 1){
-                nextDirection = 'D';
-                gridY++;
-            }
+        char excluded = opposite(direction);
+        
+        if (excluded != 'L' && gridX - 1 >= 0 && gameGrid[gridX - 1][gridY] == 1){
+            direction = 'L';
+            gridX--;
+        } else if (excluded != 'R' && gridX + 1 < gameGrid.length && gameGrid[gridX + 1][gridY] == 1){
+            direction = 'R';
+            gridX++;
+        } else if (excluded != 'U' && gridY - 1 >= 0 && gameGrid[gridX][gridY - 1] == 1){
+            direction = 'U';
+            gridY--;
+        } else if (excluded != 'D' && gridY + 1 < gameGrid[0].length && gameGrid[gridX][gridY + 1] == 1){
+            direction = 'D';
+            gridY++;
         }
-        lastDirection = direction;
-        direction = nextDirection;
+        
         updateImage();
     }
     
