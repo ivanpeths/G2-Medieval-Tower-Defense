@@ -195,6 +195,16 @@ public class TowerDefenseWorld extends World
         // title
         Label sidebarTitle = new Label("TOWERS", 40);
         addObject(sidebarTitle, 1000, 50);
+
+        TowerButton archerButton = new TowerButton("Archer", "archer.png");
+        
+        TowerButton knightButton = new TowerButton("Knight", "knight.png");
+        
+        TowerButton mageBtn = new TowerButton("Mage", "mage.png");
+        
+        TowerButton spearmanButton = new TowerButton("Spearman", "spearman.png");
+        
+        TowerButton trapperButton = new TowerButton("Trapper", "trapper.png");
     }
     
     public void act(){
