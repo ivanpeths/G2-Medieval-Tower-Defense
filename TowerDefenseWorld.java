@@ -5,7 +5,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @author Ivan and Kolby
  * Sidebar by Isaac
- * @version (a version number or a date)
  */
 public class TowerDefenseWorld extends World
 {
@@ -20,6 +19,9 @@ public class TowerDefenseWorld extends World
     
     private int startX;
     private int startY;
+    
+    private int endX;
+    private int endY;
     
     private int stepsLimit = 25;
     private int turnChances = 5; //the higher the straighter, min of 2
@@ -157,6 +159,9 @@ public class TowerDefenseWorld extends World
             }
             gameArray[currentY][currentX] = 1;
         }
+        
+        endX = currentX;
+        endY = currentY;
     }
     
     public void drawPath () {
