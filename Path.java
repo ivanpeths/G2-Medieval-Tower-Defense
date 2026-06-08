@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Path here.
  * 
- * @author (your name) 
+ * @author Ivan Ma
  * @version (a version number or a date)
  */
 public class Path extends Actor

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * Write a description of class Explosion here.
  * 
- * @author (your name) 
+ * @author Ivan Ma
  * @version (a version number or a date)
  */
 public class Explosion extends Actor

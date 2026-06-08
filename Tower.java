@@ -1,6 +1,12 @@
 import java.util.List;
 import greenfoot.*;
 
+/**
+ * Write a description of class Arrow here.
+ * 
+ * @author Ivan Ma
+ * @version (a version number or a date)
+ */
 public abstract class Tower extends Actor
 {
     protected int radius;

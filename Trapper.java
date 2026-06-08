@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Write a description of class Trapper here.
  * 
- * @author (your name) 
+ * @author Ivan Ma 
  * @version (a version number or a date)
  */
 public class Trapper extends Tower

@@ -4,7 +4,7 @@ import java.util.List;
 /**
  * Write a description of class Archer here.
  * 
- * @author (your name) 
+ * @author Ivan 
  * @version (a version number or a date)
  */
 public class Archer extends Tower
