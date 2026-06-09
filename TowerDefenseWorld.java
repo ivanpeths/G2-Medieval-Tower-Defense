@@ -45,6 +45,8 @@ public class TowerDefenseWorld extends World
         generatePath();
         drawPath();
         drawUi();
+        
+        setPaintOrder(Enemy.class, StartPath.class, EndPath.class, Path.class);
     }
     
     public void setBackground () {
@@ -173,6 +175,9 @@ public class TowerDefenseWorld extends World
                 }
             }
         }
+        
+        //addObject(new StartPath(), startX, startY);
+        addObject(new EndPath(), endX, endY);
     }
     
     private void drawUi()

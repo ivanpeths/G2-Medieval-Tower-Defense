@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Path extends Actor
 {
-    private GreenfootImage image;
+    protected GreenfootImage image;
     public Path () {
         image = new GreenfootImage("path.png");
         image.scale(50, 50);
