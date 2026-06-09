@@ -2,25 +2,27 @@ import greenfoot.*;
 
 public abstract class Enemy extends SuperSmoothMover
 {
-    private int hp;
-    private int maxHp;
-    private int gridX;
-    private int gridY;
-    private int step = 1;
     private int tileSize = 50;
     // L, R, U, D
-    private char direction = 'R';
+    protected char direction = 'R';
     
     private int[][] gameGrid;
     
-    private GreenfootImage front;
-    private GreenfootImage back;
-    private GreenfootImage left;
-    private GreenfootImage right;
+    protected GreenfootImage front;
+    protected GreenfootImage back;
+    protected GreenfootImage left;
+    protected GreenfootImage right;
     
-    public Enemy(int hp){
+    protected int hp;
+    protected int maxHp;
+    protected int gridX;
+    protected int gridY;
+    protected int step;
+    
+    public Enemy(int hp, int step){
         this.hp = hp;
         this.maxHp = hp;
+        this.step = step;
     }
 
     @Override
