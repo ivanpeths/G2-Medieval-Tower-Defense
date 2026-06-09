@@ -37,11 +37,12 @@ public abstract class Enemy extends SuperSmoothMover
     }
 
     private char opposite(char dir){
-        switch (dir) {
+        switch (dir){
             case 'L': return 'R';
             case 'R': return 'L';
             case 'U': return 'D';
-            default:  return 'U'; // 'D'
+            case 'D': return 'U';
+            default: return 'N';
         }
     }
     
