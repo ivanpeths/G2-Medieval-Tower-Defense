@@ -10,8 +10,12 @@ import java.util.List;
 public class Archer extends Tower
 {
     public Archer () {
+        type = 1;
         image = new GreenfootImage("archer.png");
         setImage(image);
+        damage = 100;
+        radius = 175;
+        cooldown = 90;
     }
     
     protected void attack () {

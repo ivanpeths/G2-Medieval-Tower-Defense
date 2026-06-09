@@ -6,17 +6,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Ivan Ma
  * @version (a version number or a date)
  */
-public class Arrow extends SuperSmoothMover
+public class Arrow extends Projectiles
 {
-    private GreenfootImage image;
-    private double speed;
-    private int damage;
-    
     public Arrow (int angle, int damage) {
         image = new GreenfootImage("arrow.png");
         setImage(image);
         
-        speed = Greenfoot.getRandomNumber(4) + 2;
+        speed = Greenfoot.getRandomNumber(2) + 4;
         setRotation (angle);
         this.damage = damage;
     }
@@ -32,13 +28,5 @@ public class Arrow extends SuperSmoothMover
             target.hurt(damage);
             remove();
         }
-    }
-    
-    public void remove() {
-        getWorld().removeObject(this);
-    }
-    
-    public void move() {
-        move (speed);
     }
 }

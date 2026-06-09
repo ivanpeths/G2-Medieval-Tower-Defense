@@ -10,8 +10,12 @@ import java.util.List;
 public class Trapper extends Tower
 {
     public Trapper () {
+        type = 5;
         image = new GreenfootImage("trapper.png");
         setImage(image);
+        damage = 300;
+        radius = 75;
+        cooldown = 180;
     }
     
     protected void attack () {
@@ -25,6 +29,11 @@ public class Trapper extends Tower
         if (nearestPath == null) {
             return;
         }
+        
+        int angle = (int)(Math.toDegrees(Math.atan2(nearestPath.getX() - getX(), nearestPath.getY() - getY())));
+        
+        setRotation(angle);
+        
         getWorld().addObject(new Trap(damage), nearestPath.getX(), nearestPath.getY());
     }
 }

@@ -10,16 +10,26 @@ import java.util.List;
 public class Knight extends Tower
 {
     public Knight () {
+        type = 2;
         image = new GreenfootImage("knight.png");
         setImage(image);
-        radius = 50;
-        cooldown = 120;
+        damage = 100;
+        radius = 75;
+        cooldown = 60;
     }
     
     protected void attack () {
         List<Enemy> enemies = getEnemies();
+        Enemy closest = null;
         for (Enemy enemy : enemies) {
-            doDmg (enemy, damage);
+            closest = enemy;
+            break;
         }
+        
+        int angle = (int)(Math.toDegrees(Math.atan2(closest.getX() - getX(), closest.getY() - getY())));
+        
+        setRotation(angle);
+        
+        doDmg (closest, damage);
     }
 }

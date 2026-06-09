@@ -10,8 +10,12 @@ import java.util.List;
 public class Mage extends Tower
 {
     public Mage () {
+        type = 3;
         image = new GreenfootImage("mage.png");
         setImage(image);
+        damage = 150;
+        radius = 175;
+        cooldown = 300;
     }
     
     protected void attack () {

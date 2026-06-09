@@ -12,11 +12,9 @@ public abstract class Tower extends Actor
     protected int radius;
     protected int damage;
     protected int type;
-    protected int x;
-    protected int y;
     protected GreenfootImage image;
     protected int cooldown;
-    protected int cooldownCounter;
+    protected int cooldownCounter = 0;
     
     public void act () {
         cooldownCounter++;
@@ -28,14 +26,6 @@ public abstract class Tower extends Actor
     
     protected List<Enemy> getEnemies(){
         return getObjectsInRange(radius, Enemy.class);
-    }
-    
-    protected Enemy getOneEnemy(){
-        Enemy[] enemies = getEnemies().toArray(new Enemy[0]);
-        if (enemies.length == 0){
-            return null;
-        }
-        return enemies[Greenfoot.getRandomNumber(enemies.length)];
     }
     
     protected void doDmg(Enemy e, int dmg){
@@ -54,13 +44,5 @@ public abstract class Tower extends Actor
     
     public int getType(){
         return type;
-    }
-    
-    public int getX(){
-        return x;
-    }
-    
-    public int getY(){
-        return y;
     }
 }

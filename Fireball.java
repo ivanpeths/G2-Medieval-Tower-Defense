@@ -7,17 +7,13 @@ import java.util.List;
  * @author Ivan Ma
  * @version (a version number or a date)
  */
-public class Fireball extends SuperSmoothMover
+public class Fireball extends Projectiles
 {
-    private GreenfootImage image;
-    private double speed;
-    private int damage;
-    
     public Fireball (int angle, int damage) {
         image = new GreenfootImage("fireball.png");
         setImage(image);
         
-        speed = Greenfoot.getRandomNumber(4) + 2;
+        speed = Greenfoot.getRandomNumber(2) + 4;
         setRotation (angle);
         this.damage = damage;
     }
@@ -37,13 +33,5 @@ public class Fireball extends SuperSmoothMover
             }
             remove();
         }
-    }
-    
-    public void remove() {
-        getWorld().removeObject(this);
-    }
-    
-    public void move() {
-        move (speed);
     }
 }

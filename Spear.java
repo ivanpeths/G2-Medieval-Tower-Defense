@@ -6,17 +6,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Ivan Ma
  * @version (a version number or a date)
  */
-public class Spear extends SuperSmoothMover
+public class Spear extends Projectiles
 {
-    private GreenfootImage image;
-    private double speed;
-    private int damage;
-    
     public Spear (int angle, int damage) {
         image = new GreenfootImage("spear.png");
         setImage(image);
         
-        speed = Greenfoot.getRandomNumber(4) + 2;
+        speed = Greenfoot.getRandomNumber(2) + 4;
         setRotation (angle);
         this.damage = damage;
     }
@@ -31,13 +27,5 @@ public class Spear extends SuperSmoothMover
         if (target != null) {
             target.hurt(damage);
         }
-    }
-    
-    public void remove() {
-        getWorld().removeObject(this);
-    }
-    
-    public void move() {
-        move (speed);
     }
 }
