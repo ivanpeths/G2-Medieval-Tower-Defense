@@ -31,6 +31,12 @@ public class TowerDefenseWorld extends World
     private int spawnRate = 60;
     private int spawnDelay = 60;
     
+    private TowerButton archerButton;
+    private TowerButton knightButton;
+    private TowerButton mageButton;
+    private TowerButton spearmanButton;
+    private TowerButton trapperButton;
+    
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.15, 0.35};
     
@@ -204,14 +210,11 @@ public class TowerDefenseWorld extends World
         Label sidebarTitle = new Label("TOWERS", 40);
         addObject(sidebarTitle, 1000, 50);
 
-        TowerButton archerButton = new TowerButton("Archer", "archer.png");
-        TowerButton knightButton = new TowerButton("Knight", "knight.png");
-        
-        TowerButton mageButton = new TowerButton("Mage", "mage.png");
-        
-        TowerButton spearmanButton = new TowerButton("Spearman", "spearman.png");
-        
-        TowerButton trapperButton = new TowerButton("Trapper", "trapper.png");
+        archerButton = new TowerButton("Archer", "archer.png");
+        knightButton = new TowerButton("Knight", "knight.png");
+        mageButton = new TowerButton("Mage", "mage.png");
+        spearmanButton = new TowerButton("Spearman", "spearman.png");
+        trapperButton = new TowerButton("Trapper", "trapper.png");
 
         addObject(archerButton, 950, 150);
         addObject(knightButton, 1050, 150);
