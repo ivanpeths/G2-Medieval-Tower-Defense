@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class TowerButton here.
  * 
- * @author (your name) 
+ * @author Isaac
  * @version (a version number or a date)
  */
 public class TowerButton extends Actor
@@ -12,7 +12,10 @@ public class TowerButton extends Actor
     
     public TowerButton (String towerName, String imageFile) {
         this.towerName = towerName;
-        setImage(new GreenfootImage(imageFile));
+        GreenfootImage img = new GreenfootImage(imageFile);
+        img.scale(60, 60);
+
+        setImage(img);
     }
 
     public String getTowerName() {
