@@ -35,6 +35,6 @@ public class Mage extends Tower
         
         setRotation(angle);
         
-        getWorld().addObject(new Fireball(angle, dmg), getX(), getY());
+        getWorld().addObject(new Fireball(angle, damage), getX(), getY());
     }
 }

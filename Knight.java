@@ -19,7 +19,7 @@ public class Knight extends Tower
     protected void attack () {
         List<Enemy> enemies = getEnemies();
         for (Enemy enemy : enemies) {
-            doDmg (enemy, dmg);
+            doDmg (enemy, damage);
         }
     }
 }

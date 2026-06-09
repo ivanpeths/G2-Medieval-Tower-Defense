@@ -10,7 +10,7 @@ import greenfoot.*;
 public abstract class Tower extends Actor
 {
     protected int radius;
-    protected int dmg;
+    protected int damage;
     protected int type;
     protected int x;
     protected int y;
@@ -49,7 +49,7 @@ public abstract class Tower extends Actor
     }
     
     public int getDmg(){
-        return dmg;
+        return damage;
     }
     
     public int getType(){

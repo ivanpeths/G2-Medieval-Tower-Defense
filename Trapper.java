@@ -25,6 +25,6 @@ public class Trapper extends Tower
         if (nearestPath == null) {
             return;
         }
-        getWorld().addObject(new Trap(dmg), nearestPath.getX(), nearestPath.getY());
+        getWorld().addObject(new Trap(damage), nearestPath.getX(), nearestPath.getY());
     }
 }

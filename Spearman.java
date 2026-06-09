@@ -35,6 +35,6 @@ public class Spearman extends Tower
         
         setRotation(angle);
         
-        getWorld().addObject(new Spear(angle, dmg), getX(), getY());
+        getWorld().addObject(new Spear(angle, damage), getX(), getY());
     }
 }

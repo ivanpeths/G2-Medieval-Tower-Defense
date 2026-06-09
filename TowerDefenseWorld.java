@@ -26,6 +26,8 @@ public class TowerDefenseWorld extends World
     private int stepsLimit = 25;
     private int turnChances = 5; //the higher the straighter, min of 2
     
+    private char startingDirection = 'N';
+    
     private int spawnRate = 60;
     private int spawnDelay = 60;
     
@@ -57,14 +59,12 @@ public class TowerDefenseWorld extends World
         int currentX = 0;
         int currentY = 0;
         
-        int startingDirection = 0;
-        
         if (Greenfoot.getRandomNumber(2) == 0) {
             currentY = Greenfoot.getRandomNumber(5) + 5;
-            startingDirection = 1;
+            startingDirection = 'R';
         } else {
             currentX = Greenfoot.getRandomNumber(5) + 5;
-            startingDirection = 2;
+            startingDirection = 'D';
         }
         
         startX = currentX;
@@ -77,7 +77,7 @@ public class TowerDefenseWorld extends World
             int choice = 0;
             choice = Greenfoot.getRandomNumber(turnChances);
             
-            if (startingDirection == 1) {
+            if (startingDirection == 'R') {
                 if (choice >= 3) {
                     currentX++;
                 } else if (choice == 1) {
@@ -250,6 +250,6 @@ public class TowerDefenseWorld extends World
     }
 
     public char getStartDirection(){
-        
+        return startingDirection;
     }
 }
