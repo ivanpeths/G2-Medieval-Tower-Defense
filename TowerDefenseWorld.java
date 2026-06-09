@@ -36,6 +36,8 @@ public class TowerDefenseWorld extends World
     private TowerButton mageButton;
     private TowerButton spearmanButton;
     private TowerButton trapperButton;
+
+    private String selectedTower = null;
     
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.15, 0.35};
@@ -187,7 +189,7 @@ public class TowerDefenseWorld extends World
     }
     
     private void drawUi()
-    {
+    {      
         // sidebar background
         GreenfootImage sidebar = new GreenfootImage(300, getHeight());
         sidebar.setColor(new Color(90, 60, 30));
@@ -224,6 +226,26 @@ public class TowerDefenseWorld extends World
     }
     
     public void act(){
+        if (Greenfoot.mouseClicked(archerButton)) {
+            selectedTower = "Archer";
+        }
+
+        if (Greenfoot.mouseClicked(knightButton)) {
+            selectedTower = "Knight";
+        }
+        
+        if (Greenfoot.mouseClicked(mageButton)) {
+            selectedTower = "Mage";
+        }
+    
+        if (Greenfoot.mouseClicked(spearmanButton)) {
+            selectedTower = "Spearman";
+        }
+        
+        if (Greenfoot.mouseClicked(trapperButton)) {
+            selectedTower = "Trapper";
+        }
+        
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
                 double type = Math.random();
