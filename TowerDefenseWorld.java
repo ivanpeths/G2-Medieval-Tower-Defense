@@ -232,10 +232,12 @@ public class TowerDefenseWorld extends World
     public void act(){
         if (Greenfoot.mouseClicked(archerButton)) {
             selectedTower = "Archer";
+            System.out.println("Archer selected!");
         }
 
         if (Greenfoot.mouseClicked(knightButton)) {
             selectedTower = "Knight";
+            System.out.println("Knight selected!");
         }
         
         if (Greenfoot.mouseClicked(mageButton)) {
