@@ -351,6 +351,27 @@ public class TowerDefenseWorld extends World
             if (selectedTower.equals("Archer"))
             {
                 addObject(new Archer(), x, y);
+                gameArray[row][col] = 2;
+            }
+            else if (selectedTower.equals("Knight"))
+            {
+                addObject(new Knight(), x, y);
+                gameArray[row][col] = 3;
+            }
+            else if (selectedTower.equals("Mage"))
+            {
+                addObject(new Mage(), x, y);
+                gameArray[row][col] = 4;
+            }
+            else if (selectedTower.equals("Spearman"))
+            {
+                addObject(new Spearman(), x, y);
+                gameArray[row][col] = 5;
+            }
+            else if (selectedTower.equals("Trapper"))
+            {
+                addObject(new Trapper(), x, y);
+                gameArray[row][col] = 6;
             }
         }
         
