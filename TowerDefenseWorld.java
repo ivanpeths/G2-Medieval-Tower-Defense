@@ -10,12 +10,9 @@ public class TowerDefenseWorld extends World
 {
     private GreenfootImage background;
     int worldSize = 16;
-    int tileLength = 60;
-    int tileHeight = 40;
+    int tileLength = 50;
+    int tileHeight = 50;
     int[][] gameArray = new int[worldSize][worldSize];
-    
-    private int gridWidth = 1200 / 24;
-    private int gridHeight = 800 / 16;
     
     private int startX;
     private int startY;
@@ -98,6 +95,10 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
                     currentX++;
+                    if (currentX > 15) {
+                        currentX = 15;
+                        continue;
+                    }
                     gameArray[currentY][currentX] = 1;
                     currentSteps++;
                     currentX++;
@@ -111,6 +112,10 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
                     currentX++;
+                    if (currentX > 15) {
+                        currentX = 15;
+                        continue;
+                    }
                     gameArray[currentY][currentX] = 1;
                     currentSteps++;
                     currentX++;
@@ -128,6 +133,10 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
                     currentY++;
+                    if (currentY > 15) {
+                        currentY = 15;
+                        continue;
+                    }
                     gameArray[currentY][currentX] = 1;
                     currentSteps++;
                     currentY++;
@@ -141,6 +150,10 @@ public class TowerDefenseWorld extends World
                     gameArray[currentY][currentX] = 1;
                     currentSteps += 2;
                     currentY++;
+                    if (currentY > 15) {
+                        currentY = 15;
+                        continue;
+                    }
                     gameArray[currentY][currentX] = 1;
                     currentSteps++;
                     currentY++;
@@ -176,16 +189,15 @@ public class TowerDefenseWorld extends World
         for (int i = 0; i < gameArray.length; i++) {
             for (int j = 0; j < gameArray[i].length; j++) {
                 if (gameArray[i][j] == 1) {
-                    int xPos = (j * gridWidth) + (gridWidth / 2);
-                    int yPos = (i * gridHeight) + (gridHeight / 2);
-                    
+                    int xPos = (j * tileLength) + (tileLength / 2);
+                    int yPos = (i * tileHeight) + (tileHeight / 2);
                     addObject(new Path(), xPos, yPos);
                 }
             }
         }
         
-        //addObject(new StartPath(), startX, startY);
-        addObject(new EndPath(), endX, endY);
+        //addObject(new StartPath(), startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
+        addObject(new EndPath(), endX * tileLength + tileLength / 2, endY * tileHeight + tileHeight / 2);
     }
     
     private void drawUi()
@@ -253,13 +265,15 @@ public class TowerDefenseWorld extends World
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
                 double type = Math.random();
-                if (type <= spawnChance[0]){
-                    addObject(new Goblin(), startX, startY);
-                } else if (type <= spawnChance[1]){
-                    addObject(new GoblinBuff(), startX, startY);
-                } else{
-                    addObject(new GoblinHorse(), startX, startY);
+                Enemy enemy;
+                if (type <= spawnChance[0]) {
+                    enemy = new Goblin();
+                } else if (type <= spawnChance[1]) {
+                    enemy = new GoblinBuff();
+                } else {
+                    enemy = new GoblinHorse();
                 }
+                addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
             }
         }
         spawnDelay++;
