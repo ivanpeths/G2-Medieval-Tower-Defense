@@ -100,11 +100,16 @@ public abstract class Enemy extends SuperSmoothMover
         }
     }
     
-    private boolean onEdge(){
-        if (Math.abs((getPreciseX() - 25) % tileSize) < 0.5 && Math.abs((getPreciseY() - 25) % tileSize) < 0.5){
-            return true;
+    private boolean onEdge() {
+        double xMod = (getPreciseX() - 25) % tileSize;
+        double yMod = (getPreciseY() - 25) % tileSize;
+        if (xMod < 0){
+            xMod += tileSize;
         }
-        return false;
+        if (yMod < 0){
+            yMod += tileSize;
+        }
+        return xMod < step && yMod < step;
     }
     
     private void updateImage(){
@@ -120,23 +125,23 @@ public abstract class Enemy extends SuperSmoothMover
         
         char excluded = opposite(direction);
         
-        if (excluded != 'L' && gridX - 1 >= 0 && gameGrid[gridX - 1][gridY] == 1){
+        if (excluded != 'L' && gridX - 1 >= 0 && gameGrid[gridY][gridX - 1] == 1){
             direction = 'L';
             gridX--;
-        } else if (excluded != 'R' && gridX + 1 < gameGrid.length && gameGrid[gridX + 1][gridY] == 1){
+        } else if (excluded != 'R' && gridX + 1 < gameGrid[0].length && gameGrid[gridY][gridX + 1] == 1){
             direction = 'R';
             gridX++;
-        } else if (excluded != 'U' && gridY - 1 >= 0 && gameGrid[gridX][gridY - 1] == 1){
+        } else if (excluded != 'U' && gridY - 1 >= 0 && gameGrid[gridY - 1][gridX] == 1){
             direction = 'U';
             gridY--;
-        } else if (excluded != 'D' && gridY + 1 < gameGrid[0].length && gameGrid[gridX][gridY + 1] == 1){
+        } else if (excluded != 'D' && gridY + 1 < gameGrid.length && gameGrid[gridY + 1][gridX] == 1){
             direction = 'D';
             gridY++;
         }
     }
     
     private void checkOob(){
-        if (getPreciseX() >= 800){
+        if (getPreciseX() >= 800 || getPreciseY() >= 800){
             getWorld().removeObject(this);
         }
     }
