@@ -345,9 +345,17 @@ public class TowerDefenseWorld extends World
                 return;
             }
         
+            if (selectedTower == null) return;
+
+            if (gameArray[row][col] != 0)
+            {
+                System.out.println("Cannot place here!");
+                return;
+            }
+            
             int x = col * tileLength + tileLength / 2;
             int y = row * tileHeight + tileHeight / 2;
-        
+            
             if (selectedTower.equals("Archer"))
             {
                 addObject(new Archer(), x, y);
@@ -375,30 +383,7 @@ public class TowerDefenseWorld extends World
             }
         }
         
-        if (Greenfoot.mouseClicked(archerButton)) {
-            selectedTower = "Archer";
-        }
-
-        if (Greenfoot.mouseClicked(knightButton)) {
-            selectedTower = "Knight";
-        }
-        
-        if (Greenfoot.mouseClicked(mageButton)) {
-            selectedTower = "Mage";
-        }
-    
-        if (Greenfoot.mouseClicked(spearmanButton)) {
-            selectedTower = "Spearman";
-        }
-        
-        if (Greenfoot.mouseClicked(trapperButton)) {
-            selectedTower = "Trapper";
-        }
-
-        if(Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
-            save();
-        }
-        
+              
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
                 double type = Math.random();
