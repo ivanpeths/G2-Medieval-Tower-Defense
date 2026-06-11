@@ -13,7 +13,7 @@ public class TowerButton extends Actor
     public TowerButton (String towerName, String imageFile) {
         this.towerName = towerName;
         GreenfootImage img = new GreenfootImage(imageFile);
-        img.scale(60, 60);
+        img.scale(75, 75);
 
         setImage(img);
     }

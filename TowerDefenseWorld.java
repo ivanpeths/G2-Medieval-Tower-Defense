@@ -33,16 +33,24 @@ public class TowerDefenseWorld extends World
     private int spawnRate = 60;
     private int spawnDelay = 60;
     
+    private int money;
+    private int score;
+    private int fontSize = 40;
+    
     private TowerButton archerButton;
     private TowerButton knightButton;
     private TowerButton mageButton;
     private TowerButton spearmanButton;
     private TowerButton trapperButton;
+    
+    private Button saveActor;
+    private Label saveLabel;
 
     private String selectedTower = null;
     
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.15, 0.35};
+    private double[] maxChanceBounds= new double[spawnChance.length];
     
     private SoundManager soundMan;
     public TowerDefenseWorld(SoundManager soundMan, boolean newGame)
@@ -52,12 +60,23 @@ public class TowerDefenseWorld extends World
         this.soundMan = soundMan;
         this.newGame = newGame;
         
+        setMaxBounds();
         setBackground();
         generatePath();
         drawPath();
         drawUi();
         
         setPaintOrder(Enemy.class, StartPath.class, EndPath.class, Path.class);
+    }
+
+    public void setMaxBounds(){
+        for (int i = 0; i < spawnChance.length; i++){
+            if (i == 0){
+                maxChanceBounds[i] = spawnChance[i];
+            } else{
+                maxChanceBounds[i] = maxChanceBounds[i-1] + spawnChance[i];
+            }
+        }
     }
     
     public void setBackground () {
@@ -286,11 +305,25 @@ public class TowerDefenseWorld extends World
         addObject(trapperButton, 1000, 350);
 
         // money 
-        Label moneyTitle = new Label("Money", 40);
-        addObject(moneyTitle, 1000, 500);
-        
-        Label tip = new Label("Press ENTER to save and quit", 25);
-        addObject(tip, 1000, 760);
+        Label moneyTitle = new Label("Money", fontSize);
+        addObject(moneyTitle, 1000, 400);
+
+        Label moneyLabel = new Label(money, fontSize);
+        addObject(moneyLabel, 1000, 450);
+
+        Label scoreTitle = new Label("Score", fontSize);
+        addObject(scoreTitle, 1000, 550);
+
+        Label scoreLabel = new Label(score, fontSize);
+        addObject(scoreLabel, 1000, 600);
+
+        GreenfootImage buttonImg = new GreenfootImage("button.png");
+        buttonImg.scale(200, 100);
+        saveActor = new Button(buttonImg);
+        saveLabel = new Label("Save", fontSize);
+        saveActor.setImage(buttonImg);
+        addObject(saveActor, 1000, 700);
+        addObject(saveLabel, 1000, 690);
     }
     
     public void act(){
@@ -340,14 +373,18 @@ public class TowerDefenseWorld extends World
         if (Greenfoot.mouseClicked(trapperButton)) {
             selectedTower = "Trapper";
         }
+
+        if(Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
+            save();
+        }
         
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
                 double type = Math.random();
                 Enemy enemy;
-                if (type <= spawnChance[0]) {
+                if (type <= maxChanceBounds[0]) {
                     enemy = new Goblin();
-                } else if (type <= spawnChance[1]) {
+                } else if (type <= maxChanceBounds[1]) {
                     enemy = new GoblinBuff();
                 } else {
                     enemy = new GoblinHorse();
@@ -385,6 +422,14 @@ public class TowerDefenseWorld extends World
         } catch (IOException e) {
             Greenfoot.setWorld(new ErrorScreen());
         }
+    }
+    
+    public void load(){
+        return;
+    }
+    
+    public void save(){
+        return;
     }
     
     public int[][] getGrid(){

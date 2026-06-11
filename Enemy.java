@@ -17,9 +17,9 @@ public abstract class Enemy extends SuperSmoothMover
     protected int maxHp;
     protected int gridX;
     protected int gridY;
-    protected int step;
+    protected double step;
     
-    public Enemy(int hp, int step){
+    public Enemy(int hp, double step){
         this.hp = hp;
         this.maxHp = hp;
         this.step = step;
@@ -138,6 +138,8 @@ public abstract class Enemy extends SuperSmoothMover
             direction = 'D';
             gridY++;
         }
+
+        updateImage();
     }
     
     private void checkOob(){
