@@ -226,7 +226,7 @@ public class TowerDefenseWorld extends World
 
         // money 
         Label moneyTitle = new Label("Money", 40);
-        addObject(sidebarTitle, 1000, 500);
+        addObject(moneyTitle, 1000, 500);
     }
     
     public void act(){
