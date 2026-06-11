@@ -29,11 +29,18 @@ public class TowerDefenseWorld extends World
     private int spawnRate = 60;
     private int spawnDelay = 60;
     
+    private int money;
+    private int score;
+    private int fontSize = 40;
+    
     private TowerButton archerButton;
     private TowerButton knightButton;
     private TowerButton mageButton;
     private TowerButton spearmanButton;
     private TowerButton trapperButton;
+    
+    private Button saveActor;
+    private Label saveLabel;
 
     private String selectedTower = null;
     
@@ -251,8 +258,25 @@ public class TowerDefenseWorld extends World
         addObject(trapperButton, 1000, 350);
 
         // money 
-        Label moneyTitle = new Label("Money", 40);
-        addObject(moneyTitle, 1000, 500);
+        Label moneyTitle = new Label("Money", fontSize);
+        addObject(moneyTitle, 1000, 400);
+
+        Label moneyLabel = new Label(money, fontSize);
+        addObject(moneyLabel, 1000, 450);
+
+        Label scoreTitle = new Label("Score", fontSize);
+        addObject(scoreTitle, 1000, 550);
+
+        Label scoreLabel = new Label(score, fontSize);
+        addObject(scoreLabel, 1000, 600);
+
+        GreenfootImage buttonImg = new GreenfootImage("button.png");
+        buttonImg.scale(200, 100);
+        saveActor = new Button(buttonImg);
+        saveLabel = new Label("Save", fontSize);
+        saveActor.setImage(buttonImg);
+        addObject(saveActor, 1000, 700);
+        addObject(saveLabel, 1000, 690);
     }
     
     public void act(){
@@ -304,6 +328,10 @@ public class TowerDefenseWorld extends World
         if (Greenfoot.mouseClicked(trapperButton)) {
             selectedTower = "Trapper";
         }
+
+        if(Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
+            save();
+        }
         
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
@@ -320,6 +348,14 @@ public class TowerDefenseWorld extends World
             }
         }
         spawnDelay++;
+    }
+    
+    public void load(){
+        return;
+    }
+    
+    public void save(){
+        return;
     }
     
     public int[][] getGrid(){
