@@ -38,6 +38,7 @@ public class TowerDefenseWorld extends World
     
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.15, 0.35};
+    private double[] maxChanceBounds= new double[spawnChance.length];
     
     private SoundManager soundMan;
     public TowerDefenseWorld(SoundManager soundMan)
@@ -46,12 +47,23 @@ public class TowerDefenseWorld extends World
         super(1200, 800, 1); 
         this.soundMan = soundMan;
         
+        setMaxBounds();
         setBackground();
         generatePath();
         drawPath();
         drawUi();
         
         setPaintOrder(Enemy.class, StartPath.class, EndPath.class, Path.class);
+    }
+
+    public void setMaxBounds(){
+        for (int i = 0; i < spawnChance.length; i++){
+            if (i == 0){
+                maxChanceBounds[i] = spawnChance[i];
+            } else{
+                maxChanceBounds[i] = maxChanceBounds[i-1] + spawnChance[i];
+            }
+        }
     }
     
     public void setBackground () {
@@ -268,9 +280,9 @@ public class TowerDefenseWorld extends World
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
                 double type = Math.random();
                 Enemy enemy;
-                if (type <= spawnChance[0]) {
+                if (type <= maxChanceBounds[0]) {
                     enemy = new Goblin();
-                } else if (type <= spawnChance[1]) {
+                } else if (type <= maxChanceBounds[1]) {
                     enemy = new GoblinBuff();
                 } else {
                     enemy = new GoblinHorse();
