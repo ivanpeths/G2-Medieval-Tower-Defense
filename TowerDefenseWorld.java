@@ -345,87 +345,92 @@ public class TowerDefenseWorld extends World
         addObject(saveLabel, 1000, 690);
     }
     
-    public void act(){
+    public void act()
+    {
         MouseInfo mouse = Greenfoot.getMouseInfo();
-
+    
         handleTowerSelection();
     
-        if (mouse == null || !Greenfoot.mouseClicked(null) || selectedTower == null)
+        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null)
         {
-            return;
-        }
-        
-        if (mouse.getX() >= 800)
-        {
-            return;
-        }
-        
-        int col = mouse.getX() / tileLength;
-        int row = mouse.getY() / tileHeight;
+            if (mouse.getX() < 800)
+            {
+                int col = mouse.getX() / tileLength;
+                int row = mouse.getY() / tileHeight;
     
-        if (row < 0 || row >= worldSize || col < 0 || col >= worldSize)
-        {
-            return;
-        }
+                if (row >= 0 && row <  && col >= 0 && col < worldSize)
+                {
+                    if (gameArray[row][col] == 0)
+                    {
+                        int x = col * tileLength + tileLength / 2;
+                        int y = row * tileHeight + tileHeight / 2;
     
-        if (gameArray[row][col] != 0)
-        {
-            //System.out.println("Blocked tile");
-            return;
+                        if (selectedTower.equals("Archer"))
+                        {
+                            addObject(new Archer(), x, y);
+                            gameArray[row][col] = 2;
+                        }
+                        else if (selectedTower.equals("Knight"))
+                        {
+                            addObject(new Knight(), x, y);
+                            gameArray[row][col] = 3;
+                        }
+                        else if (selectedTower.equals("Mage"))
+                        {
+                            addObject(new Mage(), x, y);
+                            gameArray[row][col] = 4;
+                        }
+                        else if (selectedTower.equals("Spearman"))
+                        {
+                            addObject(new Spearman(), x, y);
+                            gameArray[row][col] = 5;
+                        }
+                        else if (selectedTower.equals("Trapper"))
+                        {
+                            addObject(new Trapper(), x, y);
+                            gameArray[row][col] = 6;
+                        }
+                    }
+                }
+            }
         }
-    
-        int x = col * tileLength + tileLength / 2;
-        int y = row * tileHeight + tileHeight / 2;
-    
-        if (selectedTower.equals("Archer"))
+
+        if (spawnDelay >= 60)
         {
-            addObject(new Archer(), x, y);
-            gameArray[row][col] = 2;
-        }
-        else if (selectedTower.equals("Knight"))
-        {
-            addObject(new Knight(), x, y);
-            gameArray[row][col] = 3;
-        }
-        else if (selectedTower.equals("Mage"))
-        {
-            addObject(new Mage(), x, y);
-            gameArray[row][col] = 4;
-        }
-        else if (selectedTower.equals("Spearman"))
-        {
-            addObject(new Spearman(), x, y);
-            gameArray[row][col] = 5;
-        }
-        else if (selectedTower.equals("Trapper"))
-        {
-            addObject(new Trapper(), x, y);
-            gameArray[row][col] = 6;
-        }        
-              
-        if (spawnDelay >= 60){
-            if (Greenfoot.getRandomNumber(spawnRate) == 0){
+            if (Greenfoot.getRandomNumber(spawnRate) == 0)
+            {
                 double type = Math.random();
                 Enemy enemy;
-                if (type <= maxChanceBounds[0]) {
+    
+                if (type <= maxChanceBounds[0])
+                {
                     enemy = new Goblin();
-                } else if (type <= maxChanceBounds[1]) {
+                }
+                else if (type <= maxChanceBounds[1])
+                {
                     enemy = new GoblinBuff();
-                } else {
+                }
+                else
+                {
                     enemy = new GoblinHorse();
                 }
+    
                 addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
             }
         }
+    
         spawnDelay++;
-        
-        if (Greenfoot.isKeyDown("enter")) {
+    
+        if (Greenfoot.isKeyDown("enter"))
+        {
             save();
             Greenfoot.setWorld(new ExitScreen());
         }
-        
+    
         mapUpdateCounter++;
-        if (mapUpdateCounter >= 60) {
+    
+        if (mapUpdateCounter >= 60)
+        {
             drawMap();
             mapUpdateCounter = 0;
         }
