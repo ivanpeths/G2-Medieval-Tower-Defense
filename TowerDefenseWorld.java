@@ -242,6 +242,33 @@ public class TowerDefenseWorld extends World
     }
     
     public void act(){
+        MouseInfo mouse = Greenfoot.getMouseInfo();
+
+        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null)
+        {
+            if (mouse.getX() >= 800)
+            {
+                return;
+            }
+        
+            int col = mouse.getX() / tileLength;
+            int row = mouse.getY() / tileHeight;
+        
+            if (gameArray[row][col] == 1)
+            {
+                System.out.println("Cannot place on path!");
+                return;
+            }
+        
+            int x = col * tileLength + tileLength / 2;
+            int y = row * tileHeight + tileHeight / 2;
+        
+            if (selectedTower.equals("Archer"))
+            {
+                addObject(new Archer(), x, y);
+            }
+        }
+        
         if (Greenfoot.mouseClicked(archerButton)) {
             selectedTower = "Archer";
             System.out.println("Archer selected!");
