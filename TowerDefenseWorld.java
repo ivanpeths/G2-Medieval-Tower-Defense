@@ -416,8 +416,8 @@ public class TowerDefenseWorld extends World
                 }
             }
             
-            //output.println(money);
-            //output.println(score);
+            output.println(money);
+            output.println(score);
             //output.println(wave);
         } catch (IOException e) {
             Greenfoot.setWorld(new ErrorScreen());
@@ -425,11 +425,7 @@ public class TowerDefenseWorld extends World
     }
     
     public void load(){
-        return;
-    }
-    
-    public void save(){
-        return;
+        
     }
     
     public int[][] getGrid(){
