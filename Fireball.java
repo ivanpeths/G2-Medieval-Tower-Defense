@@ -11,6 +11,7 @@ public class Fireball extends Projectiles
 {
     public Fireball (int angle, int damage) {
         image = new GreenfootImage("fireball.png");
+        image.scale(30, 30);
         setImage(image);
         
         speed = Greenfoot.getRandomNumber(2) + 4;

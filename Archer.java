@@ -12,6 +12,7 @@ public class Archer extends Tower
     public Archer () {
         type = 1;
         image = new GreenfootImage("archer.png");
+        image.scale(40, 40);
         setImage(image);
         damage = 100;
         radius = 175;

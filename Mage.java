@@ -12,6 +12,7 @@ public class Mage extends Tower
     public Mage () {
         type = 3;
         image = new GreenfootImage("mage.png");
+        image.scale(40, 40);
         setImage(image);
         damage = 150;
         radius = 175;

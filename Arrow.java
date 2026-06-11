@@ -10,6 +10,7 @@ public class Arrow extends Projectiles
 {
     public Arrow (int angle, int damage) {
         image = new GreenfootImage("arrow.png");
+        image.scale(20, 3);
         setImage(image);
         
         speed = Greenfoot.getRandomNumber(2) + 4;
