@@ -17,6 +17,7 @@ public class TowerDefenseWorld extends World
     int tileLength = 50;
     int tileHeight = 50;
     int[][] gameArray = new int[worldSize][worldSize];
+    private int mapUpdateCounter = 0;
     
     private int startX;
     private int startY;
@@ -206,35 +207,42 @@ public class TowerDefenseWorld extends World
     }
     
     public void drawMap () {
+        TowerSpawner spawner = new TowerSpawner();
         for (int i = 0; i < gameArray.length; i++) {
             for (int j = 0; j < gameArray[i].length; j++) {
+                int xPos = (j * tileLength) + (tileLength / 2);
+                int yPos = (i * tileHeight) + (tileHeight / 2);
+                
+                addObject(spawner, xPos, yPos);
+                
+                if (spawner.isTouchingAnything()) {
+                    removeObject(spawner);
+                    continue;
+                }
+                
+                removeObject(spawner);
+                
+                if (gameArray[i][j] == 0 || gameArray[i][j] == 1) {
+                    continue;
+                }
+                
                 if (gameArray[i][j] == 2) {
-                    int xPos = (j * tileLength) + (tileLength / 2);
-                    int yPos = (i * tileHeight) + (tileHeight / 2);
                     addObject(new Archer(), xPos, yPos);
                 }
                 
                 if (gameArray[i][j] == 3) {
-                    int xPos = (j * tileLength) + (tileLength / 2);
-                    int yPos = (i * tileHeight) + (tileHeight / 2);
                     addObject(new Knight(), xPos, yPos);
                 }
                 
                 if (gameArray[i][j] == 4) {
-                    int xPos = (j * tileLength) + (tileLength / 2);
-                    int yPos = (i * tileHeight) + (tileHeight / 2);
                     addObject(new Mage(), xPos, yPos);
                 }
                 
                 if (gameArray[i][j] == 5) {
-                    int xPos = (j * tileLength) + (tileLength / 2);
-                    int yPos = (i * tileHeight) + (tileHeight / 2);
                     addObject(new Spearman(), xPos, yPos);
                 }
                 
                 if (gameArray[i][j] == 6) {
-                    int xPos = (j * tileLength) + (tileLength / 2);
-                    int yPos = (i * tileHeight) + (tileHeight / 2);
                     addObject(new Trapper(), xPos, yPos);
                 }
             }
@@ -352,6 +360,12 @@ public class TowerDefenseWorld extends World
         if (Greenfoot.isKeyDown("enter")) {
             save();
             Greenfoot.setWorld(new ExitScreen());
+        }
+        
+        mapUpdateCounter++;
+        if (mapUpdateCounter >= 60) {
+            drawMap();
+            mapUpdateCounter = 0;
         }
     }
     
