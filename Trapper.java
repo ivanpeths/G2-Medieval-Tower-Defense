@@ -12,6 +12,7 @@ public class Trapper extends Tower
     public Trapper () {
         type = 5;
         image = new GreenfootImage("trapper.png");
+        image.scale(40, 40);
         setImage(image);
         damage = 300;
         radius = 75;

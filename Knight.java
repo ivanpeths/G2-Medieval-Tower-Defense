@@ -12,6 +12,7 @@ public class Knight extends Tower
     public Knight () {
         type = 2;
         image = new GreenfootImage("knight.png");
+        image.scale(40, 40);
         setImage(image);
         damage = 100;
         radius = 75;

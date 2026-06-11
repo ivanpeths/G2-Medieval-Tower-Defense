@@ -10,6 +10,7 @@ public class Spear extends Projectiles
 {
     public Spear (int angle, int damage) {
         image = new GreenfootImage("spear.png");
+        image.scale(40, 4);
         setImage(image);
         
         speed = Greenfoot.getRandomNumber(2) + 4;

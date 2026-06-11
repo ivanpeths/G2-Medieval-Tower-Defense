@@ -12,6 +12,7 @@ public class Spearman extends Tower
     public Spearman () {
         type = 4;
         image = new GreenfootImage("spearman.png");
+        image.scale(40, 40);
         setImage(image);
         damage = 100;
         radius = 275;

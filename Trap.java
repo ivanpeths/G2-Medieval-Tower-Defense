@@ -13,6 +13,7 @@ public class Trap extends Actor
     
     public Trap (int damage) {
         image = new GreenfootImage("beartrap.png");
+        image.scale(40, 40);
         setImage(image);
         
         this.damage = damage;

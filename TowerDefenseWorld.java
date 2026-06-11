@@ -1,4 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.io.PrintWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Main Game World
@@ -202,6 +205,42 @@ public class TowerDefenseWorld extends World
         addObject(new EndPath(), endX * tileLength + tileLength / 2, endY * tileHeight + tileHeight / 2);
     }
     
+    public void drawMap () {
+        for (int i = 0; i < gameArray.length; i++) {
+            for (int j = 0; j < gameArray[i].length; j++) {
+                if (gameArray[i][j] == 2) {
+                    int xPos = (j * tileLength) + (tileLength / 2);
+                    int yPos = (i * tileHeight) + (tileHeight / 2);
+                    addObject(new Archer(), xPos, yPos);
+                }
+                
+                if (gameArray[i][j] == 3) {
+                    int xPos = (j * tileLength) + (tileLength / 2);
+                    int yPos = (i * tileHeight) + (tileHeight / 2);
+                    addObject(new Knight(), xPos, yPos);
+                }
+                
+                if (gameArray[i][j] == 4) {
+                    int xPos = (j * tileLength) + (tileLength / 2);
+                    int yPos = (i * tileHeight) + (tileHeight / 2);
+                    addObject(new Mage(), xPos, yPos);
+                }
+                
+                if (gameArray[i][j] == 5) {
+                    int xPos = (j * tileLength) + (tileLength / 2);
+                    int yPos = (i * tileHeight) + (tileHeight / 2);
+                    addObject(new Spearman(), xPos, yPos);
+                }
+                
+                if (gameArray[i][j] == 6) {
+                    int xPos = (j * tileLength) + (tileLength / 2);
+                    int yPos = (i * tileHeight) + (tileHeight / 2);
+                    addObject(new Trapper(), xPos, yPos);
+                }
+            }
+        }
+    }
+    
     private void drawUi()
     {      
         // sidebar background
@@ -241,6 +280,9 @@ public class TowerDefenseWorld extends World
         // money 
         Label moneyTitle = new Label("Money", 40);
         addObject(moneyTitle, 1000, 500);
+        
+        Label tip = new Label("Press ENTER to save and quit", 25);
+        addObject(tip, 1000, 760);
     }
     
     public void act(){
@@ -273,12 +315,10 @@ public class TowerDefenseWorld extends World
         
         if (Greenfoot.mouseClicked(archerButton)) {
             selectedTower = "Archer";
-            System.out.println("Archer selected!");
         }
 
         if (Greenfoot.mouseClicked(knightButton)) {
             selectedTower = "Knight";
-            System.out.println("Knight selected!");
         }
         
         if (Greenfoot.mouseClicked(mageButton)) {
@@ -308,6 +348,29 @@ public class TowerDefenseWorld extends World
             }
         }
         spawnDelay++;
+        
+        if (Greenfoot.isKeyDown("enter")) {
+            save();
+            Greenfoot.setWorld(new ExitScreen());
+        }
+    }
+    
+    public void save () {
+        try {
+            PrintWriter output = new PrintWriter(new FileWriter ("save.txt"));
+            
+            for (int i = 0; i < gameArray.length; i++) {
+                for (int j = 0; j < gameArray[i].length; i++) {
+                    output.println(gameArray[i][j]);
+                }
+            }
+            
+            //output.println(money);
+            //output.println(score);
+            //output.println(wave);
+        } catch (IOException e) {
+            Greenfoot.setWorld(new ErrorScreen());
+        }
     }
     
     public int[][] getGrid(){
