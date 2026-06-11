@@ -331,31 +331,32 @@ public class TowerDefenseWorld extends World
 
         if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null)
         {
-            if (mouse.getX() >= 800)
-            {
-                return;
-            }
+            if (mouse.getX() >= 800) return;
         
             int col = mouse.getX() / tileLength;
             int row = mouse.getY() / tileHeight;
         
+            // bounds check FIRST
+            if (row < 0 || row >= worldSize || col < 0 || col >= worldSize)
+                return;
+        
+            // cannot place on path
             if (gameArray[row][col] == 1)
             {
                 System.out.println("Cannot place on path!");
                 return;
             }
         
-            if (selectedTower == null) return;
-
+            // cannot place on anything already there (tower or path)
             if (gameArray[row][col] != 0)
             {
                 System.out.println("Cannot place here!");
                 return;
             }
-            
+        
             int x = col * tileLength + tileLength / 2;
             int y = row * tileHeight + tileHeight / 2;
-            
+        
             if (selectedTower.equals("Archer"))
             {
                 addObject(new Archer(), x, y);
@@ -381,8 +382,7 @@ public class TowerDefenseWorld extends World
                 addObject(new Trapper(), x, y);
                 gameArray[row][col] = 6;
             }
-        }
-        
+        }        
               
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
