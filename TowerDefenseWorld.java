@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class TowerDefenseWorld extends World
 {
+    private boolean newGame;
     private GreenfootImage background;
     int worldSize = 16;
     int tileLength = 50;
@@ -40,11 +41,12 @@ public class TowerDefenseWorld extends World
     private double[] spawnChance = {0.50, 0.15, 0.35};
     
     private SoundManager soundMan;
-    public TowerDefenseWorld(SoundManager soundMan)
+    public TowerDefenseWorld(SoundManager soundMan, boolean newGame)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1200, 800, 1); 
         this.soundMan = soundMan;
+        this.newGame = newGame;
         
         setBackground();
         generatePath();
