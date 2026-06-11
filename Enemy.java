@@ -77,10 +77,14 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     public void act(){
-        walk();
-        if (onEdge()){
+        // Recalculate actual position and clamp
+        gridX = Math.max(0, Math.min((int) Math.round((getPreciseX() - tileSize / 2.0) / tileSize), gameGrid[0].length - 1));
+        gridY = Math.max(0, Math.min((int) Math.round((getPreciseY() - tileSize / 2.0) / tileSize), gameGrid.length - 1));
+        if (onEdge()) {
+            setLocation(gridX * tileSize + tileSize / 2, gridY * tileSize + tileSize / 2);
             turn();
         }
+        walk();
         checkOob();
     }
     
@@ -111,6 +115,9 @@ public abstract class Enemy extends SuperSmoothMover
     }
 
     private void turn(){
+        // Prevent enemies drifting away, snaps them back to grid center
+        setLocation(gridX * tileSize + tileSize / 2, gridY * tileSize + tileSize / 2);
+        
         char excluded = opposite(direction);
         
         if (excluded != 'L' && gridX - 1 >= 0 && gameGrid[gridX - 1][gridY] == 1){
@@ -126,8 +133,6 @@ public abstract class Enemy extends SuperSmoothMover
             direction = 'D';
             gridY++;
         }
-        
-        updateImage();
     }
     
     private void checkOob(){
