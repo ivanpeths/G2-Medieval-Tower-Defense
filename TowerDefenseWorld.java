@@ -223,6 +223,10 @@ public class TowerDefenseWorld extends World
         addObject(mageButton, 950, 250);
         addObject(spearmanButton, 1050, 250);
         addObject(trapperButton, 1000, 350);
+
+        // money 
+        Label moneyTitle = new Label("Money", 40);
+        addObject(sidebarTitle, 1000, 500);
     }
     
     public void act(){
