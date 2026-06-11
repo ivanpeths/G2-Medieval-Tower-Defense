@@ -267,6 +267,25 @@ public class TowerDefenseWorld extends World
             }
         }
     }
+
+    private void handleTowerSelection()
+    {
+        if (Greenfoot.mouseClicked(archerButton)) {
+            selectedTower = "Archer";
+        }
+        else if (Greenfoot.mouseClicked(knightButton)) {
+            selectedTower = "Knight";
+        }
+        else if (Greenfoot.mouseClicked(mageButton)) {
+            selectedTower = "Mage";
+        }
+        else if (Greenfoot.mouseClicked(spearmanButton)) {
+            selectedTower = "Spearman";
+        }
+        else if (Greenfoot.mouseClicked(trapperButton)) {
+            selectedTower = "Trapper";
+        }
+    }
     
     private void drawUi()
     {      
@@ -329,59 +348,59 @@ public class TowerDefenseWorld extends World
     public void act(){
         MouseInfo mouse = Greenfoot.getMouseInfo();
 
-        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null)
+        handleTowerSelection();
+    
+        if (mouse == null || !Greenfoot.mouseClicked(null) || selectedTower == null)
         {
-            if (mouse.getX() >= 800) return;
+            return;
+        }
         
-            int col = mouse.getX() / tileLength;
-            int row = mouse.getY() / tileHeight;
+        if (mouse.getX() >= 800)
+        {
+            return;
+        }
         
-            // bounds check FIRST
-            if (row < 0 || row >= worldSize || col < 0 || col >= worldSize)
-                return;
-        
-            // cannot place on path
-            if (gameArray[row][col] == 1)
-            {
-                System.out.println("Cannot place on path!");
-                return;
-            }
-        
-            // cannot place on anything already there (tower or path)
-            if (gameArray[row][col] != 0)
-            {
-                System.out.println("Cannot place here!");
-                return;
-            }
-        
-            int x = col * tileLength + tileLength / 2;
-            int y = row * tileHeight + tileHeight / 2;
-        
-            if (selectedTower.equals("Archer"))
-            {
-                addObject(new Archer(), x, y);
-                gameArray[row][col] = 2;
-            }
-            else if (selectedTower.equals("Knight"))
-            {
-                addObject(new Knight(), x, y);
-                gameArray[row][col] = 3;
-            }
-            else if (selectedTower.equals("Mage"))
-            {
-                addObject(new Mage(), x, y);
-                gameArray[row][col] = 4;
-            }
-            else if (selectedTower.equals("Spearman"))
-            {
-                addObject(new Spearman(), x, y);
-                gameArray[row][col] = 5;
-            }
-            else if (selectedTower.equals("Trapper"))
-            {
-                addObject(new Trapper(), x, y);
-                gameArray[row][col] = 6;
-            }
+        int col = mouse.getX() / tileLength;
+        int row = mouse.getY() / tileHeight;
+    
+        if (row < 0 || row >= worldSize || col < 0 || col >= worldSize)
+        {
+            return;
+        }
+    
+        if (gameArray[row][col] != 0)
+        {
+            System.out.println("Blocked tile");
+            return;
+        }
+    
+        int x = col * tileLength + tileLength / 2;
+        int y = row * tileHeight + tileHeight / 2;
+    
+        if (selectedTower.equals("Archer"))
+        {
+            addObject(new Archer(), x, y);
+            gameArray[row][col] = 2;
+        }
+        else if (selectedTower.equals("Knight"))
+        {
+            addObject(new Knight(), x, y);
+            gameArray[row][col] = 3;
+        }
+        else if (selectedTower.equals("Mage"))
+        {
+            addObject(new Mage(), x, y);
+            gameArray[row][col] = 4;
+        }
+        else if (selectedTower.equals("Spearman"))
+        {
+            addObject(new Spearman(), x, y);
+            gameArray[row][col] = 5;
+        }
+        else if (selectedTower.equals("Trapper"))
+        {
+            addObject(new Trapper(), x, y);
+            gameArray[row][col] = 6;
         }        
               
         if (spawnDelay >= 60){
