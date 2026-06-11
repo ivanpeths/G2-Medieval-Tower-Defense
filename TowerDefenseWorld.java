@@ -370,7 +370,7 @@ public class TowerDefenseWorld extends World
     
         if (gameArray[row][col] != 0)
         {
-            System.out.println("Blocked tile");
+            //System.out.println("Blocked tile");
             return;
         }
     
