@@ -42,8 +42,8 @@ public class TitleScreen extends World
         continueLabel = new Label("Continue", fontSize);
         addObject(startButton, getWidth() / 2, getHeight() / 8 * 7 - 125);
         addObject(continueButton, getWidth() / 2, getHeight() / 8 * 7);
-        addObject(startLabel, getWidth() / 2, getHeight() / 8 * 7 - 10);
-        addObject(continueLabel, getWidth() / 2, getHeight() / 8 * 7 - 135);
+        addObject(startLabel, getWidth() / 2, getHeight() / 8 * 7 - 135);
+        addObject(continueLabel,  getWidth() / 2, getHeight() / 8 * 7 - 10);
     }
     
     public void setBackground(){
