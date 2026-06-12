@@ -13,7 +13,7 @@ public class Spear extends Projectiles
         image.scale(40, 4);
         setImage(image);
         
-        speed = Greenfoot.getRandomNumber(2) + 4;
+        speed = Greenfoot.getRandomNumber(2) + 6;
         setRotation (angle);
         this.damage = damage;
     }

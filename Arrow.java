@@ -13,7 +13,7 @@ public class Arrow extends Projectiles
         image.scale(20, 3);
         setImage(image);
         
-        speed = Greenfoot.getRandomNumber(2) + 4;
+        speed = Greenfoot.getRandomNumber(2) + 6;
         setRotation (angle);
         this.damage = damage;
     }
