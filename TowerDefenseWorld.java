@@ -66,7 +66,7 @@ public class TowerDefenseWorld extends World
         drawPath();
         drawUi();
         
-        setPaintOrder(Enemy.class, Projectiles.class, StartPath.class, EndPath.class, Path.class);
+        setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
     }
 
     public void setMaxBounds(){
