@@ -20,6 +20,7 @@ public class Spear extends Projectiles
 
     public void act()
     {
+        super.act();
         move();
         if (getWorld() == null){
             return;
