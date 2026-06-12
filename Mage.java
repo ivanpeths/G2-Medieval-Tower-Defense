@@ -14,9 +14,9 @@ public class Mage extends Tower
         image = new GreenfootImage("mage.png");
         image.scale(40, 40);
         setImage(image);
-        damage = 150;
+        damage = 250;
         radius = 175;
-        cooldown = 300;
+        cooldown = 500;
     }
     
     protected void attack () {
