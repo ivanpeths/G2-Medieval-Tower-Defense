@@ -311,16 +311,16 @@ public class TowerDefenseWorld extends World
 
         // money 
         Label moneyTitle = new Label("Money", fontSize);
-        addObject(moneyTitle, 1000, 400);
+        addObject(moneyTitle, 1000, 450);
 
         Label moneyLabel = new Label(money, fontSize);
-        addObject(moneyLabel, 1000, 450);
+        addObject(moneyLabel, 1000, 500);
 
         Label scoreTitle = new Label("Score", fontSize);
-        addObject(scoreTitle, 1000, 550);
+        addObject(scoreTitle, 1000, 575);
 
         Label scoreLabel = new Label(score, fontSize);
-        addObject(scoreLabel, 1000, 600);
+        addObject(scoreLabel, 1000, 625);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(200, 100);
