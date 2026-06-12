@@ -337,42 +337,33 @@ public class TowerDefenseWorld extends World
     
         handleTowerSelection();
     
-        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null)
-        {
-            if (mouse.getX() < 800)
-            {
+        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null){
+            if (mouse.getX() < 800){
                 int col = mouse.getX() / tileLength;
                 int row = mouse.getY() / tileHeight;
     
-                if (row >= 0 && row < 16 && col >= 0 && col < worldSize)
-                {
-                    if (gameArray[row][col] == 0)
-                    {
+                if (row >= 0 && row < 16 && col >= 0 && col < worldSize){
+                    if (gameArray[row][col] == 0){
                         int x = col * tileLength + tileLength / 2;
                         int y = row * tileHeight + tileHeight / 2;
     
-                        if (selectedTower.equals("Archer"))
-                        {
+                        if (selectedTower.equals("Archer")){
                             addObject(new Archer(), x, y);
                             gameArray[row][col] = 2;
                         }
-                        else if (selectedTower.equals("Knight"))
-                        {
+                        else if (selectedTower.equals("Knight")){
                             addObject(new Knight(), x, y);
                             gameArray[row][col] = 3;
                         }
-                        else if (selectedTower.equals("Mage"))
-                        {
+                        else if (selectedTower.equals("Mage")){
                             addObject(new Mage(), x, y);
                             gameArray[row][col] = 4;
                         }
-                        else if (selectedTower.equals("Spearman"))
-                        {
+                        else if (selectedTower.equals("Spearman")){
                             addObject(new Spearman(), x, y);
                             gameArray[row][col] = 5;
                         }
-                        else if (selectedTower.equals("Trapper"))
-                        {
+                        else if (selectedTower.equals("Trapper")){
                             addObject(new Trapper(), x, y);
                             gameArray[row][col] = 6;
                         }
