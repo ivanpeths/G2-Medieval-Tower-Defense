@@ -2,6 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 /**
  * Main Game World
@@ -60,9 +62,12 @@ public class TowerDefenseWorld extends World
         this.soundMan = soundMan;
         this.newGame = newGame;
         
+        load();
         setMaxBounds();
         setBackground();
-        generatePath();
+        if (newGame){
+            generatePath();
+        }
         drawPath();
         drawUi();
         
@@ -372,6 +377,10 @@ public class TowerDefenseWorld extends World
         }
     
         spawnDelay++;
+
+        if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
+            save();
+        }
     }
     
     public void save () {
@@ -379,21 +388,55 @@ public class TowerDefenseWorld extends World
             PrintWriter output = new PrintWriter(new FileWriter ("save.txt"));
             
             for (int i = 0; i < gameArray.length; i++) {
-                for (int j = 0; j < gameArray[i].length; i++) {
+                for (int j = 0; j < gameArray[i].length; j++) {
                     output.println(gameArray[i][j]);
                 }
             }
             
             output.println(money);
             output.println(score);
+            output.println(startX);
+            output.println(startY);
+            output.println(endX);
+            output.println(endY);
+            output.println(startingDirection);
             //output.println(wave);
+
+            output.close();
         } catch (IOException e) {
             Greenfoot.setWorld(new ErrorScreen());
         }
     }
     
     public void load(){
-        
+        if (!newGame){
+            try {
+                Scanner input = new Scanner(new FileReader("save.txt"));
+               
+                for (int i = 0; i < gameArray.length; i++){
+                    for (int j = 0; j < gameArray[i].length; j++){
+                        if (!input.hasNextLine()) {
+                            input.close();
+                            Greenfoot.setWorld(new ErrorScreen());
+                            return;
+                        }
+                        gameArray[i][j] = Integer.parseInt(input.nextLine());
+                    }
+                }
+
+                money = Integer.parseInt(input.nextLine());
+                score = Integer.parseInt(input.nextLine());
+                startX = Integer.parseInt(input.nextLine());
+                startY = Integer.parseInt(input.nextLine());
+                endX = Integer.parseInt(input.nextLine());
+                endY = Integer.parseInt(input.nextLine());
+                startingDirection = input.nextLine().charAt(0); 
+                //wave = Integer.parseInt(input.nextLine());
+                input.close();
+            } catch (IOException e) {
+                Greenfoot.setWorld(new ErrorScreen());
+            }
+        }
     }
     
     public int[][] getGrid(){
