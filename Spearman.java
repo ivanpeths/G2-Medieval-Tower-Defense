@@ -14,9 +14,9 @@ public class Spearman extends Tower
         image = new GreenfootImage("spearman.png");
         image.scale(40, 40);
         setImage(image);
-        damage = 100;
+        damage = 75;
         radius = 275;
-        cooldown = 120;
+        cooldown = 150;
     }
     
     protected void attack () {
