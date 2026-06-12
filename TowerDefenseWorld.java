@@ -2,6 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.FileReader;
+import java.util.Scanner;
 
 /**
  * Main Game World
@@ -60,10 +62,16 @@ public class TowerDefenseWorld extends World
         this.soundMan = soundMan;
         this.newGame = newGame;
         
+        load();
         setMaxBounds();
         setBackground();
-        generatePath();
+        if (newGame){
+            generatePath();
+        }
         drawPath();
+        if (!newGame) {
+            restoreTowers();
+        }
         drawUi();
         
         setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
@@ -225,6 +233,27 @@ public class TowerDefenseWorld extends World
         addObject(new EndPath(), endX * tileLength + tileLength / 2, endY * tileHeight + tileHeight / 2);
     }
     
+    public void restoreTowers() {
+        for (int i = 0; i < gameArray.length; i++) {
+            for (int j = 0; j < gameArray[i].length; j++) {
+                int x = j * tileLength + tileLength / 2;
+                int y = i * tileHeight + tileHeight / 2;
+
+                if (gameArray[i][j] == 2) {
+                    addObject(new Archer(), x, y);
+                } else if (gameArray[i][j] == 3) {
+                    addObject(new Knight(), x, y);
+                } else if (gameArray[i][j] == 4) {
+                    addObject(new Mage(), x, y);
+                } else if (gameArray[i][j] == 5) {
+                    addObject(new Spearman(), x, y);
+                } else if (gameArray[i][j] == 6) {
+                    addObject(new Trapper(), x, y);
+                }
+            }
+        }
+    }
+
     private void handleTowerSelection()
     {
         if (Greenfoot.mouseClicked(archerButton)) {
@@ -244,8 +273,7 @@ public class TowerDefenseWorld extends World
         }
     }
     
-    private void drawUi()
-    {      
+    private void drawUi(){      
         // sidebar background
         GreenfootImage sidebar = new GreenfootImage(300, getHeight());
         sidebar.setColor(new Color(90, 60, 30));
@@ -282,16 +310,16 @@ public class TowerDefenseWorld extends World
 
         // money 
         Label moneyTitle = new Label("Money", fontSize);
-        addObject(moneyTitle, 1000, 400);
+        addObject(moneyTitle, 1000, 450);
 
         Label moneyLabel = new Label(money, fontSize);
-        addObject(moneyLabel, 1000, 450);
+        addObject(moneyLabel, 1000, 500);
 
         Label scoreTitle = new Label("Score", fontSize);
-        addObject(scoreTitle, 1000, 550);
+        addObject(scoreTitle, 1000, 575);
 
         Label scoreLabel = new Label(score, fontSize);
-        addObject(scoreLabel, 1000, 600);
+        addObject(scoreLabel, 1000, 625);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(200, 100);
@@ -302,48 +330,66 @@ public class TowerDefenseWorld extends World
         addObject(saveLabel, 1000, 690);
     }
     
-    public void act()
-    {
+    public void act(){
         MouseInfo mouse = Greenfoot.getMouseInfo();
     
         handleTowerSelection();
-    
-        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null)
-        {
-            if (mouse.getX() < 800)
-            {
+        spawnTowers();
+        spawnEnemies();
+        spawnDelay++;
+
+        if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
+            save();
+        }
+    }
+    private void spawnEnemy(){
+        if (spawnDelay >= 60){
+                if (Greenfoot.getRandomNumber(spawnRate) == 0){
+                    double type = Math.random();
+                    Enemy enemy;
+        
+                    if (type <= maxChanceBounds[0]){
+                        enemy = new Goblin();
+                    }
+                    else if (type <= maxChanceBounds[1]){
+                        enemy = new GoblinBuff();
+                    }
+                    else{
+                        enemy = new GoblinHorse();
+                    }
+        
+                    addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
+                }
+            }
+    }
+    private void spawnTowers(){
+        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null){
+            if (mouse.getX() < 800){
                 int col = mouse.getX() / tileLength;
                 int row = mouse.getY() / tileHeight;
     
-                if (row >= 0 && row < 16 && col >= 0 && col < worldSize)
-                {
-                    if (gameArray[row][col] == 0)
-                    {
+                if (row >= 0 && row < 16 && col >= 0 && col < worldSize){
+                    if (gameArray[row][col] == 0){
                         int x = col * tileLength + tileLength / 2;
                         int y = row * tileHeight + tileHeight / 2;
     
-                        if (selectedTower.equals("Archer"))
-                        {
+                        if (selectedTower.equals("Archer")){
                             addObject(new Archer(), x, y);
                             gameArray[row][col] = 2;
                         }
-                        else if (selectedTower.equals("Knight"))
-                        {
+                        else if (selectedTower.equals("Knight")){
                             addObject(new Knight(), x, y);
                             gameArray[row][col] = 3;
                         }
-                        else if (selectedTower.equals("Mage"))
-                        {
+                        else if (selectedTower.equals("Mage")){
                             addObject(new Mage(), x, y);
                             gameArray[row][col] = 4;
                         }
-                        else if (selectedTower.equals("Spearman"))
-                        {
+                        else if (selectedTower.equals("Spearman")){
                             addObject(new Spearman(), x, y);
                             gameArray[row][col] = 5;
                         }
-                        else if (selectedTower.equals("Trapper"))
-                        {
+                        else if (selectedTower.equals("Trapper")){
                             addObject(new Trapper(), x, y);
                             gameArray[row][col] = 6;
                         }
@@ -351,49 +397,62 @@ public class TowerDefenseWorld extends World
                 }
             }
         }
-
-        if (spawnDelay >= 60){
-            if (Greenfoot.getRandomNumber(spawnRate) == 0){
-                double type = Math.random();
-                Enemy enemy;
-    
-                if (type <= maxChanceBounds[0]){
-                    enemy = new Goblin();
-                }
-                else if (type <= maxChanceBounds[1]){
-                    enemy = new GoblinBuff();
-                }
-                else{
-                    enemy = new GoblinHorse();
-                }
-    
-                addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
-            }
-        }
-    
-        spawnDelay++;
     }
-    
+
     public void save () {
         try {
             PrintWriter output = new PrintWriter(new FileWriter ("save.txt"));
             
             for (int i = 0; i < gameArray.length; i++) {
-                for (int j = 0; j < gameArray[i].length; i++) {
+                for (int j = 0; j < gameArray[i].length; j++) {
                     output.println(gameArray[i][j]);
                 }
             }
             
             output.println(money);
             output.println(score);
+            output.println(startX);
+            output.println(startY);
+            output.println(endX);
+            output.println(endY);
+            output.println(startingDirection);
             //output.println(wave);
+
+            output.close();
         } catch (IOException e) {
             Greenfoot.setWorld(new ErrorScreen());
         }
     }
     
     public void load(){
-        
+        if (!newGame){
+            try {
+                Scanner input = new Scanner(new FileReader("save.txt"));
+               
+                for (int i = 0; i < gameArray.length; i++){
+                    for (int j = 0; j < gameArray[i].length; j++){
+                        if (!input.hasNextLine()) {
+                            input.close();
+                            Greenfoot.setWorld(new ErrorScreen());
+                            return;
+                        }
+                        gameArray[i][j] = Integer.parseInt(input.nextLine());
+                    }
+                }
+
+                money = Integer.parseInt(input.nextLine());
+                score = Integer.parseInt(input.nextLine());
+                startX = Integer.parseInt(input.nextLine());
+                startY = Integer.parseInt(input.nextLine());
+                endX = Integer.parseInt(input.nextLine());
+                endY = Integer.parseInt(input.nextLine());
+                startingDirection = input.nextLine().charAt(0); 
+                //wave = Integer.parseInt(input.nextLine());
+                input.close();
+            } catch (IOException e) {
+                Greenfoot.setWorld(new ErrorScreen());
+            }
+        }
     }
     
     public int[][] getGrid(){

@@ -54,10 +54,12 @@ public abstract class Enemy extends SuperSmoothMover
     
     public void hurt(int dmgAmt){
         hp -= dmgAmt;
+        updateBar();
     }
     
     public void heal(int healAmt){
         hp += healAmt;
+        updateBar();
     }
     
     public int getHp(){
@@ -154,5 +156,9 @@ public abstract class Enemy extends SuperSmoothMover
         if ((getPreciseX() >= 800 || getPreciseY() >= 800) || (isTouching(EndPath.class))){
             getWorld().removeObject(this);
         }
+    }
+
+    private void updateBar(){
+        healthBar.update(hp);
     }
 }
