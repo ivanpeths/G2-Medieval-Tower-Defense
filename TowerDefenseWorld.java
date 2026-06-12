@@ -273,8 +273,7 @@ public class TowerDefenseWorld extends World
         }
     }
     
-    private void drawUi()
-    {      
+    private void drawUi(){      
         // sidebar background
         GreenfootImage sidebar = new GreenfootImage(300, getHeight());
         sidebar.setColor(new Color(90, 60, 30));
@@ -331,12 +330,39 @@ public class TowerDefenseWorld extends World
         addObject(saveLabel, 1000, 690);
     }
     
-    public void act()
-    {
+    public void act(){
         MouseInfo mouse = Greenfoot.getMouseInfo();
     
         handleTowerSelection();
-    
+        spawnTowers();
+        spawnEnemies();
+        spawnDelay++;
+
+        if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
+            save();
+        }
+    }
+    private void spawnEnemy(){
+        if (spawnDelay >= 60){
+                if (Greenfoot.getRandomNumber(spawnRate) == 0){
+                    double type = Math.random();
+                    Enemy enemy;
+        
+                    if (type <= maxChanceBounds[0]){
+                        enemy = new Goblin();
+                    }
+                    else if (type <= maxChanceBounds[1]){
+                        enemy = new GoblinBuff();
+                    }
+                    else{
+                        enemy = new GoblinHorse();
+                    }
+        
+                    addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
+                }
+            }
+    }
+    private void spawnTowers(){
         if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null){
             if (mouse.getX() < 800){
                 int col = mouse.getX() / tileLength;
@@ -371,33 +397,8 @@ public class TowerDefenseWorld extends World
                 }
             }
         }
-
-        if (spawnDelay >= 60){
-            if (Greenfoot.getRandomNumber(spawnRate) == 0){
-                double type = Math.random();
-                Enemy enemy;
-    
-                if (type <= maxChanceBounds[0]){
-                    enemy = new Goblin();
-                }
-                else if (type <= maxChanceBounds[1]){
-                    enemy = new GoblinBuff();
-                }
-                else{
-                    enemy = new GoblinHorse();
-                }
-    
-                addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
-            }
-        }
-    
-        spawnDelay++;
-
-        if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
-            save();
-        }
     }
-    
+
     public void save () {
         try {
             PrintWriter output = new PrintWriter(new FileWriter ("save.txt"));
