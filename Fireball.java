@@ -14,7 +14,7 @@ public class Fireball extends Projectiles
         image.scale(30, 30);
         setImage(image);
         
-        speed = Greenfoot.getRandomNumber(2) + 4;
+        speed = Greenfoot.getRandomNumber(2) + 6;
         setRotation (angle);
         this.damage = damage;
     }

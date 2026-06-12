@@ -66,7 +66,7 @@ public class TowerDefenseWorld extends World
         drawPath();
         drawUi();
         
-        setPaintOrder(Enemy.class, StartPath.class, EndPath.class, Path.class);
+        setPaintOrder(Enemy.class, Projectiles.class, StartPath.class, EndPath.class, Path.class);
     }
 
     public void setMaxBounds(){
@@ -225,49 +225,6 @@ public class TowerDefenseWorld extends World
         addObject(new EndPath(), endX * tileLength + tileLength / 2, endY * tileHeight + tileHeight / 2);
     }
     
-    public void drawMap () {
-        TowerSpawner spawner = new TowerSpawner();
-        for (int i = 0; i < gameArray.length; i++) {
-            for (int j = 0; j < gameArray[i].length; j++) {
-                int xPos = (j * tileLength) + (tileLength / 2);
-                int yPos = (i * tileHeight) + (tileHeight / 2);
-                
-                addObject(spawner, xPos, yPos);
-                
-                if (spawner.isTouchingAnything()) {
-                    removeObject(spawner);
-                    continue;
-                }
-                
-                removeObject(spawner);
-                
-                if (gameArray[i][j] == 0 || gameArray[i][j] == 1) {
-                    continue;
-                }
-                
-                if (gameArray[i][j] == 2) {
-                    addObject(new Archer(), xPos, yPos);
-                }
-                
-                if (gameArray[i][j] == 3) {
-                    addObject(new Knight(), xPos, yPos);
-                }
-                
-                if (gameArray[i][j] == 4) {
-                    addObject(new Mage(), xPos, yPos);
-                }
-                
-                if (gameArray[i][j] == 5) {
-                    addObject(new Spearman(), xPos, yPos);
-                }
-                
-                if (gameArray[i][j] == 6) {
-                    addObject(new Trapper(), xPos, yPos);
-                }
-            }
-        }
-    }
-
     private void handleTowerSelection()
     {
         if (Greenfoot.mouseClicked(archerButton)) {
@@ -420,20 +377,6 @@ public class TowerDefenseWorld extends World
         }
     
         spawnDelay++;
-    
-        if (Greenfoot.isKeyDown("enter"))
-        {
-            save();
-            Greenfoot.setWorld(new ExitScreen());
-        }
-    
-        mapUpdateCounter++;
-    
-        if (mapUpdateCounter >= 60)
-        {
-            //drawMap();
-            mapUpdateCounter = 0;
-        }
     }
     
     public void save () {

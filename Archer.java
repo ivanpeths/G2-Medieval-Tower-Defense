@@ -38,6 +38,8 @@ public class Archer extends Tower
         
         int angle = (int)(Math.toDegrees(Math.atan2(closest.getX() - getX(), closest.getY() - getY())));
         
+        angle = Math.abs
+        
         setRotation(angle);
         
         getWorld().addObject(new Arrow(angle, damage), getX(), getY());
