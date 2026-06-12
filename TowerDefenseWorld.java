@@ -358,7 +358,7 @@ public class TowerDefenseWorld extends World
                 int col = mouse.getX() / tileLength;
                 int row = mouse.getY() / tileHeight;
     
-                if (row >= 0 && row <  && col >= 0 && col < worldSize)
+                if (row >= 0 && row < worldSize && col >= 0 && col < worldSize)
                 {
                     if (gameArray[row][col] == 0)
                     {
