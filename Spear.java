@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Spear extends Projectiles
 {
+    private int maxHits;
     public Spear (int angle, int damage) {
         image = new GreenfootImage("spear.png");
         image.scale(40, 4);
@@ -16,6 +17,7 @@ public class Spear extends Projectiles
         speed = Greenfoot.getRandomNumber(2) + 6;
         setRotation (angle);
         this.damage = damage;
+        maxHits = 3;
     }
 
     public void act()
@@ -28,6 +30,11 @@ public class Spear extends Projectiles
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class);
         if (target != null) {
             target.hurt(damage);
+            maxHits--;
+        }
+        
+        if (maxHits == 0) {
+            getWorld().removeObject(this);
         }
     }
 }
