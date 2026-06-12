@@ -14,9 +14,9 @@ public class Knight extends Tower
         image = new GreenfootImage("knight.png");
         image.scale(40, 40);
         setImage(image);
-        damage = 100;
+        damage = 150;
         radius = 75;
-        cooldown = 60;
+        cooldown = 300;
     }
     
     protected void attack () {

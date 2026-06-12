@@ -352,23 +352,18 @@ public class TowerDefenseWorld extends World
             }
         }
 
-        if (spawnDelay >= 60)
-        {
-            if (Greenfoot.getRandomNumber(spawnRate) == 0)
-            {
+        if (spawnDelay >= 60){
+            if (Greenfoot.getRandomNumber(spawnRate) == 0){
                 double type = Math.random();
                 Enemy enemy;
     
-                if (type <= maxChanceBounds[0])
-                {
+                if (type <= maxChanceBounds[0]){
                     enemy = new Goblin();
                 }
-                else if (type <= maxChanceBounds[1])
-                {
+                else if (type <= maxChanceBounds[1]){
                     enemy = new GoblinBuff();
                 }
-                else
-                {
+                else{
                     enemy = new GoblinHorse();
                 }
     
