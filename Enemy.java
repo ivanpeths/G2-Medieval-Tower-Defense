@@ -19,10 +19,13 @@ public abstract class Enemy extends SuperSmoothMover
     protected int gridY;
     protected double step;
     
+    protected SuperStatBar healthBar;
+
     public Enemy(int hp, double step){
         this.hp = hp;
         this.maxHp = hp;
         this.step = step;
+        healthBar = new SuperStatBar(maxHp, hp, this, 25, 10, 30);
     }
 
     @Override
@@ -31,6 +34,7 @@ public abstract class Enemy extends SuperSmoothMover
         gameGrid = w.getGrid();
         gridX = w.getStartX();
         gridY = w.getStartY();
+        w.addObject(healthBar, (int) this.getPreciseX(), (int) this.getPreciseY());
         direction = w.getStartDirection();
         setImages();
         updateImage();
@@ -147,7 +151,7 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     private void checkOob(){
-        if (getPreciseX() >= 800 || getPreciseY() >= 800){
+        if ((getPreciseX() >= 800 || getPreciseY() >= 800) || (isTouching(EndPath.class))){
             getWorld().removeObject(this);
         }
     }
