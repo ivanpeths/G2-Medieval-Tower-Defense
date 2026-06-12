@@ -69,6 +69,9 @@ public class TowerDefenseWorld extends World
             generatePath();
         }
         drawPath();
+        if (!newGame) {
+            restoreTowers();
+        }
         drawUi();
         
         setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
@@ -230,6 +233,27 @@ public class TowerDefenseWorld extends World
         addObject(new EndPath(), endX * tileLength + tileLength / 2, endY * tileHeight + tileHeight / 2);
     }
     
+    public void restoreTowers() {
+        for (int i = 0; i < gameArray.length; i++) {
+            for (int j = 0; j < gameArray[i].length; j++) {
+                int x = j * tileLength + tileLength / 2;
+                int y = i * tileHeight + tileHeight / 2;
+
+                if (gameArray[i][j] == 2) {
+                    addObject(new Archer(), x, y);
+                } else if (gameArray[i][j] == 3) {
+                    addObject(new Knight(), x, y);
+                } else if (gameArray[i][j] == 4) {
+                    addObject(new Mage(), x, y);
+                } else if (gameArray[i][j] == 5) {
+                    addObject(new Spearman(), x, y);
+                } else if (gameArray[i][j] == 6) {
+                    addObject(new Trapper(), x, y);
+                }
+            }
+        }
+    }
+
     private void handleTowerSelection()
     {
         if (Greenfoot.mouseClicked(archerButton)) {
