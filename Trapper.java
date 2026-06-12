@@ -31,9 +31,9 @@ public class Trapper extends Tower
             return;
         }
         
-        int angle = (int)(Math.toDegrees(Math.atan2(nearestPath.getX() - getX(), nearestPath.getY() - getY())));
+        int angle = (int)(Math.toDegrees(Math.atan2(nearestPath.getY() - getY(), nearestPath.getX() - getX())));
         
-        setRotation(angle);
+        setRotation(angle - 90);
         
         getWorld().addObject(new Trap(damage), nearestPath.getX(), nearestPath.getY());
     }

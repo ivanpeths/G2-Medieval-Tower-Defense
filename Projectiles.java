@@ -16,6 +16,12 @@ public class Projectiles extends SuperSmoothMover
         move (speed);
     }
     
+    public void act () {
+        if (getX() >= 790 || getX() <= 10 || getY() >= 790 || getY() <= 10) {
+            remove();
+        }
+    }
+    
     public void remove() {
         getWorld().removeObject(this);
     }

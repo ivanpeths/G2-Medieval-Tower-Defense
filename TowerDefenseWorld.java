@@ -30,7 +30,7 @@ public class TowerDefenseWorld extends World
     
     private char startingDirection = 'N';
     
-    private int spawnRate = 60;
+    private int spawnRate = 300;
     private int spawnDelay = 60;
     
     private int money;
@@ -66,7 +66,7 @@ public class TowerDefenseWorld extends World
         drawPath();
         drawUi();
         
-        setPaintOrder(Enemy.class, Projectiles.class, StartPath.class, EndPath.class, Path.class);
+        setPaintOrder(Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
     }
 
     public void setMaxBounds(){
