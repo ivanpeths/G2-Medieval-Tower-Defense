@@ -33,10 +33,9 @@ public class Knight extends Tower
             return;
         }
         
-        int angle = (int)(Math.toDegrees(Math.atan2(closest.getX() - getX(), closest.getY() - getY())));
-        angle = Math.abs(360 - angle);
+        int angle = (int)(Math.toDegrees(Math.atan2(closest.getY() - getY(), closest.getX() - getX())));
         
-        setRotation(angle);
+        setRotation(angle - 90);
         
         doDmg (closest, damage);
     }

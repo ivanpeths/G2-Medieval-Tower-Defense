@@ -21,6 +21,7 @@ public class Fireball extends Projectiles
 
     public void act()
     {
+        super.act();
         move();
         if (getWorld() == null){
             return;
@@ -28,7 +29,7 @@ public class Fireball extends Projectiles
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class);
         if (target != null) {
             getWorld().addObject(new Explosion(120, 1), getX(), getY());
-            List<Enemy> enemies = getObjectsInRange(120, Enemy.class);
+            List<Enemy> enemies = getObjectsInRange(170, Enemy.class);
             for (Enemy enemy: enemies) {
                 enemy.hurt(damage);
             }

@@ -36,9 +36,9 @@ public class Mage extends Tower
             return;
         }
         
-        int angle = (int)(Math.toDegrees(Math.atan2(closest.getX() - getX(), closest.getY() - getY())));
-        
-        setRotation(angle);
+        int angle = (int)(Math.toDegrees(Math.atan2(closest.getY() - getY(), closest.getX() - getX())));
+                
+        setRotation(angle - 90);
         
         getWorld().addObject(new Fireball(angle, damage), getX(), getY());
     }

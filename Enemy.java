@@ -90,6 +90,10 @@ public abstract class Enemy extends SuperSmoothMover
         }
         walk();
         checkOob();
+        
+        if (hp <= 0) {
+            getWorld().removeObject(this);
+        }
     }
     
     private void walk(){

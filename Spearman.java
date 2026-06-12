@@ -36,9 +36,9 @@ public class Spearman extends Tower
             return;
         }
         
-        int angle = (int)(Math.toDegrees(Math.atan2(closest.getX() - getX(), closest.getY() - getY())));
+        int angle = (int)(Math.toDegrees(Math.atan2(closest.getY() - getY(), closest.getX() - getX())));
         
-        setRotation(angle);
+        setRotation(angle - 90);
         
         getWorld().addObject(new Spear(angle, damage), getX(), getY());
     }

@@ -30,7 +30,7 @@ public class TowerDefenseWorld extends World
     
     private char startingDirection = 'N';
     
-    private int spawnRate = 60;
+    private int spawnRate = 120;
     private int spawnDelay = 60;
     
     private int money;
