@@ -331,11 +331,9 @@ public class TowerDefenseWorld extends World
     }
     
     public void act(){
-        MouseInfo mouse = Greenfoot.getMouseInfo();
-    
         handleTowerSelection();
         spawnTowers();
-        spawnEnemies();
+        spawnEnemy();
         spawnDelay++;
 
         if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
@@ -344,25 +342,26 @@ public class TowerDefenseWorld extends World
     }
     private void spawnEnemy(){
         if (spawnDelay >= 60){
-                if (Greenfoot.getRandomNumber(spawnRate) == 0){
-                    double type = Math.random();
-                    Enemy enemy;
-        
-                    if (type <= maxChanceBounds[0]){
-                        enemy = new Goblin();
-                    }
-                    else if (type <= maxChanceBounds[1]){
-                        enemy = new GoblinBuff();
-                    }
-                    else{
-                        enemy = new GoblinHorse();
-                    }
-        
-                    addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
+            if (Greenfoot.getRandomNumber(spawnRate) == 0){
+                double type = Math.random();
+                Enemy enemy;
+    
+                if (type <= maxChanceBounds[0]){
+                    enemy = new Goblin();
                 }
+                else if (type <= maxChanceBounds[1]){
+                    enemy = new GoblinBuff();
+                }
+                else{
+                    enemy = new GoblinHorse();
+                }
+    
+                addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
             }
+        }
     }
     private void spawnTowers(){
+        MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null){
             if (mouse.getX() < 800){
                 int col = mouse.getX() / tileLength;
