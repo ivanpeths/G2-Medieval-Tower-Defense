@@ -15,6 +15,7 @@ public class TowerDefenseWorld extends World
 {
     private boolean newGame;
     private GreenfootImage background;
+    private GreenfootImage grid;
     int worldSize = 16;
     int tileLength = 50;
     int tileHeight = 50;
@@ -84,7 +85,7 @@ public class TowerDefenseWorld extends World
         }
         drawUi();
         
-        setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Overlay.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
+        setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class, Overlay.class);
     }
     public void started(){
         soundMan.playBgm();
@@ -104,9 +105,15 @@ public class TowerDefenseWorld extends World
         }
     }
     
-    public void setBackground () {
+    public void setBackground(){
         GreenfootImage background = new GreenfootImage("background.png");
         setBackground(background);
+
+        GreenfootImage gridImg = new GreenfootImage("grid.png");
+        gridImg.scale(800, 800);
+        Overlay gridActor = new Overlay();
+        gridActor.setImage(gridImg);
+        addObject(gridActor, getWidth() / 4 + 100, getHeight() / 2);
     }
     
     public void generatePath () {
