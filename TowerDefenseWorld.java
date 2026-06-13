@@ -76,7 +76,14 @@ public class TowerDefenseWorld extends World
         
         setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
     }
+    public void started(){
+        soundMan.playBgm();
+    }
 
+    public void stopped(){
+        soundMan.pauseBgm();
+    }
+    
     public void setMaxBounds(){
         for (int i = 0; i < spawnChance.length; i++){
             if (i == 0){

@@ -33,7 +33,6 @@ public class SoundManager
     private GreenfootSound startingSound;
     private GreenfootSound bgm;
     private GreenfootSound ambience;
-    private GreenfootSound menu;
     
     private GreenfootSound[] leftCoinSounds;
     private GreenfootSound[] rightCoinSounds;
@@ -46,6 +45,7 @@ public class SoundManager
     private GreenfootSound[] qualitySounds;
     */
 
+    private GreenfootSound bgm;
     private GreenfootSound[] menuClickSounds;
     
     /*
@@ -68,7 +68,7 @@ public class SoundManager
     private int startingSoundVolume = 30;
     private int coinVolume = 25;
     private int ambienceVolume = 20;
-    private int menuVolume = 25;
+    
     private int clickVolume = 50;
     private int errorVolume = 35;
     private int breakVolume = 25;
@@ -77,7 +77,7 @@ public class SoundManager
     private int spawnVolume = 30;
     private int qualityVolume = 60;
     */
-
+    private int bgmVolume = 50;
     private int menuClickVolume = 40;
     
     /*
@@ -96,6 +96,9 @@ public class SoundManager
     }    
 
     public void setFiles(){
+        bgm = new GreenfootSound("bgm.mp3");
+        bgm.setVolume(bgmVolume);
+
         menuClickSounds = new GreenfootSound[menuClickLength];
         for (int i = 0; i < menuClickLength; i++){
             menuClickSounds[i] = new GreenfootSound("menu_click.mp3");
@@ -112,9 +115,6 @@ public class SoundManager
         ambience = new GreenfootSound("ambience.mp3");
         ambience.setVolume(ambienceVolume);
         
-        menu = new GreenfootSound("menu.mp3");
-        menu.setVolume(menuVolume);
-
         // Use arrays for sounds with potential simultaneous plays
         leftCoinSounds = new GreenfootSound[coinLength];
         for (int i = 0; i < coinLength; i++){
@@ -208,19 +208,6 @@ public class SoundManager
         ambience.pause();
     }  
     
-    // Menu music
-    public void playMenu(){
-        menu.playLoop();
-    }
-    
-    public void pauseMenu(){
-        menu.pause();
-    }
-    
-    public void stopMenu(){
-        menu.stop();
-    }
-    
     // Pointer click
     public void playClick(){
         clickSounds[clickIndex].play();
@@ -258,8 +245,22 @@ public class SoundManager
     }
     */
 
+    // Button clicks
     public void playMenuClick(){
         menuClickSounds[menuClickIndex].play();
         menuClickIndex = (menuClickIndex + 1) % menuClickLength;
+    }
+
+    // Menu music
+    public void playBgm(){
+        bgm.playLoop();
+    }
+    
+    public void pauseBgm(){
+        bgm.pause();
+    }
+    
+    public void stopBgm(){
+        bgm.stop();
     }
 }

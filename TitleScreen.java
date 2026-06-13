@@ -26,11 +26,11 @@ public class TitleScreen extends World
     
     // Start and stop menu music as needed
     public void stopped(){
-        // soundMan.pauseMenu();
+        soundMan.pauseBgm();
     }
     
     public void started(){
-        // soundMan.playMenu();
+        soundMan.playBgm();
     }
     
     public void setupButton(){
