@@ -47,6 +47,7 @@ public class SoundManager
 
     private GreenfootSound bgm;
     private GreenfootSound[] menuClickSounds;
+    private GreenfootSound[] arrowSounds;
     
     /*
     // Indexes
@@ -62,6 +63,7 @@ public class SoundManager
     */
 
     private int menuClickIndex = 0;
+    private int arrowIndex = 0;
     
     /*
     // Volumes
@@ -77,8 +79,9 @@ public class SoundManager
     private int spawnVolume = 30;
     private int qualityVolume = 60;
     */
-    private int bgmVolume = 50;
-    private int menuClickVolume = 40;
+    private int bgmVolume = 40;
+    private int menuClickVolume = 50;
+    private int arrowVolume = 50;
     
     /*
     // Lengths
@@ -89,6 +92,7 @@ public class SoundManager
     */
     
     private int menuClickLength = 3;
+    private int arrowLength = 10;
     
     
     public SoundManager(){
@@ -103,6 +107,12 @@ public class SoundManager
         for (int i = 0; i < menuClickLength; i++){
             menuClickSounds[i] = new GreenfootSound("menu_click.mp3");
             menuClickSounds[i].setVolume(menuClickVolume);
+        }
+
+        arrowSounds = new GreenfootSound[arrowLength];
+        for (int i = 0; i < arrowLength; i++){
+            arrowSounds[i] = new GreenfootSound("arrow.mp3");
+            arrowSounds[i].setVolume(arrowVolume);
         }
     }
 
@@ -262,5 +272,11 @@ public class SoundManager
     
     public void stopBgm(){
         bgm.stop();
+    }
+
+    // Arrow impact
+    public void playArrow(){
+        arrowSounds[arrowIndex].play();
+        arrowIndex = (arrowIndex + 1) % arrowLength;
     }
 }

@@ -265,18 +265,23 @@ public class TowerDefenseWorld extends World
     {
         if (Greenfoot.mouseClicked(archerButton)) {
             selectedTower = "Archer";
+            soundMan.playMenuClick();
         }
         else if (Greenfoot.mouseClicked(knightButton)) {
             selectedTower = "Knight";
+            soundMan.playMenuClick();
         }
         else if (Greenfoot.mouseClicked(mageButton)) {
             selectedTower = "Mage";
+            soundMan.playMenuClick();
         }
         else if (Greenfoot.mouseClicked(spearmanButton)) {
             selectedTower = "Spearman";
+            soundMan.playMenuClick();
         }
         else if (Greenfoot.mouseClicked(trapperButton)) {
             selectedTower = "Trapper";
+            soundMan.playMenuClick();
         }
     }
     
@@ -368,6 +373,7 @@ public class TowerDefenseWorld extends World
             }
         }
     }
+    
     private void spawnTowers(){
         MouseInfo mouse = Greenfoot.getMouseInfo();
         if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null){
@@ -476,5 +482,9 @@ public class TowerDefenseWorld extends World
 
     public char getStartDirection(){
         return startingDirection;
+    }
+    
+    public SoundManager getSoundMan(){
+        return soundMan;
     }
 }

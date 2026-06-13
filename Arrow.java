@@ -27,6 +27,8 @@ public class Arrow extends Projectiles
         }
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class);
         if (target != null) {
+            SoundManager soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+            soundMan.playArrow();
             target.hurt(damage);
             remove();
         }
