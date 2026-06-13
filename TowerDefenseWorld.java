@@ -375,7 +375,7 @@ public class TowerDefenseWorld extends World
         addObject(moneyLabel, 1000, 625);
 
         BlankActor heartIcon = new BlankActor();
-        heartIcon.setImage(new GreenfootImage("heart.png"));
+        heartIcon.setImage(new GreenfootImage("health.png"));
         addObject(heartIcon, 950, 450);
         
         BlankActor coinIcon = new BlankActor();
