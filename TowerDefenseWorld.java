@@ -39,6 +39,8 @@ public class TowerDefenseWorld extends World
     private int health = 20;
     private int money = 0;
     private int fontSize = 40;
+    private Label healthLabel;
+    private Label moneyLabel;
     
     private TowerButton archerButton;
     private TowerButton knightButton;
@@ -357,18 +359,26 @@ public class TowerDefenseWorld extends World
         addObject(spearmanButton, towerButtonCol3, towerButtonRow2);
         addObject(trapperButton, towerButtonCol2, towerButtonRow3);
 
-        // Health and money 
+        // Health and money         
         Label healthTitle = new Label("health", fontSize);
         addObject(healthTitle, 1000, 450);
 
-        Label healthLabel = new Label(health, fontSize);
+        healthLabel = new Label(health, fontSize);
         addObject(healthLabel, 1000, 500);
 
         Label moneyTitle = new Label("money", fontSize);
         addObject(moneyTitle, 1000, 575);
 
-        Label moneyLabel = new Label(money, fontSize);
+        moneyLabel = new Label(money, fontSize);
         addObject(moneyLabel, 1000, 625);
+
+        BlankActor heartIcon = new BlankActor();
+        heartIcon.setImage(new GreenfootImage("heart.png"));
+        addObject(heartIcon, 950, 450);
+        
+        BlankActor coinIcon = new BlankActor();
+        coinIcon.setImage(new GreenfootImage("coin.png"));
+        addObject(coinIcon, 950, 575);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(200, 100);
