@@ -362,13 +362,13 @@ public class TowerDefenseWorld extends World
         addObject(trapperButton, towerButtonCol2, towerButtonRow3);
 
         // Health and money         
-        Label healthTitle = new Label("health", fontSize);
+        Label healthTitle = new Label("Health", fontSize);
         addObject(healthTitle, 1000, 450);
 
         healthLabel = new Label(health, fontSize);
         addObject(healthLabel, 1000, 500);
 
-        Label moneyTitle = new Label("money", fontSize);
+        Label moneyTitle = new Label("Money", fontSize);
         addObject(moneyTitle, 1000, 575);
 
         moneyLabel = new Label(money, fontSize);
@@ -376,7 +376,7 @@ public class TowerDefenseWorld extends World
 
         BlankActor heartIcon = new BlankActor();
         heartIcon.setImage(new GreenfootImage("health.png"));
-        heartIcon.getImage().scale(30, 30);
+        heartIcon.getImage().scale(70, 30);
         addObject(heartIcon, 950, 450);
         
         BlankActor moneyIcon = new BlankActor();
