@@ -10,6 +10,8 @@ import java.util.Scanner;
  * 
  * @author Ivan and Kolby
  * Sidebar by Isaac
+ * Money -  https://guardian5.itch.io/mounds-of-money-sprite-package 
+ * Health - https://opengameart.org/content/heart-pixel-art 
  */
 public class TowerDefenseWorld extends World
 {
