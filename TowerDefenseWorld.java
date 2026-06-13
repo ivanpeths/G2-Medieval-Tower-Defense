@@ -379,7 +379,7 @@ public class TowerDefenseWorld extends World
         addObject(heartIcon, 950, 450);
         
         BlankActor coinIcon = new BlankActor();
-        coinIcon.setImage(new GreenfootImage("coin.png"));
+        coinIcon.setImage(new GreenfootImage("money.png"));
         addObject(coinIcon, 950, 575);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
