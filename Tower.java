@@ -14,7 +14,7 @@ public abstract class Tower extends Actor
     protected int type;
     protected GreenfootImage image;
     protected int cooldown;
-    protected int cooldownCounter = 0;
+    protected int cooldownCounter = cooldown;
     
     public void act () {
         cooldownCounter++;

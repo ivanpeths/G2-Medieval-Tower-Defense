@@ -14,9 +14,9 @@ public class Trapper extends Tower
         image = new GreenfootImage("trapper.png");
         image.scale(40, 40);
         setImage(image);
-        damage = 500;
+        damage = 250;
         radius = 75;
-        cooldown = 500;
+        cooldown = 400;
     }
     
     protected void attack () {
