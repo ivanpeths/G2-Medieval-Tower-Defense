@@ -16,7 +16,7 @@ public class Knight extends Tower
         setImage(image);
         damage = 150;
         radius = 75;
-        cooldown = 300;
+        cooldown = 150;
     }
     
     protected void attack () {

@@ -26,11 +26,11 @@ public class TitleScreen extends World
     
     // Start and stop menu music as needed
     public void stopped(){
-        // soundMan.pauseMenu();
+        soundMan.pauseBgm();
     }
     
     public void started(){
-        // soundMan.playMenu();
+        soundMan.playBgm();
     }
     
     public void setupButton(){
@@ -54,12 +54,12 @@ public class TitleScreen extends World
     // Change world to SettingsWorld with a SoundManager passed
     public void act(){
         if(Greenfoot.mouseClicked(startButton) || Greenfoot.mouseClicked(startLabel)){
-            //soundMan.playMenuClick();
+            soundMan.playMenuClick();
             Greenfoot.setWorld(new TowerDefenseWorld(soundMan, true));
         }
         
         if(Greenfoot.mouseClicked(continueButton) || Greenfoot.mouseClicked(continueLabel)){
-            //soundMan.playMenuClick();
+            soundMan.playMenuClick();
             Greenfoot.setWorld(new TowerDefenseWorld(soundMan, false));
         }
     }

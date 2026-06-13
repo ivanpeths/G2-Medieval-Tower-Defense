@@ -16,7 +16,7 @@ public class Trapper extends Tower
         setImage(image);
         damage = 500;
         radius = 75;
-        cooldown = 1000;
+        cooldown = 500;
     }
     
     protected void attack () {
