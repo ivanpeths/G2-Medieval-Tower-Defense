@@ -46,6 +46,7 @@ public class SoundManager
     */
 
     private GreenfootSound bgm;
+    private GreenfootSound tower;
     private GreenfootSound[] menuClickSounds;
     private GreenfootSound[] arrowSounds;
     
@@ -81,7 +82,8 @@ public class SoundManager
     */
     private int bgmVolume = 40;
     private int menuClickVolume = 50;
-    private int arrowVolume = 50;
+    private int arrowVolume = 30;
+    private int towerVolume = 30;
     
     /*
     // Lengths
@@ -102,6 +104,9 @@ public class SoundManager
     public void setFiles(){
         bgm = new GreenfootSound("bgm.mp3");
         bgm.setVolume(bgmVolume);
+
+        tower = new GreenfootSound("tower.mp3");
+        tower.setVolume(towerVolume);
 
         menuClickSounds = new GreenfootSound[menuClickLength];
         for (int i = 0; i < menuClickLength; i++){
@@ -273,6 +278,10 @@ public class SoundManager
     public void stopBgm(){
         bgm.stop();
     }
+
+    public void playTower(){
+        tower.play();
+    }   
 
     // Arrow impact
     public void playArrow(){

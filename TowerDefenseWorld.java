@@ -406,6 +406,7 @@ public class TowerDefenseWorld extends World
                             addObject(new Trapper(), x, y);
                             gameArray[row][col] = 6;
                         }
+                        soundMan.playTower();
                     }
                 }
             }
