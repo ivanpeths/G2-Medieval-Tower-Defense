@@ -36,8 +36,8 @@ public class TowerDefenseWorld extends World
     private int spawnRate = 90;
     private int spawnDelay = 60;
     
-    private int lives = 20;
-    private int score = 0;
+    private int health = 20;
+    private int money = 0;
     private int fontSize = 40;
     
     private TowerButton archerButton;
@@ -357,18 +357,18 @@ public class TowerDefenseWorld extends World
         addObject(spearmanButton, towerButtonCol3, towerButtonRow2);
         addObject(trapperButton, towerButtonCol2, towerButtonRow3);
 
-        // Lives and score 
-        Label livesTitle = new Label("Lives", fontSize);
-        addObject(livesTitle, 1000, 450);
+        // Health and money 
+        Label healthTitle = new Label("health", fontSize);
+        addObject(healthTitle, 1000, 450);
 
-        Label livesLabel = new Label(lives, fontSize);
-        addObject(livesLabel, 1000, 500);
+        Label healthLabel = new Label(health, fontSize);
+        addObject(healthLabel, 1000, 500);
 
-        Label scoreTitle = new Label("Score", fontSize);
-        addObject(scoreTitle, 1000, 575);
+        Label moneyTitle = new Label("money", fontSize);
+        addObject(moneyTitle, 1000, 575);
 
-        Label scoreLabel = new Label(score, fontSize);
-        addObject(scoreLabel, 1000, 625);
+        Label moneyLabel = new Label(money, fontSize);
+        addObject(moneyLabel, 1000, 625);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(200, 100);
@@ -468,8 +468,8 @@ public class TowerDefenseWorld extends World
                 }
             }
             
-            output.println(lives);
-            output.println(score);
+            output.println(health);
+            output.println(money);
             output.println(startX);
             output.println(startY);
             output.println(endX);
@@ -499,8 +499,8 @@ public class TowerDefenseWorld extends World
                     }
                 }
 
-                lives = Integer.parseInt(input.nextLine());
-                score = Integer.parseInt(input.nextLine());
+                health = Integer.parseInt(input.nextLine());
+                money = Integer.parseInt(input.nextLine());
                 startX = Integer.parseInt(input.nextLine());
                 startY = Integer.parseInt(input.nextLine());
                 endX = Integer.parseInt(input.nextLine());
