@@ -35,8 +35,8 @@ public class TowerDefenseWorld extends World
     private int spawnRate = 90;
     private int spawnDelay = 60;
     
-    private int lives;
-    private int score;
+    private int lives = 20;
+    private int score = 0;
     private int fontSize = 40;
     
     private TowerButton archerButton;
