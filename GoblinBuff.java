@@ -1,4 +1,9 @@
 import greenfoot.*;
+/**
+ * Buff goblin, subclass of Enemy. High health and slow speed.
+ * 
+ * @author Kolby Ng
+ */
 public class GoblinBuff extends Enemy
 {
     public GoblinBuff(){

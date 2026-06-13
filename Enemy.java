@@ -1,5 +1,9 @@
 import greenfoot.*;
-
+/**
+ * Enemy superclass. Handles movement and everything related.
+ * 
+ * @author Kolby Ng
+ */
 public abstract class Enemy extends SuperSmoothMover
 {
     private int tileSize = 50;
