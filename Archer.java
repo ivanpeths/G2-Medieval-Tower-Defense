@@ -14,7 +14,7 @@ public class Archer extends Tower
         image = new GreenfootImage("archer.png");
         image.scale(40, 40);
         setImage(image);
-        damage = 50;
+        damage = 40;
         radius = 150;
         cooldown = 50;
     }
