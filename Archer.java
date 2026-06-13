@@ -17,6 +17,7 @@ public class Archer extends Tower
         damage = 40;
         radius = 150;
         cooldown = 75;
+        cooldownCounter = cooldown;
     }
     
     protected void attack () {

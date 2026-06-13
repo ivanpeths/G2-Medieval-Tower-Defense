@@ -17,6 +17,7 @@ public class Mage extends Tower
         damage = 250;
         radius = 175;
         cooldown = 300;
+        cooldownCounter = cooldown;
     }
     
     protected void attack () {

@@ -17,6 +17,7 @@ public class Trapper extends Tower
         damage = 250;
         radius = 75;
         cooldown = 400;
+        cooldownCounter = cooldown;
     }
     
     protected void attack () {
