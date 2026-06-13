@@ -45,6 +45,16 @@ public class TowerDefenseWorld extends World
     private TowerButton spearmanButton;
     private TowerButton trapperButton;
     
+    private int towerButtonRow1 = 150;
+    private int towerButtonRow2 = 250;
+    private int towerButtonRow3 = 350;
+    private int towerButtonCol1 = 950;
+    private int towerButtonCol2 = 1000;
+    private int towerButtonCol3 = 1050;
+
+    private GreenfootImage towerIndicatorImage;
+    private Overlay towerIndicatorActor;
+    
     private Button saveActor;
     private Label saveLabel;
 
@@ -74,7 +84,7 @@ public class TowerDefenseWorld extends World
         }
         drawUi();
         
-        setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
+        setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Overlay.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
     }
     public void started(){
         soundMan.playBgm();
@@ -263,25 +273,45 @@ public class TowerDefenseWorld extends World
 
     private void handleTowerSelection()
     {
-        if (Greenfoot.mouseClicked(archerButton)) {
+        if (Greenfoot.mouseClicked(archerButton) && !"Archer".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Archer";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol1, towerButtonRow1);
         }
-        else if (Greenfoot.mouseClicked(knightButton)) {
+        else if (Greenfoot.mouseClicked(knightButton) && !"Knight".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Knight";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol3, towerButtonRow1);
         }
-        else if (Greenfoot.mouseClicked(mageButton)) {
+        else if (Greenfoot.mouseClicked(mageButton) && !"Mage".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Mage";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol1, towerButtonRow2);
         }
-        else if (Greenfoot.mouseClicked(spearmanButton)) {
+        else if (Greenfoot.mouseClicked(spearmanButton) && !"Spearman".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Spearman";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol3, towerButtonRow2);
         }
-        else if (Greenfoot.mouseClicked(trapperButton)) {
-            selectedTower = "Trapper";
+        else if (Greenfoot.mouseClicked(trapperButton) && !"Trapper".equals(selectedTower)) {
             soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
+            selectedTower = "Trapper";
+            addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow3);
         }
     }
     
@@ -314,11 +344,11 @@ public class TowerDefenseWorld extends World
         spearmanButton = new TowerButton("Spearman", "spearman.png");
         trapperButton = new TowerButton("Trapper", "trapper.png");
 
-        addObject(archerButton, 950, 150);
-        addObject(knightButton, 1050, 150);
-        addObject(mageButton, 950, 250);
-        addObject(spearmanButton, 1050, 250);
-        addObject(trapperButton, 1000, 350);
+        addObject(archerButton, towerButtonCol1, towerButtonRow1);
+        addObject(knightButton, towerButtonCol3, towerButtonRow1);
+        addObject(mageButton, towerButtonCol1, towerButtonRow2);
+        addObject(spearmanButton, towerButtonCol3, towerButtonRow2);
+        addObject(trapperButton, towerButtonCol2, towerButtonRow3);
 
         // Lives and score 
         Label livesTitle = new Label("Lives", fontSize);
@@ -340,6 +370,14 @@ public class TowerDefenseWorld extends World
         saveActor.setImage(buttonImg);
         addObject(saveActor, 1000, 725);
         addObject(saveLabel, 1000, 715);
+
+        
+        towerIndicatorImage = new GreenfootImage(100, 100);
+        towerIndicatorImage.setColor(new Color(144, 213, 255, 50));
+        towerIndicatorImage.fill();
+        
+        towerIndicatorActor = new Overlay();
+        towerIndicatorActor.setImage(towerIndicatorImage);
     }
     
     public void act(){

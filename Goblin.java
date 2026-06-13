@@ -1,4 +1,9 @@
 import greenfoot.*;
+/**
+ * Goblin, subclass of Enemy. Normal health and normal speed.
+ * 
+ * @author Kolby Ng
+ */
 public class Goblin extends Enemy
 {
     public Goblin(){

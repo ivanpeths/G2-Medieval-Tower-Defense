@@ -17,6 +17,7 @@ public class Spearman extends Tower
         damage = 75;
         radius = 275;
         cooldown = 200;
+        cooldownCounter = cooldown;
     }
     
     protected void attack () {

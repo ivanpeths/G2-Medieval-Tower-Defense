@@ -1,4 +1,9 @@
 import greenfoot.*;
+/**
+ * Goblin on a horse, subclass of Enemy. Low health and fast speed.
+ * 
+ * @author Kolby Ng
+ */
 public class GoblinHorse extends Enemy
 {
     public GoblinHorse(){

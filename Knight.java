@@ -17,6 +17,7 @@ public class Knight extends Tower
         damage = 150;
         radius = 75;
         cooldown = 150;
+        cooldownCounter = cooldown;
     }
     
     protected void attack () {
