@@ -337,6 +337,7 @@ public class TowerDefenseWorld extends World
         spawnDelay++;
 
         if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
+            soundMan.playMenuClick();
             save();
         }
     }

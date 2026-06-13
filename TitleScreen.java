@@ -54,12 +54,12 @@ public class TitleScreen extends World
     // Change world to SettingsWorld with a SoundManager passed
     public void act(){
         if(Greenfoot.mouseClicked(startButton) || Greenfoot.mouseClicked(startLabel)){
-            //soundMan.playMenuClick();
+            soundMan.playMenuClick();
             Greenfoot.setWorld(new TowerDefenseWorld(soundMan, true));
         }
         
         if(Greenfoot.mouseClicked(continueButton) || Greenfoot.mouseClicked(continueLabel)){
-            //soundMan.playMenuClick();
+            soundMan.playMenuClick();
             Greenfoot.setWorld(new TowerDefenseWorld(soundMan, false));
         }
     }

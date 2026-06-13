@@ -16,7 +16,7 @@ public class Spearman extends Tower
         setImage(image);
         damage = 75;
         radius = 275;
-        cooldown = 150;
+        cooldown = 75;
     }
     
     protected void attack () {
