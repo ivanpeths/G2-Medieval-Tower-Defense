@@ -157,7 +157,7 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     private void checkOob(){
-        if ((getPreciseX() >= 800 || getPreciseY() >= 800) || (isTouching(EndPath.class))){
+        if (isTouching(EndPath.class)){
             getWorld().removeObject(this);
         }
     }
