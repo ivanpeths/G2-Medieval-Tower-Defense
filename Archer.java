@@ -16,7 +16,7 @@ public class Archer extends Tower
         setImage(image);
         damage = 40;
         radius = 150;
-        cooldown = 50;
+        cooldown = 75;
     }
     
     protected void attack () {

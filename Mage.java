@@ -16,7 +16,7 @@ public class Mage extends Tower
         setImage(image);
         damage = 250;
         radius = 175;
-        cooldown = 250;
+        cooldown = 300;
     }
     
     protected void attack () {

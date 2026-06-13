@@ -23,7 +23,7 @@ public class Explosion extends Actor
     
     private void drawExplosion (GreenfootImage image, double percent){
         image.clear();
-        Color drawColor = new Color (169, 169, 169, (int)(255 * percent));
+        Color drawColor = new Color (255, 191, 0, (int)(255 * percent));
         image.setColor(drawColor);
         image.fillOval (0, 0, image.getWidth() -2, image.getHeight() -2);
         setImage(image);

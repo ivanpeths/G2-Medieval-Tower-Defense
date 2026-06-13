@@ -32,11 +32,11 @@ public class TowerDefenseWorld extends World
     
     private char startingDirection = 'N';
     
-    private int spawnRate = 120;
+    private int spawnRate = 90;
     private int spawnDelay = 60;
     
-    private int money;
-    private int score;
+    private int lives = 20;
+    private int score = 0;
     private int fontSize = 40;
     
     private TowerButton archerButton;
@@ -320,12 +320,12 @@ public class TowerDefenseWorld extends World
         addObject(spearmanButton, 1050, 250);
         addObject(trapperButton, 1000, 350);
 
-        // money 
-        Label moneyTitle = new Label("Money", fontSize);
-        addObject(moneyTitle, 1000, 450);
+        // Lives and score 
+        Label livesTitle = new Label("Lives", fontSize);
+        addObject(livesTitle, 1000, 450);
 
-        Label moneyLabel = new Label(money, fontSize);
-        addObject(moneyLabel, 1000, 500);
+        Label livesLabel = new Label(lives, fontSize);
+        addObject(livesLabel, 1000, 500);
 
         Label scoreTitle = new Label("Score", fontSize);
         addObject(scoreTitle, 1000, 575);
@@ -338,8 +338,8 @@ public class TowerDefenseWorld extends World
         saveActor = new Button(buttonImg);
         saveLabel = new Label("Save", fontSize);
         saveActor.setImage(buttonImg);
-        addObject(saveActor, 1000, 700);
-        addObject(saveLabel, 1000, 690);
+        addObject(saveActor, 1000, 725);
+        addObject(saveLabel, 1000, 715);
     }
     
     public void act(){
@@ -423,7 +423,7 @@ public class TowerDefenseWorld extends World
                 }
             }
             
-            output.println(money);
+            output.println(lives);
             output.println(score);
             output.println(startX);
             output.println(startY);
@@ -454,7 +454,7 @@ public class TowerDefenseWorld extends World
                     }
                 }
 
-                money = Integer.parseInt(input.nextLine());
+                lives = Integer.parseInt(input.nextLine());
                 score = Integer.parseInt(input.nextLine());
                 startX = Integer.parseInt(input.nextLine());
                 startY = Integer.parseInt(input.nextLine());
