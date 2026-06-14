@@ -406,7 +406,7 @@ public class TowerDefenseWorld extends World
         healthLabel.setValue(health);
     
         if (health <= 0){
-            Greenfoot.setWorld(new GameOverWorld());
+            Greenfoot.setWorld(new LoseScreen());
         }
     }
     
