@@ -9,14 +9,15 @@ import java.util.List;
  */
 public class Knight extends Tower
 {
+    public static final int damage = 150;
+    public static final int radius = 75;
+    public static final int cooldown = 150;
+    
     public Knight () {
         type = 2;
         image = new GreenfootImage("knight.png");
         image.scale(40, 40);
         setImage(image);
-        damage = 150;
-        radius = 75;
-        cooldown = 150;
         cooldownCounter = cooldown;
     }
     

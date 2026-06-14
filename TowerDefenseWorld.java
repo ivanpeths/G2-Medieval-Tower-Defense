@@ -52,6 +52,11 @@ public class TowerDefenseWorld extends World
     private int fontSize = 40;
     private Label healthLabel;
     private Label moneyLabel;
+    private Label dmgLabel;
+    private Label radLabel;
+    private int dmg;
+    private int rad;
+    private int cd;
     
     private boolean newWavePause = false;
     private int newWavePauseCounter = 0;
@@ -62,6 +67,8 @@ public class TowerDefenseWorld extends World
     private TowerButton spearmanButton;
     private TowerButton trapperButton;
     private TowerButton clearSelectedButton;
+
+    private int[][] towerStats;
     
     private int towerButtonRow1 = 150;
     private int towerButtonRow2 = 250;
@@ -91,6 +98,7 @@ public class TowerDefenseWorld extends World
         
         load();
         setMaxBounds();
+        fillStatsArray();
         setBackground();
         if (newGame){
             generatePath();
@@ -121,6 +129,17 @@ public class TowerDefenseWorld extends World
         }
     }
     
+    public void fillStatsArray(){
+        towerStats = new int[][]{
+            {Archer.damage, Archer.radius, Archer.cooldown}, 
+            {Knight.damage, Knight.radius, Knight.cooldown},
+            {Mage.damage, Mage.radius, Mage.cooldown},
+            {Spearman.damage, Spearman.radius, Spearman.cooldown},
+            {Trapper.damage, Trapper.radius, Trapper.cooldown},
+            {0, 0, 0}
+        };
+    }
+
     public void setBackground(){
         GreenfootImage background = new GreenfootImage("background.png");
         setBackground(background);
@@ -272,7 +291,7 @@ public class TowerDefenseWorld extends World
         addObject(new StartPath(), startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
         addObject(new EndPath(), endX * tileLength + tileLength / 2, endY * tileHeight + tileHeight / 2);
     }
-    
+
     public void restoreTowers() {
         for (int i = 0; i < gameArray.length; i++) {
             for (int j = 0; j < gameArray[i].length; j++) {
@@ -424,13 +443,13 @@ public class TowerDefenseWorld extends World
         Label dmgTitle = new Label("DMG", fontSize);
         addObject(dmgTitle, 350, towerButtonCol1);
 
-        dmgLabel = new Label(dmg, fontSize);
+        dmgLabel = new Label("", fontSize);
         addObject(moneyLabel, 450, towerButtonCol1);
 
         Label radTitle = new Label("RAD", fontSize);
         addObject(radTitle, 350, towerButtonCol2);
 
-        radLabel = new Label(rad, fontSize);
+        radLabel = new Label("", fontSize);
         addObject(radLabel, 450, towerButtonCol2);
     }
 
