@@ -409,6 +409,11 @@ public class TowerDefenseWorld extends World
             Greenfoot.setWorld(new LoseScreen());
         }
     }
+
+    public void addMoney(int amount){
+        money += amount;
+        moneyLabel.setValue(money);
+    }
     
     public void act(){
         handleTowerSelection();
