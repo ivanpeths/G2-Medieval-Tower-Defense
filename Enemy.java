@@ -158,6 +158,8 @@ public abstract class Enemy extends SuperSmoothMover
     
     private void checkOob(){
         if (isTouching(EndPath.class)){
+            TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
+            world.loseHealth(1);
             getWorld().removeObject(this);
         }
     }
