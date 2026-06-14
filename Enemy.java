@@ -98,7 +98,9 @@ public abstract class Enemy extends SuperSmoothMover
         checkOob();
         
         if (hp <= 0) {
-            getWorld().removeObject(this);
+            TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
+            world.addMoney(10); // reward amount
+            world.removeObject(this);
         }
     }
     
