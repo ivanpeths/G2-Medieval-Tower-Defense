@@ -1,4 +1,9 @@
 import greenfoot.*;
+/**
+ * Buff goblin, subclass of Enemy. High health and slow speed.
+ * 
+ * @author Kolby Ng
+ */
 public class GoblinBuff extends Enemy
 {
     public GoblinBuff(){
@@ -15,5 +20,14 @@ public class GoblinBuff extends Enemy
         back.scale(50, 50);
         left.scale(50, 50);
         right.scale(50, 50);
+    }
+    
+    public void act () {
+        super.act();
+        if (hp <= 0) {
+            TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
+            world.addMoney(30); // reward amount
+            world.removeObject(this);
+        }
     }
 }

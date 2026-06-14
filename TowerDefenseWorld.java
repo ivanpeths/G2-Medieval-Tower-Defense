@@ -9,17 +9,27 @@ import java.util.Scanner;
  * Main Game World
  * 
  * @author Ivan and Kolby
- * Sidebar by Isaac
+ * Sidebar and functions in sidebar by Isaac
+ * Money -  https://guardian5.itch.io/mounds-of-money-sprite-package 
+ * Health - https://opengameart.org/content/heart-pixel-art 
+ * Other images by Gemini
  */
 public class TowerDefenseWorld extends World
 {
     private boolean newGame;
     private GreenfootImage background;
+    private GreenfootImage grid;
     int worldSize = 16;
     int tileLength = 50;
     int tileHeight = 50;
     int[][] gameArray = new int[worldSize][worldSize];
     private int mapUpdateCounter = 0;
+    
+    private int archerCost = 50;
+    private int knightCost = 50;
+    private int mageCost = 100;
+    private int spearmanCost = 80;
+    private int trapperCost = 80;
     
     private int startX;
     private int startY;
@@ -33,11 +43,18 @@ public class TowerDefenseWorld extends World
     private char startingDirection = 'N';
     
     private int spawnRate = 90;
-    private int spawnDelay = 60;
     
-    private int lives = 20;
-    private int score = 0;
+    private int waveCounter = 1;
+    private int wave = 1;
+    
+    private int health = 20;
+    private int money = 100;
     private int fontSize = 40;
+    private Label healthLabel;
+    private Label moneyLabel;
+    
+    private boolean newWavePause = false;
+    private int newWavePauseCounter = 0;
     
     private TowerButton archerButton;
     private TowerButton knightButton;
@@ -45,13 +62,23 @@ public class TowerDefenseWorld extends World
     private TowerButton spearmanButton;
     private TowerButton trapperButton;
     
+    private int towerButtonRow1 = 150;
+    private int towerButtonRow2 = 250;
+    private int towerButtonRow3 = 350;
+    private int towerButtonCol1 = 950;
+    private int towerButtonCol2 = 1000;
+    private int towerButtonCol3 = 1050;
+
+    private GreenfootImage towerIndicatorImage;
+    private Overlay towerIndicatorActor;
+    
     private Button saveActor;
     private Label saveLabel;
 
     private String selectedTower = null;
     
     // Goblin, GoblinBuff, GoblinHorse
-    private double[] spawnChance = {0.50, 0.15, 0.35};
+    private double[] spawnChance = {0.50, 0.35, 0.15};
     private double[] maxChanceBounds= new double[spawnChance.length];
     
     private SoundManager soundMan;
@@ -74,7 +101,7 @@ public class TowerDefenseWorld extends World
         }
         drawUi();
         
-        setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class);
+        setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class, Overlay.class);
     }
     public void started(){
         soundMan.playBgm();
@@ -94,9 +121,15 @@ public class TowerDefenseWorld extends World
         }
     }
     
-    public void setBackground () {
+    public void setBackground(){
         GreenfootImage background = new GreenfootImage("background.png");
         setBackground(background);
+
+        GreenfootImage gridImg = new GreenfootImage("grid.png");
+        gridImg.scale(800, 800);
+        Overlay gridActor = new Overlay();
+        gridActor.setImage(gridImg);
+        addObject(gridActor, getWidth() / 4 + 100, getHeight() / 2);
     }
     
     public void generatePath () {
@@ -263,25 +296,45 @@ public class TowerDefenseWorld extends World
 
     private void handleTowerSelection()
     {
-        if (Greenfoot.mouseClicked(archerButton)) {
+        if (Greenfoot.mouseClicked(archerButton) && !"Archer".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Archer";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol1, towerButtonRow1);
         }
-        else if (Greenfoot.mouseClicked(knightButton)) {
+        else if (Greenfoot.mouseClicked(knightButton) && !"Knight".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Knight";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol3, towerButtonRow1);
         }
-        else if (Greenfoot.mouseClicked(mageButton)) {
+        else if (Greenfoot.mouseClicked(mageButton) && !"Mage".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Mage";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol1, towerButtonRow2);
         }
-        else if (Greenfoot.mouseClicked(spearmanButton)) {
+        else if (Greenfoot.mouseClicked(spearmanButton) && !"Spearman".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
             selectedTower = "Spearman";
-            soundMan.playMenuClick();
+            addObject(towerIndicatorActor, towerButtonCol3, towerButtonRow2);
         }
-        else if (Greenfoot.mouseClicked(trapperButton)) {
-            selectedTower = "Trapper";
+        else if (Greenfoot.mouseClicked(trapperButton) && !"Trapper".equals(selectedTower)) {
             soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
+            selectedTower = "Trapper";
+            addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow3);
         }
     }
     
@@ -314,24 +367,34 @@ public class TowerDefenseWorld extends World
         spearmanButton = new TowerButton("Spearman", "spearman.png");
         trapperButton = new TowerButton("Trapper", "trapper.png");
 
-        addObject(archerButton, 950, 150);
-        addObject(knightButton, 1050, 150);
-        addObject(mageButton, 950, 250);
-        addObject(spearmanButton, 1050, 250);
-        addObject(trapperButton, 1000, 350);
+        addObject(archerButton, towerButtonCol1, towerButtonRow1);
+        addObject(knightButton, towerButtonCol3, towerButtonRow1);
+        addObject(mageButton, towerButtonCol1, towerButtonRow2);
+        addObject(spearmanButton, towerButtonCol3, towerButtonRow2);
+        addObject(trapperButton, towerButtonCol2, towerButtonRow3);
 
-        // Lives and score 
-        Label livesTitle = new Label("Lives", fontSize);
-        addObject(livesTitle, 1000, 450);
+        // Health and money         
+        Label healthTitle = new Label("Health", fontSize);
+        addObject(healthTitle, 1000, 450);
 
-        Label livesLabel = new Label(lives, fontSize);
-        addObject(livesLabel, 1000, 500);
+        healthLabel = new Label(health, fontSize);
+        addObject(healthLabel, 1000, 500);
 
-        Label scoreTitle = new Label("Score", fontSize);
-        addObject(scoreTitle, 1000, 575);
+        Label moneyTitle = new Label("Money", fontSize);
+        addObject(moneyTitle, 1000, 575);
 
-        Label scoreLabel = new Label(score, fontSize);
-        addObject(scoreLabel, 1000, 625);
+        moneyLabel = new Label(money, fontSize);
+        addObject(moneyLabel, 1000, 625);
+
+        BlankActor heartIcon = new BlankActor();
+        heartIcon.setImage(new GreenfootImage("health.png"));
+        heartIcon.getImage().scale(30, 30);
+        addObject(heartIcon, 930, 450);
+        
+        BlankActor moneyIcon = new BlankActor();
+        moneyIcon.setImage(new GreenfootImage("money.png"));
+        moneyIcon.getImage().scale(60, 30);
+        addObject(moneyIcon, 915, 575);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(200, 100);
@@ -340,37 +403,76 @@ public class TowerDefenseWorld extends World
         saveActor.setImage(buttonImg);
         addObject(saveActor, 1000, 725);
         addObject(saveLabel, 1000, 715);
+
+        
+        towerIndicatorImage = new GreenfootImage(100, 100);
+        towerIndicatorImage.setColor(new Color(144, 213, 255, 50));
+        towerIndicatorImage.fill();
+        
+        towerIndicatorActor = new Overlay();
+        towerIndicatorActor.setImage(towerIndicatorImage);
+    }
+
+    public void loseHealth(int amount){
+        health -= amount;
+        healthLabel.setValue(health);
+    
+        if (health <= 0){
+            Greenfoot.setWorld(new LoseScreen());
+        }
+    }
+
+    public void addMoney(int amount){
+        money += amount;
+        moneyLabel.setValue(money);
     }
     
     public void act(){
         handleTowerSelection();
         spawnTowers();
-        spawnEnemy();
-        spawnDelay++;
+        if (!newWavePause) {
+            spawnEnemy();
+        } else {
+            newWavePauseCounter++;
+        }
+        
+        if (newWavePauseCounter >= 120) {
+            newWavePause = false;
+            newWavePauseCounter = 0;
+        }
 
         if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
             soundMan.playMenuClick();
             save();
         }
+        
+        waveCounter++;
+        if ((wave % 1320) == 0) {
+            wave++;
+            newWavePause = true;
+            maxChanceBounds[0] -= 0.1;
+            maxChanceBounds[1] -= 0.05;
+            maxChanceBounds[2] += 0.15;
+        }
     }
+    
     private void spawnEnemy(){
-        if (spawnDelay >= 60){
-            if (Greenfoot.getRandomNumber(spawnRate) == 0){
-                double type = Math.random();
-                Enemy enemy;
-    
-                if (type <= maxChanceBounds[0]){
-                    enemy = new Goblin();
-                }
-                else if (type <= maxChanceBounds[1]){
-                    enemy = new GoblinBuff();
-                }
-                else{
-                    enemy = new GoblinHorse();
-                }
-    
-                addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
+        int tempSpawnRate = spawnRate - (wave * 5);
+        if (Greenfoot.getRandomNumber(tempSpawnRate) == 0) {
+            double type = Math.random();
+            Enemy enemy;
+
+            if (type <= maxChanceBounds[0]){
+                enemy = new Goblin();
             }
+            else if (type <= maxChanceBounds[1]){
+                enemy = new GoblinHorse();
+            }
+            else{
+                enemy = new GoblinBuff();
+            }
+
+            addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
         }
     }
     
@@ -387,24 +489,49 @@ public class TowerDefenseWorld extends World
                         int y = row * tileHeight + tileHeight / 2;
     
                         if (selectedTower.equals("Archer")){
-                            addObject(new Archer(), x, y);
-                            gameArray[row][col] = 2;
+                            if (money >= archerCost) {
+                                addObject(new Archer(), x, y);
+                                gameArray[row][col] = 2;
+                                removeMoney(archerCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Knight")){
-                            addObject(new Knight(), x, y);
-                            gameArray[row][col] = 3;
+                            if (money >= knightCost) {
+                                addObject(new Knight(), x, y);
+                                gameArray[row][col] = 3;
+                                removeMoney(knightCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Mage")){
-                            addObject(new Mage(), x, y);
-                            gameArray[row][col] = 4;
+                            if (money >= mageCost) {
+                                addObject(new Mage(), x, y);
+                                gameArray[row][col] = 4;
+                                removeMoney(mageCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Spearman")){
-                            addObject(new Spearman(), x, y);
-                            gameArray[row][col] = 5;
+                            if (money >= spearmanCost) {
+                                addObject(new Spearman(), x, y);
+                                gameArray[row][col] = 5;
+                                removeMoney(spearmanCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Trapper")){
-                            addObject(new Trapper(), x, y);
-                            gameArray[row][col] = 6;
+                            if (money >= trapperCost) {
+                                addObject(new Trapper(), x, y);
+                                gameArray[row][col] = 6;
+                                removeMoney(trapperCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         soundMan.playTower();
                     }
@@ -423,8 +550,8 @@ public class TowerDefenseWorld extends World
                 }
             }
             
-            output.println(lives);
-            output.println(score);
+            output.println(health);
+            output.println(money);
             output.println(startX);
             output.println(startY);
             output.println(endX);
@@ -454,8 +581,8 @@ public class TowerDefenseWorld extends World
                     }
                 }
 
-                lives = Integer.parseInt(input.nextLine());
-                score = Integer.parseInt(input.nextLine());
+                health = Integer.parseInt(input.nextLine());
+                money = Integer.parseInt(input.nextLine());
                 startX = Integer.parseInt(input.nextLine());
                 startY = Integer.parseInt(input.nextLine());
                 endX = Integer.parseInt(input.nextLine());
@@ -467,6 +594,11 @@ public class TowerDefenseWorld extends World
                 Greenfoot.setWorld(new ErrorScreen());
             }
         }
+    }
+    
+    public void removeMoney (int cost) {
+        money = money - cost;
+        moneyLabel.setValue(money);
     }
     
     public int[][] getGrid(){

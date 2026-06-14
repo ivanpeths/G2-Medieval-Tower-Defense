@@ -1,4 +1,9 @@
 import greenfoot.*;
+/**
+ * Goblin, subclass of Enemy. Normal health and normal speed.
+ * 
+ * @author Kolby Ng
+ */
 public class Goblin extends Enemy
 {
     public Goblin(){
@@ -15,5 +20,14 @@ public class Goblin extends Enemy
         back.scale(50, 50);
         left.scale(50, 50);
         right.scale(50, 50);
+    }
+    
+    public void act () {
+        super.act();
+        if (hp <= 0) {
+            TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
+            world.addMoney(10); // reward amount
+            world.removeObject(this);
+        }
     }
 }

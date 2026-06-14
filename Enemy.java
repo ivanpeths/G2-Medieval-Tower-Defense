@@ -1,5 +1,9 @@
 import greenfoot.*;
-
+/**
+ * Enemy superclass. Handles movement and everything related.
+ * 
+ * @author Kolby Ng
+ */
 public abstract class Enemy extends SuperSmoothMover
 {
     private int tileSize = 50;
@@ -92,10 +96,6 @@ public abstract class Enemy extends SuperSmoothMover
         }
         walk();
         checkOob();
-        
-        if (hp <= 0) {
-            getWorld().removeObject(this);
-        }
     }
     
     private void walk(){
@@ -153,7 +153,9 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     private void checkOob(){
-        if ((getPreciseX() >= 800 || getPreciseY() >= 800) || (isTouching(EndPath.class))){
+        if (isTouching(EndPath.class)){
+            TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
+            world.loseHealth(1);
             getWorld().removeObject(this);
         }
     }
