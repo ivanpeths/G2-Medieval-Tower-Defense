@@ -25,11 +25,11 @@ public class TowerDefenseWorld extends World
     int[][] gameArray = new int[worldSize][worldSize];
     private int mapUpdateCounter = 0;
     
-    private int archerCost = 10;
-    private int knightCost = 10;
-    private int mageCost = 30;
-    private int spearmanCost = 20;
-    private int trapperCost = 20;
+    private int archerCost = 50;
+    private int knightCost = 50;
+    private int mageCost = 100;
+    private int spearmanCost = 80;
+    private int trapperCost = 80;
     
     private int startX;
     private int startY;
@@ -43,13 +43,18 @@ public class TowerDefenseWorld extends World
     private char startingDirection = 'N';
     
     private int spawnRate = 90;
-    private int spawnDelay = 60;
+    
+    private int waveCounter = 1;
+    private int wave = 1;
     
     private int health = 20;
     private int money = 100;
     private int fontSize = 40;
     private Label healthLabel;
     private Label moneyLabel;
+    
+    private boolean newWavePause = false;
+    private int newWavePauseCounter = 0;
     
     private TowerButton archerButton;
     private TowerButton knightButton;
@@ -73,7 +78,7 @@ public class TowerDefenseWorld extends World
     private String selectedTower = null;
     
     // Goblin, GoblinBuff, GoblinHorse
-    private double[] spawnChance = {0.50, 0.15, 0.35};
+    private double[] spawnChance = {0.50, 0.35, 0.15};
     private double[] maxChanceBounds= new double[spawnChance.length];
     
     private SoundManager soundMan;
@@ -425,33 +430,49 @@ public class TowerDefenseWorld extends World
     public void act(){
         handleTowerSelection();
         spawnTowers();
-        spawnEnemy();
-        spawnDelay++;
+        if (!newWavePause) {
+            spawnEnemy();
+        } else {
+            newWavePauseCounter++;
+        }
+        
+        if (newWavePauseCounter >= 120) {
+            newWavePause = false;
+            newWavePauseCounter = 0;
+        }
 
         if (Greenfoot.mouseClicked(saveActor) || Greenfoot.mouseClicked(saveLabel)){
             soundMan.playMenuClick();
             save();
         }
+        
+        waveCounter++;
+        if ((wave % 1320) == 0) {
+            wave++;
+            newWavePause = true;
+            maxChanceBounds[0] -= 0.1;
+            maxChanceBounds[1] -= 0.05;
+            maxChanceBounds[2] += 0.15;
+        }
     }
     
     private void spawnEnemy(){
-        if (spawnDelay >= 60){
-            if (Greenfoot.getRandomNumber(spawnRate) == 0){
-                double type = Math.random();
-                Enemy enemy;
-    
-                if (type <= maxChanceBounds[0]){
-                    enemy = new Goblin();
-                }
-                else if (type <= maxChanceBounds[1]){
-                    enemy = new GoblinBuff();
-                }
-                else{
-                    enemy = new GoblinHorse();
-                }
-    
-                addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
+        int tempSpawnRate = spawnRate - (wave * 5);
+        if (Greenfoot.getRandomNumber(tempSpawnRate) == 0) {
+            double type = Math.random();
+            Enemy enemy;
+
+            if (type <= maxChanceBounds[0]){
+                enemy = new Goblin();
             }
+            else if (type <= maxChanceBounds[1]){
+                enemy = new GoblinHorse();
+            }
+            else{
+                enemy = new GoblinBuff();
+            }
+
+            addObject(enemy, startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
         }
     }
     
