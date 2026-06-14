@@ -400,6 +400,15 @@ public class TowerDefenseWorld extends World
         towerIndicatorActor = new Overlay();
         towerIndicatorActor.setImage(towerIndicatorImage);
     }
+
+    public void loseHealth(int amount){
+        health -= amount;
+        healthLabel.setValue(health);
+    
+        if (health <= 0){
+            Greenfoot.setWorld(new GameOverWorld());
+        }
+    }
     
     public void act(){
         handleTowerSelection();
