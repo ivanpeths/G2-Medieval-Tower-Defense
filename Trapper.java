@@ -9,14 +9,15 @@ import java.util.List;
  */
 public class Trapper extends Tower
 {
+    public static final int damage = 250;
+    public static final int radius = 75;
+    public static final int cooldown = 400;
+    
     public Trapper () {
         type = 5;
         image = new GreenfootImage("trapper.png");
         image.scale(40, 40);
         setImage(image);
-        damage = 250;
-        radius = 75;
-        cooldown = 400;
         cooldownCounter = cooldown;
     }
     

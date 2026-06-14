@@ -49,6 +49,10 @@ public abstract class Tower extends Actor
     public int getDmg(){
         return damage;
     }
+
+    public int getCd(){
+        return cooldown;
+    }
     
     public int getType(){
         return type;
