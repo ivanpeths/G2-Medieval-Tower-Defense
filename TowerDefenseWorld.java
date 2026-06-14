@@ -458,22 +458,22 @@ public class TowerDefenseWorld extends World
         towerIndicatorActor.setImage(towerIndicatorImage);
 
         Label dmgTitle = new Label("DMG", fontSize);
-        addObject(dmgTitle, 350, towerButtonCol1);
+        addObject(dmgTitle, towerButtonCol1, 350);
 
         dmgLabel = new Label(dmg, fontSize);
-        addObject(moneyLabel, 450, towerButtonCol1);
+        addObject(dmgLabel, towerButtonCol1, 400);
 
         Label radTitle = new Label("RAD", fontSize);
-        addObject(radTitle, 350, towerButtonCol2);
+        addObject(radTitle, towerButtonCol2, 350);
 
         radLabel = new Label(rad, fontSize);
-        addObject(radLabel, 450, towerButtonCol2);
+        addObject(radLabel, towerButtonCol2, 400);
         
         Label cdTitle = new Label("CD", fontSize);
-        addObject(radTitle, 350, towerButtonCol2);
+        addObject(cdTitle, towerButtonCol3, 350);
 
         cdLabel = new Label(cd, fontSize);
-        addObject(cdLabel, 450, towerButtonCol2);
+        addObject(cdLabel, towerButtonCol3, 400);
     }
 
     public void loseHealth(int amount){
