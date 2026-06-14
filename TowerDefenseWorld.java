@@ -54,6 +54,7 @@ public class TowerDefenseWorld extends World
     private Label moneyLabel;
     private Label dmgLabel;
     private Label radLabel;
+    private Label cdLabel;
     private int dmg;
     private int rad;
     private int cd;
@@ -82,7 +83,7 @@ public class TowerDefenseWorld extends World
     private Button saveActor;
     private Label saveLabel;
 
-    private String selectedTower = null;
+    private Integer selectedTower = null;
     
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.35, 0.15};
@@ -320,7 +321,8 @@ public class TowerDefenseWorld extends World
             if (selectedTower != null){
                 removeObject(towerIndicatorActor);
             }
-            selectedTower = "Archer";
+            selectedTower = 0;
+            updateStatVals();
             addObject(towerIndicatorActor, towerButtonCol1, towerButtonRow1);
         }
         else if (Greenfoot.mouseClicked(knightButton) && !"Knight".equals(selectedTower)) {
@@ -328,7 +330,8 @@ public class TowerDefenseWorld extends World
             if (selectedTower != null){
                 removeObject(towerIndicatorActor);
             }
-            selectedTower = "Knight";
+            selectedTower = 1;
+            updateStatVals();
             addObject(towerIndicatorActor, towerButtonCol3, towerButtonRow1);
         }
         else if (Greenfoot.mouseClicked(mageButton) && !"Mage".equals(selectedTower)) {
@@ -336,7 +339,8 @@ public class TowerDefenseWorld extends World
             if (selectedTower != null){
                 removeObject(towerIndicatorActor);
             }
-            selectedTower = "Mage";
+            selectedTower = 2;
+            updateStatVals();
             addObject(towerIndicatorActor, towerButtonCol1, towerButtonRow2);
         }
         else if (Greenfoot.mouseClicked(spearmanButton) && !"Spearman".equals(selectedTower)) {
@@ -344,7 +348,8 @@ public class TowerDefenseWorld extends World
             if (selectedTower != null){
                 removeObject(towerIndicatorActor);
             }
-            selectedTower = "Spearman";
+            selectedTower = 3;
+            updateStatVals();
             addObject(towerIndicatorActor, towerButtonCol3, towerButtonRow2);
         }
         else if (Greenfoot.mouseClicked(trapperButton) && !"Trapper".equals(selectedTower)) {
@@ -352,7 +357,8 @@ public class TowerDefenseWorld extends World
             if (selectedTower != null){
                 removeObject(towerIndicatorActor);
             }
-            selectedTower = "Trapper";
+            selectedTower = 4;
+            updateStatVals();
             addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow1);
         } 
         else if (Greenfoot.mouseClicked(clearSelectedButton) && !"Clear".equals(selectedTower)) {
@@ -360,9 +366,20 @@ public class TowerDefenseWorld extends World
             if (selectedTower != null){
                 removeObject(towerIndicatorActor);
             }
-            selectedTower = "Clear";
+            selectedTower = 5;
+            updateStatVals();
             addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow2);
         }
+    }
+    
+    private void updateStatVals(){
+        dmg = towerStats[selectedTower][0];
+        rad = towerStats[selectedTower][1];
+        cd = towerStats[selectedTower][2];
+        
+        dmgLabel.setValue(dmg);
+        radLabel.setValue(rad);
+        cdLabel.setValue(cd);
     }
     
     private void drawUi(){      
@@ -443,14 +460,20 @@ public class TowerDefenseWorld extends World
         Label dmgTitle = new Label("DMG", fontSize);
         addObject(dmgTitle, 350, towerButtonCol1);
 
-        dmgLabel = new Label("", fontSize);
+        dmgLabel = new Label(dmg, fontSize);
         addObject(moneyLabel, 450, towerButtonCol1);
 
         Label radTitle = new Label("RAD", fontSize);
         addObject(radTitle, 350, towerButtonCol2);
 
-        radLabel = new Label("", fontSize);
+        radLabel = new Label(rad, fontSize);
         addObject(radLabel, 450, towerButtonCol2);
+        
+        Label cdTitle = new Label("CD", fontSize);
+        addObject(radTitle, 350, towerButtonCol2);
+
+        cdLabel = new Label(cd, fontSize);
+        addObject(cdLabel, 450, towerButtonCol2);
     }
 
     public void loseHealth(int amount){
@@ -518,7 +541,7 @@ public class TowerDefenseWorld extends World
     
     private void spawnTowers(){
         MouseInfo mouse = Greenfoot.getMouseInfo();
-        if (mouse != null && Greenfoot.mouseClicked(null) && selectedTower != null){
+        if (mouse != null && Greenfoot.mouseClicked(null) && (Integer) selectedTower != null){
             if (mouse.getX() < 800){
                 int col = mouse.getX() / tileLength;
                 int row = mouse.getY() / tileHeight;
@@ -528,7 +551,7 @@ public class TowerDefenseWorld extends World
                         int x = col * tileLength + tileLength / 2;
                         int y = row * tileHeight + tileHeight / 2;
     
-                        if (selectedTower.equals("Archer")){
+                        if (selectedTower == 0){
                             if (money >= archerCost) {
                                 addObject(new Archer(), x, y);
                                 gameArray[row][col] = 2;
@@ -538,7 +561,7 @@ public class TowerDefenseWorld extends World
                                 soundMan.playError();
                             }
                         }
-                        else if (selectedTower.equals("Knight")){
+                        else if (selectedTower == 1){
                             if (money >= knightCost) {
                                 addObject(new Knight(), x, y);
                                 gameArray[row][col] = 3;
@@ -548,7 +571,7 @@ public class TowerDefenseWorld extends World
                                 soundMan.playError();
                             }
                         }
-                        else if (selectedTower.equals("Mage")){
+                        else if (selectedTower == 2){
                             if (money >= mageCost) {
                                 addObject(new Mage(), x, y);
                                 gameArray[row][col] = 4;
@@ -558,7 +581,7 @@ public class TowerDefenseWorld extends World
                                 soundMan.playError();
                             }
                         }
-                        else if (selectedTower.equals("Spearman")){
+                        else if (selectedTower == 3){
                             if (money >= spearmanCost) {
                                 addObject(new Spearman(), x, y);
                                 gameArray[row][col] = 5;
@@ -568,7 +591,7 @@ public class TowerDefenseWorld extends World
                                 soundMan.playError();
                             }
                         }
-                        else if (selectedTower.equals("Trapper")){
+                        else if (selectedTower == 4){
                             if (money >= trapperCost) {
                                 addObject(new Trapper(), x, y);
                                 gameArray[row][col] = 6;
@@ -578,7 +601,7 @@ public class TowerDefenseWorld extends World
                                 soundMan.playError();
                             }
                         }
-                        else if (selectedTower.equals("Clear")){
+                        else if (selectedTower == 5){
                             return;
                         }
                     }
