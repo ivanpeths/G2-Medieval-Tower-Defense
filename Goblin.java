@@ -21,4 +21,13 @@ public class Goblin extends Enemy
         left.scale(50, 50);
         right.scale(50, 50);
     }
+    
+    public void act () {
+        super.act();
+        if (hp <= 0) {
+            TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
+            world.addMoney(10); // reward amount
+            world.removeObject(this);
+        }
+    }
 }

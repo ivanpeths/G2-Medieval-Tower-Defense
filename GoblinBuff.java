@@ -21,4 +21,13 @@ public class GoblinBuff extends Enemy
         left.scale(50, 50);
         right.scale(50, 50);
     }
+    
+    public void act () {
+        super.act();
+        if (hp <= 0) {
+            TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
+            world.addMoney(30); // reward amount
+            world.removeObject(this);
+        }
+    }
 }

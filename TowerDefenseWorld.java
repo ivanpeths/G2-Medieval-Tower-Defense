@@ -25,6 +25,12 @@ public class TowerDefenseWorld extends World
     int[][] gameArray = new int[worldSize][worldSize];
     private int mapUpdateCounter = 0;
     
+    private int archerCost = 10;
+    private int knightCost = 10;
+    private int mageCost = 30;
+    private int spearmanCost = 20;
+    private int trapperCost = 20;
+    
     private int startX;
     private int startY;
     
@@ -40,7 +46,7 @@ public class TowerDefenseWorld extends World
     private int spawnDelay = 60;
     
     private int health = 20;
-    private int money = 0;
+    private int money = 100;
     private int fontSize = 40;
     private Label healthLabel;
     private Label moneyLabel;
@@ -427,6 +433,7 @@ public class TowerDefenseWorld extends World
             save();
         }
     }
+    
     private void spawnEnemy(){
         if (spawnDelay >= 60){
             if (Greenfoot.getRandomNumber(spawnRate) == 0){
@@ -461,24 +468,49 @@ public class TowerDefenseWorld extends World
                         int y = row * tileHeight + tileHeight / 2;
     
                         if (selectedTower.equals("Archer")){
-                            addObject(new Archer(), x, y);
-                            gameArray[row][col] = 2;
+                            if (money >= archerCost) {
+                                addObject(new Archer(), x, y);
+                                gameArray[row][col] = 2;
+                                removeMoney(archerCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Knight")){
-                            addObject(new Knight(), x, y);
-                            gameArray[row][col] = 3;
+                            if (money >= knightCost) {
+                                addObject(new Knight(), x, y);
+                                gameArray[row][col] = 3;
+                                removeMoney(knightCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Mage")){
-                            addObject(new Mage(), x, y);
-                            gameArray[row][col] = 4;
+                            if (money >= mageCost) {
+                                addObject(new Mage(), x, y);
+                                gameArray[row][col] = 4;
+                                removeMoney(mageCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Spearman")){
-                            addObject(new Spearman(), x, y);
-                            gameArray[row][col] = 5;
+                            if (money >= spearmanCost) {
+                                addObject(new Spearman(), x, y);
+                                gameArray[row][col] = 5;
+                                removeMoney(spearmanCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         else if (selectedTower.equals("Trapper")){
-                            addObject(new Trapper(), x, y);
-                            gameArray[row][col] = 6;
+                            if (money >= trapperCost) {
+                                addObject(new Trapper(), x, y);
+                                gameArray[row][col] = 6;
+                                removeMoney(trapperCost);
+                            } else {
+                                //play an error sound
+                            }
                         }
                         soundMan.playTower();
                     }
@@ -541,6 +573,11 @@ public class TowerDefenseWorld extends World
                 Greenfoot.setWorld(new ErrorScreen());
             }
         }
+    }
+    
+    public void removeMoney (int cost) {
+        money = money - cost;
+        moneyLabel.setValue(money);
     }
     
     public int[][] getGrid(){
