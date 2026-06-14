@@ -376,13 +376,13 @@ public class TowerDefenseWorld extends World
 
         BlankActor heartIcon = new BlankActor();
         heartIcon.setImage(new GreenfootImage("health.png"));
-        heartIcon.getImage().scale(70, 30);
-        addObject(heartIcon, 950, 450);
+        heartIcon.getImage().scale(30, 30);
+        addObject(heartIcon, 930, 450);
         
         BlankActor moneyIcon = new BlankActor();
         moneyIcon.setImage(new GreenfootImage("money.png"));
-        moneyIcon.getImage().scale(30, 30);
-        addObject(moneyIcon, 950, 575);
+        moneyIcon.getImage().scale(60, 30);
+        addObject(moneyIcon, 915, 575);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(200, 100);
