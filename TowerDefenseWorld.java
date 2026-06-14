@@ -61,13 +61,13 @@ public class TowerDefenseWorld extends World
     private TowerButton mageButton;
     private TowerButton spearmanButton;
     private TowerButton trapperButton;
+    private TowerButton clearSelectedButton;
     
     private int towerButtonRow1 = 150;
     private int towerButtonRow2 = 250;
-    private int towerButtonRow3 = 350;
-    private int towerButtonCol1 = 950;
+    private int towerButtonCol1 = 900;
     private int towerButtonCol2 = 1000;
-    private int towerButtonCol3 = 1050;
+    private int towerButtonCol3 = 1100;
 
     private GreenfootImage towerIndicatorImage;
     private Overlay towerIndicatorActor;
@@ -334,7 +334,15 @@ public class TowerDefenseWorld extends World
                 removeObject(towerIndicatorActor);
             }
             selectedTower = "Trapper";
-            addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow3);
+            addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow1);
+        } 
+        else if (Greenfoot.mouseClicked(clearSelectedButton) && !"Clear".equals(selectedTower)) {
+            soundMan.playMenuClick();
+            if (selectedTower != null){
+                removeObject(towerIndicatorActor);
+            }
+            selectedTower = "Clear";
+            addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow2);
         }
     }
     
@@ -366,12 +374,14 @@ public class TowerDefenseWorld extends World
         mageButton = new TowerButton("Mage", "mage.png");
         spearmanButton = new TowerButton("Spearman", "spearman.png");
         trapperButton = new TowerButton("Trapper", "trapper.png");
+        clearSelectedButton = new TowerButton("Clear", "cross.png");
 
         addObject(archerButton, towerButtonCol1, towerButtonRow1);
         addObject(knightButton, towerButtonCol3, towerButtonRow1);
         addObject(mageButton, towerButtonCol1, towerButtonRow2);
         addObject(spearmanButton, towerButtonCol3, towerButtonRow2);
-        addObject(trapperButton, towerButtonCol2, towerButtonRow3);
+        addObject(trapperButton, towerButtonCol2, towerButtonRow1);
+        addObject(clearSelectedButton, towerButtonCol2, towerButtonRow2);
 
         // Health and money         
         Label healthTitle = new Label("Health", fontSize);
@@ -404,13 +414,24 @@ public class TowerDefenseWorld extends World
         addObject(saveActor, 1000, 725);
         addObject(saveLabel, 1000, 715);
 
-        
         towerIndicatorImage = new GreenfootImage(100, 100);
         towerIndicatorImage.setColor(new Color(144, 213, 255, 50));
         towerIndicatorImage.fill();
         
         towerIndicatorActor = new Overlay();
         towerIndicatorActor.setImage(towerIndicatorImage);
+
+        Label dmgTitle = new Label("DMG", fontSize);
+        addObject(dmgTitle, 350, towerButtonCol1);
+
+        dmgLabel = new Label(dmg, fontSize);
+        addObject(moneyLabel, 450, towerButtonCol1);
+
+        Label radTitle = new Label("RAD", fontSize);
+        addObject(radTitle, 350, towerButtonCol2);
+
+        radLabel = new Label(rad, fontSize);
+        addObject(radLabel, 450, towerButtonCol2);
     }
 
     public void loseHealth(int amount){
@@ -493,8 +514,9 @@ public class TowerDefenseWorld extends World
                                 addObject(new Archer(), x, y);
                                 gameArray[row][col] = 2;
                                 removeMoney(archerCost);
+                                soundMan.playTower();
                             } else {
-                                //play an error sound
+                                soundMan.playError();
                             }
                         }
                         else if (selectedTower.equals("Knight")){
@@ -502,8 +524,9 @@ public class TowerDefenseWorld extends World
                                 addObject(new Knight(), x, y);
                                 gameArray[row][col] = 3;
                                 removeMoney(knightCost);
+                                soundMan.playTower();
                             } else {
-                                //play an error sound
+                                soundMan.playError();
                             }
                         }
                         else if (selectedTower.equals("Mage")){
@@ -511,8 +534,9 @@ public class TowerDefenseWorld extends World
                                 addObject(new Mage(), x, y);
                                 gameArray[row][col] = 4;
                                 removeMoney(mageCost);
+                                soundMan.playTower();
                             } else {
-                                //play an error sound
+                                soundMan.playError();
                             }
                         }
                         else if (selectedTower.equals("Spearman")){
@@ -520,8 +544,9 @@ public class TowerDefenseWorld extends World
                                 addObject(new Spearman(), x, y);
                                 gameArray[row][col] = 5;
                                 removeMoney(spearmanCost);
+                                soundMan.playTower();
                             } else {
-                                //play an error sound
+                                soundMan.playError();
                             }
                         }
                         else if (selectedTower.equals("Trapper")){
@@ -529,11 +554,14 @@ public class TowerDefenseWorld extends World
                                 addObject(new Trapper(), x, y);
                                 gameArray[row][col] = 6;
                                 removeMoney(trapperCost);
+                                soundMan.playTower();
                             } else {
-                                //play an error sound
+                                soundMan.playError();
                             }
                         }
-                        soundMan.playTower();
+                        else if (selectedTower.equals("Clear")){
+                            return;
+                        }
                     }
                 }
             }
