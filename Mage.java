@@ -9,9 +9,9 @@ import java.util.List;
  */
 public class Mage extends Tower
 {
-    public static final int DAMAGE = 250;
+    public static final int DAMAGE = 150;
     public static final int RADIUS = 175;
-    public static final int COOLDOWN = 300;
+    public static final int COOLDOWN = 450;
     
     public Mage () {
         damage = DAMAGE;
