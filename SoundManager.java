@@ -8,6 +8,7 @@ import greenfoot.*;
  * Some sound effects uses arrays to allow simultatneous playing of the same sound
  * 
  * Credits
+ * BGM: https://pixabay.com/music/adventure-medieval-waltz-music-412748/
  * Error: https://pixabay.com/sound-effects/film-special-effects-ui-error-pop-515668/
  * Settings click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/ but tuned down
  * 
