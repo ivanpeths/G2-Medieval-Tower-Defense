@@ -19,10 +19,10 @@ public class TowerDefenseWorld extends World
     private boolean newGame;
     private GreenfootImage background;
     private GreenfootImage grid;
-    int worldSize = 16;
-    int tileLength = 50;
-    int tileHeight = 50;
-    int[][] gameArray = new int[worldSize][worldSize];
+    private int worldSize = 16;
+    private int tileLength = 50;
+    private int tileHeight = 50;
+    private int[][] gameArray = new int[worldSize][worldSize];
     private int mapUpdateCounter = 0;
     
     private int archerCost = 50;
