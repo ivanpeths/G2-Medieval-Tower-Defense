@@ -648,7 +648,7 @@ public class TowerDefenseWorld extends World
             output.println(endX);
             output.println(endY);
             output.println(startingDirection);
-            //output.println(wave);
+            output.println(wave);
 
             output.close();
 
