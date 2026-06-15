@@ -15,18 +15,16 @@ public abstract class Tower extends Actor
     protected GreenfootImage image;
     protected int cooldown;
     protected int cooldownCounter;
-    protected boolean attemptAttack = false;
 
     public void act () {
-        cooldownCounter++;
-        if (cooldownCounter >= cooldown) {
-            attemptAttack = true;
+        if (cooldownCounter < Integer.MAX_VALUE) {
+            cooldownCounter++;
         }
+        
         List<Enemy> inRange = getEnemies();
-        if (attemptAttack) {
-            if (inRange != null) {
+        if (cooldownCounter >= cooldown) {
+            if (inRange != null && !inRange.isEmpty()) {
                 attack();
-                attemptAttack = false;
                 cooldownCounter = 0;
             }
         }
