@@ -535,8 +535,8 @@ public class TowerDefenseWorld extends World
     }
 
     private void checkWin(){
-        if (score >= winCond){
-            Greenfoot.setWorld(new WinScreen(soundMan, lives));
+        if (money >= winCond){
+            Greenfoot.setWorld(new WinScreen(soundMan, health));
         }
     }
 
