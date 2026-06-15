@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class StartPath here.
+ * Path to start the run
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Ivan Ma
  */
 public class StartPath extends Path
 {
