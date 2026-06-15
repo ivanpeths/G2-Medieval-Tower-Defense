@@ -2,17 +2,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
 /**
- * Write a description of class Mage here.
+ * Mage shoots fireballs that explode and deal area of effect damage.
  * 
  * @author Ivan Ma 
- * @version (a version number or a date)
  */
 public class Mage extends Tower
 {
-    public static final int DAMAGE = 150;
-    public static final int RADIUS = 175;
-    public static final int COOLDOWN = 450;
+    public static final int DAMAGE = 250; //high damage
+    public static final int RADIUS = 175; //medium radius
+    public static final int COOLDOWN = 450; //high cooldown
     
+    //constructor, commented in other towers
     public Mage () {
         damage = DAMAGE;
         radius = RADIUS;
@@ -24,6 +24,7 @@ public class Mage extends Tower
         cooldownCounter = cooldown;
     }
     
+    //attack with weapon, identical to spearman - commented
     protected void attack () {
         List<Enemy> enemies = getEnemies();
         Enemy closest = null;
@@ -45,6 +46,7 @@ public class Mage extends Tower
                 
         setRotation(angle - 90);
         
+        //adds a fireball going in that direction
         getWorld().addObject(new Fireball(angle, damage), getX(), getY());
     }
 }

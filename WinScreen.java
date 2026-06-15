@@ -18,7 +18,7 @@ public class WinScreen extends World
 
     private int lives;
     
-    public WinScreen(int lives, SoundManager soundMan)
+    public WinScreen(SoundManager soundMan, int lives)
     {    
         super(1200, 800, 1);
         this.lives = lives;

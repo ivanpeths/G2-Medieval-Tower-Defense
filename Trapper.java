@@ -2,44 +2,48 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
 /**
- * Write a description of class Trapper here.
+ * Places traps on the path that instantly kill all enemies walking over it.
  * 
  * @author Ivan Ma 
- * @version (a version number or a date)
  */
 public class Trapper extends Tower
 {
-    public static final int DAMAGE = 250;
-    public static final int RADIUS = 75;
-    public static final int COOLDOWN = 400;
+    public static final int DAMAGE = 300; //high damage
+    public static final int RADIUS = 75; //1 tile
+    public static final int COOLDOWN = 300; //5 seconds
     
+    //sets the image and applies variables, run on creation
     public Trapper () {
         damage = DAMAGE;
         radius = RADIUS;
         cooldown = COOLDOWN;
-        type = 5;
+        type = 5; //trapper
         image = new GreenfootImage("trapper.png");
         image.scale(40, 40);
         setImage(image);
         cooldownCounter = cooldown;
     }
     
+    //attack using ability
     protected void attack () {
-        List<Path> paths = getObjectsInRange(75, Path.class);
-        Path nearestPath = null;
-        for (Path path : paths) {
-            nearestPath = path;
-            break;
+        List<Path> paths = getObjectsInRange(75, Path.class); //get all paths nearby
+        Path nearestPath = null; //initializes a path variable
+        for (Path path : paths) { //loops through
+            nearestPath = path; //finds the nearest path
+            break; //ends the loop
         }
         
+        //prevent crashes by stopping method on no path in range
         if (nearestPath == null) {
             return;
         }
         
+        //finds the angle between the trapper and the path
         int angle = (int)(Math.toDegrees(Math.atan2(nearestPath.getY() - getY(), nearestPath.getX() - getX())));
         
-        setRotation(angle - 90);
+        setRotation(angle - 90); //sets rotation
         
+        //adds the trap on the tile
         getWorld().addObject(new Trap(damage), nearestPath.getX(), nearestPath.getY());
     }
 }

@@ -19,10 +19,10 @@ public class TowerDefenseWorld extends World
     private boolean newGame;
     private GreenfootImage background;
     private GreenfootImage grid;
-    int worldSize = 16;
-    int tileLength = 50;
-    int tileHeight = 50;
-    int[][] gameArray = new int[worldSize][worldSize];
+    private int worldSize = 16;
+    private int tileLength = 50;
+    private int tileHeight = 50;
+    private int[][] gameArray = new int[worldSize][worldSize];
     private int mapUpdateCounter = 0;
     
     private int archerCost = 50;
@@ -543,7 +543,7 @@ public class TowerDefenseWorld extends World
 
     private void checkWin(){
         if (money >= winCond){
-            Greenfoot.setWorld(new WinScreen(health, soundMan));
+            Greenfoot.setWorld(new WinScreen(soundMan, health));
         }
     }
 
@@ -655,7 +655,7 @@ public class TowerDefenseWorld extends World
             output.println(endX);
             output.println(endY);
             output.println(startingDirection);
-            //output.println(wave);
+            output.println(wave);
 
             output.close();
 
