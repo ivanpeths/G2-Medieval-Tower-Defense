@@ -132,11 +132,11 @@ public class TowerDefenseWorld extends World
     
     public void fillStatsArray(){
         towerStats = new int[][]{
-            {Archer.damage, Archer.radius, Archer.cooldown}, 
-            {Knight.damage, Knight.radius, Knight.cooldown},
-            {Mage.damage, Mage.radius, Mage.cooldown},
-            {Spearman.damage, Spearman.radius, Spearman.cooldown},
-            {Trapper.damage, Trapper.radius, Trapper.cooldown},
+            {Archer.DAMAGE, Archer.RADIUS, Archer.COOLDOWN}, 
+            {Knight.DAMAGE, Knight.RADIUS, Knight.COOLDOWN},
+            {Mage.DAMAGE, Mage.RADIUS, Mage.COOLDOWN},
+            {Spearman.DAMAGE, Spearman.RADIUS, Spearman.COOLDOWN},
+            {Trapper.DAMAGE, Trapper.RADIUS, Trapper.COOLDOWN},
             {0, 0, 0}
         };
     }
