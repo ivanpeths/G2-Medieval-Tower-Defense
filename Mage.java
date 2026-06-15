@@ -9,11 +9,14 @@ import java.util.List;
  */
 public class Mage extends Tower
 {
-    public static final int damage = 250;
-    public static final int radius = 175;
-    public static final int cooldown = 300;
+    public static final int DAMAGE = 250;
+    public static final int RADIUS = 175;
+    public static final int COOLDOWN = 300;
     
     public Mage () {
+        damage = DAMAGE;
+        radius = RADIUS;
+        cooldown = COOLDOWN;
         type = 3;
         image = new GreenfootImage("mage.png");
         image.scale(40, 40);

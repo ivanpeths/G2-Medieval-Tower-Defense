@@ -9,11 +9,14 @@ import java.util.List;
  */
 public class Spearman extends Tower
 {
-    public static final int damage = 75;
-    public static final int radius = 275;
-    public static final int cooldown = 200;
+    public static final int DAMAGE = 75;
+    public static final int RADIUS = 275;
+    public static final int COOLDOWN = 200;
     
     public Spearman () {
+        damage = DAMAGE;
+        radius = RADIUS;
+        cooldown = COOLDOWN;
         type = 4;
         image = new GreenfootImage("spearman.png");
         image.scale(40, 40);
