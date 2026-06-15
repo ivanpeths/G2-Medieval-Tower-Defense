@@ -84,6 +84,7 @@ public class TowerDefenseWorld extends World
     
     private Button saveActor;
     private Label saveLabel;
+    private int saveCountdown;
 
     private Integer selectedTower = null;
     
@@ -520,6 +521,12 @@ public class TowerDefenseWorld extends World
             maxChanceBounds[1] -= 0.05;
             maxChanceBounds[2] += 0.15;
         }
+
+        if (saveCountdown > 0){
+            saveCountdown--;
+        } else{
+            saveLabel.setValue("Save");
+        }
     }
     
     private void spawnEnemy(){
@@ -633,6 +640,9 @@ public class TowerDefenseWorld extends World
             //output.println(wave);
 
             output.close();
+
+            saveLabel.setValue("Saved!");
+            saveCountdown = 360;
         } catch (IOException e) {
             Greenfoot.setWorld(new ErrorScreen());
         }
