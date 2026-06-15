@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.ArrayList;
 
 /**
  * Write a description of class Arrow here.
@@ -9,6 +10,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Spear extends Projectiles
 {
     private int maxHits;
+    private ArrayList<Enemy> hitEnemies;
     public Spear (int angle, int damage) {
         image = new GreenfootImage("spear.png");
         image.scale(40, 4);
@@ -18,6 +20,7 @@ public class Spear extends Projectiles
         setRotation (angle);
         this.damage = damage;
         maxHits = 3;
+        hitEnemies = new ArrayList<Enemy>(maxHits);
     }
 
     public void act()
@@ -28,7 +31,8 @@ public class Spear extends Projectiles
             return;
         }
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class);
-        if (target != null) {
+        if (target != null && !hitEnemies.contains(target)) {
+            hitEnemies.add(target);
             target.hurt(damage);
             maxHits--;
         }

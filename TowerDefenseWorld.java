@@ -139,7 +139,7 @@ public class TowerDefenseWorld extends World
             {Mage.DAMAGE, Mage.RADIUS, Mage.COOLDOWN, mageCost},
             {Spearman.DAMAGE, Spearman.RADIUS, Spearman.COOLDOWN, spearmanCost},
             {Trapper.DAMAGE, Trapper.RADIUS, Trapper.COOLDOWN, trapperCost},
-            {0, 0, 0}
+            {0, 0, 0, 0}
         };
     }
 
@@ -370,7 +370,6 @@ public class TowerDefenseWorld extends World
             }
             selectedTower = 5;
             updateStatVals();
-            addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow2);
         }
     }
     
