@@ -1,10 +1,9 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 /**
- * Write a description of class Explosion here.
+ * Explosion effect
  * 
- * @author Ivan Ma
- * @version (a version number or a date)
+ * @author Ivan Ma, cred - Mr. Cohen for some code
  */
 public class Explosion extends Actor
 {

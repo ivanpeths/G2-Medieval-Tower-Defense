@@ -1,27 +1,29 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Projectiles here.
+ * Projectile abstract superclass for weapons of towers
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Ivan Ma
  */
-public class Projectiles extends SuperSmoothMover
+public abstract class Projectiles extends SuperSmoothMover
 {
     protected GreenfootImage image;
-    protected double speed;
-    protected int damage;
+    protected double speed; //speed of projectile
+    protected int damage; //damage of projectile
     
+    //moves in the direction of where the projectile is facing
     public void move() {
         move (speed);
     }
     
+    //runs every act to check if it is off the map
     public void act () {
         if (getX() >= 790 || getX() <= 10 || getY() >= 790 || getY() <= 10) {
             remove();
         }
     }
     
+    //removes the projectile
     public void remove() {
         getWorld().removeObject(this);
     }

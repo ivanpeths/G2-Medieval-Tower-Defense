@@ -2,17 +2,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 
 /**
- * Write a description of class Archer here.
+ * Shoots arrows at enemies. Default tower.
  * 
- * @author Ivan 
- * @version (a version number or a date)
+ * @author Ivan
  */
 public class Archer extends Tower
 {
-    public static final int DAMAGE = 40;
-    public static final int RADIUS = 150;
-    public static final int COOLDOWN = 75;
+    public static final int DAMAGE = 40; //low damage
+    public static final int RADIUS = 150; //medium range
+    public static final int COOLDOWN = 75; //low cooldown
 
+    //constructor, commented in other towers
     public Archer () {
         damage = DAMAGE;
         radius = RADIUS;
@@ -24,6 +24,7 @@ public class Archer extends Tower
         cooldownCounter = cooldown;
     }
     
+    //attacks, uses the same algorithm as spearman - commented
     protected void attack () {
         List<Enemy> enemies = getEnemies();
         Enemy closest = null;
