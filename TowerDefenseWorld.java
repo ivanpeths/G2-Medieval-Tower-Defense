@@ -48,7 +48,7 @@ public class TowerDefenseWorld extends World
     private int wave = 1;
     
     private int health = 20;
-    private int money = 100;
+    private int money = 200;
     private int fontSize = 40;
     private Label healthLabel;
     private Label moneyLabel;
