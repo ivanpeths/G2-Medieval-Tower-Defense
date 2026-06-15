@@ -87,6 +87,8 @@ public class TowerDefenseWorld extends World
     private int saveCountdown;
 
     private Integer selectedTower = null;
+
+    private int winCond = 1000;
     
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.35, 0.15};
@@ -483,10 +485,6 @@ public class TowerDefenseWorld extends World
     public void loseHealth(int amount){
         health -= amount;
         healthLabel.setValue(health);
-    
-        if (health <= 0){
-            Greenfoot.setWorld(new LoseScreen());
-        }
     }
 
     public void addMoney(int amount){
@@ -527,8 +525,21 @@ public class TowerDefenseWorld extends World
         } else{
             saveLabel.setValue("Save");
         }
+        checkLose();
+        checkWin();
     }
-    
+    private void checkLose(){
+        if (health <= 0){
+            Greenfoot.setWorld(new LoseScreen(soundMan));
+        }
+    }
+
+    private void checkWin(){
+        if (score >= winCond){
+            Greenfoot.setWorld(new WinScreen(soundMan, lives));
+        }
+    }
+
     private void spawnEnemy(){
         int tempSpawnRate = spawnRate - (wave * 5);
         if (Greenfoot.getRandomNumber(tempSpawnRate) == 0) {

@@ -9,10 +9,12 @@ public class ExitScreen extends World
 {
     private Label saveLabel;
     private GreenfootImage background;
+    private SoundManager soundMan;
     
-    public ExitScreen()
+    public ExitScreen(SoundManager soundMan)
     {    
         super(1200, 800, 1); 
+        this.soundMan = soundMan;
         setupButton();
         setBackground();
     }
@@ -27,12 +29,12 @@ public class ExitScreen extends World
     }
     
     public void setupButton(){
-        saveLabel = new Label("Your game has been saved. Thanks for playing!", 50);
+        saveLabel = new Label("Thanks for playing!", 100);
         addObject(saveLabel, getWidth() / 2, getHeight() / 2);
     }
     
     public void setBackground(){
-        background = new GreenfootImage ("titlescreen.png");
+        background = new GreenfootImage ("background.png");
         setBackground(background);
     }
 }
