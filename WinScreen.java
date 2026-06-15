@@ -3,21 +3,25 @@ import greenfoot.*;
 /**
  * Exit screen
  * 
- * @author Ivan Ma, Kolby Ng
+ * @author Kolby Ng
  */
-public class LoseScreen extends World
+public class WinScreen extends World
 {
-    private Label saveLabel;
-    private GreenfootImage background;
-    private SoundManager soundMan;
+    private Label winLabel;
+    private Label livesLabel;
     private Button restartButton;
     private Label restartLabel;
     private Button exitButton;
     private Label exitLabel;
+    private GreenfootImage background;
+    private SoundManager soundMan;
+
+    private int lives;
     
-    public LoseScreen(SoundManager soundMan)
+    public WinScreen(int lives, SoundManager soundMan)
     {    
-        super(1200, 800, 1); 
+        super(1200, 800, 1);
+        this.lives = lives;
         this.soundMan = soundMan;
         setupButton();
         setBackground();
@@ -34,8 +38,11 @@ public class LoseScreen extends World
     
     public void setupButton(){
         GreenfootImage buttonImg = new GreenfootImage("button.png");
-        saveLabel = new Label("You lost. Please try again next time!", 50);
-        addObject(saveLabel, getWidth() / 2, getHeight() / 2);
+        winLabel = new Label("You won!", 100);
+        addObject(winLabel, getWidth() / 2, getHeight() / 4);
+
+        livesLabel = new Label("You had " + lives + " lives left!", 100);
+        addObject(livesLabel, getWidth() / 2, getHeight() / 2);
 
         restartButton = new Button(buttonImg);
         restartLabel = new Label("Restart", 75);
@@ -50,7 +57,7 @@ public class LoseScreen extends World
     }
     
     public void setBackground(){
-        background = new GreenfootImage ("titlescreen.png");
+        background = new GreenfootImage ("background.png");
         setBackground(background);
     }
 

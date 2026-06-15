@@ -48,16 +48,18 @@ public class TowerDefenseWorld extends World
     private int wave = 1;
     
     private int health = 20;
-    private int money = 100;
+    private int money = 200;
     private int fontSize = 40;
     private Label healthLabel;
     private Label moneyLabel;
     private Label dmgLabel;
     private Label radLabel;
     private Label cdLabel;
+    private Label costLabel;
     private int dmg;
     private int rad;
     private int cd;
+    private int cost;
     
     private boolean newWavePause = false;
     private int newWavePauseCounter = 0;
@@ -82,8 +84,11 @@ public class TowerDefenseWorld extends World
     
     private Button saveActor;
     private Label saveLabel;
+    private int saveCountdown;
 
     private Integer selectedTower = null;
+
+    private int winCond = 1000;
     
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.35, 0.15};
@@ -132,12 +137,12 @@ public class TowerDefenseWorld extends World
     
     public void fillStatsArray(){
         towerStats = new int[][]{
-            {Archer.damage, Archer.radius, Archer.cooldown}, 
-            {Knight.damage, Knight.radius, Knight.cooldown},
-            {Mage.damage, Mage.radius, Mage.cooldown},
-            {Spearman.damage, Spearman.radius, Spearman.cooldown},
-            {Trapper.damage, Trapper.radius, Trapper.cooldown},
-            {0, 0, 0}
+            {Archer.DAMAGE, Archer.RADIUS, Archer.COOLDOWN, archerCost}, 
+            {Knight.DAMAGE, Knight.RADIUS, Knight.COOLDOWN, knightCost},
+            {Mage.DAMAGE, Mage.RADIUS, Mage.COOLDOWN, mageCost},
+            {Spearman.DAMAGE, Spearman.RADIUS, Spearman.COOLDOWN, spearmanCost},
+            {Trapper.DAMAGE, Trapper.RADIUS, Trapper.COOLDOWN, trapperCost},
+            {0, 0, 0, 0}
         };
     }
 
@@ -368,7 +373,6 @@ public class TowerDefenseWorld extends World
             }
             selectedTower = 5;
             updateStatVals();
-            addObject(towerIndicatorActor, towerButtonCol2, towerButtonRow2);
         }
     }
     
@@ -376,10 +380,12 @@ public class TowerDefenseWorld extends World
         dmg = towerStats[selectedTower][0];
         rad = towerStats[selectedTower][1];
         cd = towerStats[selectedTower][2];
+        cost = towerStats[selectedTower][3];
         
         dmgLabel.setValue(dmg);
         radLabel.setValue(rad);
         cdLabel.setValue(cd);
+        costLabel.setValue(cost);
     }
     
     private void drawUi(){      
@@ -419,28 +425,28 @@ public class TowerDefenseWorld extends World
         addObject(trapperButton, towerButtonCol2, towerButtonRow1);
         addObject(clearSelectedButton, towerButtonCol2, towerButtonRow2);
 
-        // Health and money         
-        Label healthTitle = new Label("Health", fontSize);
-        addObject(healthTitle, 1000, 450);
-
-        healthLabel = new Label(health, fontSize);
-        addObject(healthLabel, 1000, 500);
-
-        Label moneyTitle = new Label("Money", fontSize);
-        addObject(moneyTitle, 1000, 575);
-
-        moneyLabel = new Label(money, fontSize);
-        addObject(moneyLabel, 1000, 625);
-
+        // Health and money
         BlankActor heartIcon = new BlankActor();
         heartIcon.setImage(new GreenfootImage("health.png"));
         heartIcon.getImage().scale(30, 30);
-        addObject(heartIcon, 930, 450);
-        
+        addObject(heartIcon, (towerButtonCol1 + towerButtonCol2) / 2, 575);
+
+        healthLabel = new Label(health, fontSize);
+        addObject(healthLabel, (towerButtonCol1 + towerButtonCol2) / 2, 625);
+
         BlankActor moneyIcon = new BlankActor();
         moneyIcon.setImage(new GreenfootImage("money.png"));
         moneyIcon.getImage().scale(60, 30);
-        addObject(moneyIcon, 915, 575);
+        addObject(moneyIcon, (towerButtonCol2 + towerButtonCol3) / 2, 575);
+
+        moneyLabel = new Label(money, fontSize);
+        addObject(moneyLabel, (towerButtonCol2 + towerButtonCol3) / 2, 625);
+
+        Label costTitle = new Label("COST", fontSize);
+        addObject(costTitle, towerButtonCol2, 460);
+
+        costLabel = new Label(cost, fontSize);
+        addObject(costLabel, towerButtonCol2, 510);
 
         GreenfootImage buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(200, 100);
@@ -479,10 +485,6 @@ public class TowerDefenseWorld extends World
     public void loseHealth(int amount){
         health -= amount;
         healthLabel.setValue(health);
-    
-        if (health <= 0){
-            Greenfoot.setWorld(new LoseScreen());
-        }
     }
 
     public void addMoney(int amount){
@@ -517,8 +519,27 @@ public class TowerDefenseWorld extends World
             maxChanceBounds[1] -= 0.05;
             maxChanceBounds[2] += 0.15;
         }
+
+        if (saveCountdown > 0){
+            saveCountdown--;
+        } else{
+            saveLabel.setValue("Save");
+        }
+        checkLose();
+        checkWin();
     }
-    
+    private void checkLose(){
+        if (health <= 0){
+            Greenfoot.setWorld(new LoseScreen(soundMan));
+        }
+    }
+
+    private void checkWin(){
+        if (score >= winCond){
+            Greenfoot.setWorld(new WinScreen(soundMan, lives));
+        }
+    }
+
     private void spawnEnemy(){
         int tempSpawnRate = spawnRate - (wave * 5);
         if (Greenfoot.getRandomNumber(tempSpawnRate) == 0) {
@@ -630,6 +651,9 @@ public class TowerDefenseWorld extends World
             //output.println(wave);
 
             output.close();
+
+            saveLabel.setValue("Saved!");
+            saveCountdown = 360;
         } catch (IOException e) {
             Greenfoot.setWorld(new ErrorScreen());
         }
