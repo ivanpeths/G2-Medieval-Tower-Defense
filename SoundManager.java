@@ -28,7 +28,7 @@ public class SoundManager
     private int errorIndex = 0;
     
     private int bgmVolume = 40;
-    private int menuClickVolume = 50;
+    private int menuClickVolume = 70;
     private int arrowVolume = 30;
     private int towerVolume = 30;
     private int errorVolume = 50;
