@@ -14,19 +14,17 @@ public abstract class Tower extends Actor
     protected GreenfootImage image;
     protected int cooldown; //cooldown per attack
     protected int cooldownCounter; //counter to effect the cooldown
-    protected boolean attemptAttack = false; //allows saving of attacks after cooldown
 
     //runs every act to attempt an attack
     public void act () {
-        cooldownCounter++;
-        if (cooldownCounter >= cooldown) { //when cooldown counter is high than required cooldown
-            attemptAttack = true; //attack
+        if (cooldownCounter < Integer.MAX_VALUE) { //if cooldown is up
+            cooldownCounter++;
         }
-        List<Enemy> inRange = getEnemies(); //get enemies in range
-        if (attemptAttack) { //makes sure timer is up
-            if (inRange != null) { //makes sure there are enemies to attack
-                attack();
-                attemptAttack = false; //reset variables and attack
+        
+        List<Enemy> inRange = getEnemies(); //get the enemies in range
+        if (cooldownCounter >= cooldown) { //while cooldown is not used yet
+            if (inRange != null && !inRange.isEmpty()) { //when there is an enemy in range
+                attack(); //attack and reset cooldown
                 cooldownCounter = 0;
             }
         }

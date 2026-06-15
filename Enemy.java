@@ -26,6 +26,7 @@ public abstract class Enemy extends SuperSmoothMover
     protected SuperStatBar healthBar;
 
     public Enemy(int hp, double step){
+        TowerDefenseWorld w = (TowerDefenseWorld) getWorld();
         this.hp = hp;
         this.maxHp = hp;
         this.step = step;
@@ -153,7 +154,7 @@ public abstract class Enemy extends SuperSmoothMover
     }
     
     private void checkOob(){
-        if (isTouching(EndPath.class)){
+        if (isTouching(EndChecker.class)){
             TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
             world.loseHealth(1);
             getWorld().removeObject(this);

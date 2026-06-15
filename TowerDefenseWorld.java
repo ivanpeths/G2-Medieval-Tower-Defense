@@ -89,6 +89,9 @@ public class TowerDefenseWorld extends World
     private Integer selectedTower = null;
 
     private int winCond = 1000;
+
+    private int endXCoord;
+    private int endYCoord;
     
     // Goblin, GoblinBuff, GoblinHorse
     private double[] spawnChance = {0.50, 0.35, 0.15};
@@ -293,9 +296,13 @@ public class TowerDefenseWorld extends World
                 }
             }
         }
-        
+        endXCoord = endX * tileLength + tileLength / 2;
+        endYCoord = endY * tileHeight + tileHeight / 2;
+
         addObject(new StartPath(), startX * tileLength + tileLength / 2, startY * tileHeight + tileHeight / 2);
-        addObject(new EndPath(), endX * tileLength + tileLength / 2, endY * tileHeight + tileHeight / 2);
+        
+        addObject(new EndPath(), endXCoord, endYCoord);
+        addObject(new EndChecker(), endXCoord, endYCoord);
     }
 
     public void restoreTowers() {
@@ -713,5 +720,13 @@ public class TowerDefenseWorld extends World
     
     public SoundManager getSoundMan(){
         return soundMan;
+    }
+
+    public int getEndX(){
+        return endXCoord;
+    }
+
+    public int getEndY(){
+        return endYCoord;
     }
 }

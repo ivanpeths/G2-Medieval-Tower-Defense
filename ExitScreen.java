@@ -10,6 +10,7 @@ public class ExitScreen extends World
     private Label saveLabel;
     private GreenfootImage background;
     private SoundManager soundMan;
+    private int cooldown = 180;
     
     public ExitScreen(SoundManager soundMan)
     {    
@@ -36,5 +37,12 @@ public class ExitScreen extends World
     public void setBackground(){
         background = new GreenfootImage ("background.png");
         setBackground(background);
+    }
+
+    public void act(){
+        if(cooldown <= 0){
+            Greenfoot.stop();
+        }
+        cooldown--;
     }
 }

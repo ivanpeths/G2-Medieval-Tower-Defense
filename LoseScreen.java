@@ -34,8 +34,8 @@ public class LoseScreen extends World
     
     public void setupButton(){
         GreenfootImage buttonImg = new GreenfootImage("button.png");
-        saveLabel = new Label("You lost. Please try again next time!", 50);
-        addObject(saveLabel, getWidth() / 2, getHeight() / 2);
+        saveLabel = new Label("You lost!", 100);
+        addObject(saveLabel, getWidth() / 2, getHeight() / 4);
 
         restartButton = new Button(buttonImg);
         restartLabel = new Label("Restart", 75);
@@ -50,7 +50,7 @@ public class LoseScreen extends World
     }
     
     public void setBackground(){
-        background = new GreenfootImage ("titlescreen.png");
+        background = new GreenfootImage ("background.png");
         setBackground(background);
     }
 
