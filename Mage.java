@@ -10,7 +10,7 @@ public class Mage extends Tower
 {
     public static final int DAMAGE = 250; //high damage
     public static final int RADIUS = 175; //medium radius
-    public static final int COOLDOWN = 300; //high cooldown
+    public static final int COOLDOWN = 450; //high cooldown
     
     //constructor, commented in other towers
     public Mage () {

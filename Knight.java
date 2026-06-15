@@ -8,9 +8,9 @@ import java.util.List;
  */
 public class Knight extends Tower
 {
-    public static final int DAMAGE = 150; //medium damage
+    public static final int DAMAGE = 50; //low damage
     public static final int RADIUS = 75; //low range
-    public static final int COOLDOWN = 150; //low cooldown
+    public static final int COOLDOWN = 60; //low cooldown
     
     //constructor, commented in other towers
     public Knight () {
