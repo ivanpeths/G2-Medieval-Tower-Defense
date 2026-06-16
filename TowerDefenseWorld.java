@@ -28,7 +28,7 @@ import java.util.Scanner;
  * "Please save us, King Cohen :("
  * "These goblins stink"
  * "I wish the king would teach me Computer Science"
- * "NO NOT THE FLAG, WHAT WOULD I DO WITHOUT IT"
+ * "NO NOT THE FLAG, WHAT WOULD WE DO WITHOUT IT"
  * 
  * Win the war for them. There are no cheats. 
  * 
@@ -131,6 +131,8 @@ public class TowerDefenseWorld extends World
     private double[] maxChanceBounds= new double[spawnChance.length];
     
     private int winCond = 5000;
+    // Catch exceptions of load since it doesn't change worlds when called from constructor
+    private boolean loadFailed = false;
 
     /**
     * Creates the game world
@@ -166,12 +168,22 @@ public class TowerDefenseWorld extends World
         
         setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class, Overlay.class);
     }
-
-    // Sound starting and stopping
+    
+    public void addedToWorld(World w){
+        if (loadFailed) {
+            Greenfoot.setWorld(new ErrorScreen(soundMan));
+        }
+    }
+    /**
+    * Starts music when game is started
+    */
     public void started(){
         soundMan.playBgm();
     }
 
+    /**
+    * Pauses music when game is stopped
+    */
     public void stopped(){
         soundMan.pauseBgm();
     }
@@ -484,7 +496,7 @@ public class TowerDefenseWorld extends World
         sidebar.setColor(new Color(90, 60, 30));
         sidebar.fill();
     
-        BlankActor sidebarActor = new BlankActor();
+        UiElement sidebarActor = new UiElement();
         sidebarActor.setImage(sidebar);
         addObject(sidebarActor, 1000, 400);
     
@@ -493,7 +505,7 @@ public class TowerDefenseWorld extends World
         separator.setColor(Color.BLACK);
         separator.fill();
     
-        BlankActor separatorActor = new BlankActor();
+        UiElement separatorActor = new UiElement();
         separatorActor.setImage(separator);
         addObject(separatorActor, 800, 400);
     
@@ -517,7 +529,7 @@ public class TowerDefenseWorld extends World
         addObject(clearSelectedButton, towerButtonCol2, towerButtonRow2);
 
         // Health and money
-        BlankActor heartIcon = new BlankActor();
+        UiElement heartIcon = new UiElement();
         heartIcon.setImage(new GreenfootImage("health.png"));
         heartIcon.getImage().scale(30, 30);
         addObject(heartIcon, (towerButtonCol1 + towerButtonCol2) / 2, 575);
@@ -525,7 +537,7 @@ public class TowerDefenseWorld extends World
         healthLabel = new Label(health, fontSize);
         addObject(healthLabel, (towerButtonCol1 + towerButtonCol2) / 2, 625);
 
-        BlankActor moneyIcon = new BlankActor();
+        UiElement moneyIcon = new UiElement();
         moneyIcon.setImage(new GreenfootImage("money.png"));
         moneyIcon.getImage().scale(60, 30);
         addObject(moneyIcon, (towerButtonCol2 + towerButtonCol3) / 2, 575);
@@ -783,7 +795,7 @@ public class TowerDefenseWorld extends World
             saveLabel.setValue("Saved!");
             saveCountdown = 180;
         } catch (IOException e) {
-            Greenfoot.setWorld(new ErrorScreen());
+            Greenfoot.setWorld(new ErrorScreen(soundMan));
         }
     }
     
@@ -794,12 +806,12 @@ public class TowerDefenseWorld extends World
                 // Try opening "save.txt"
                 Scanner input = new Scanner(new FileReader("save.txt"));
                
-               // Read the first 225 lines into the array
+                // Read the first 225 lines into the array
                 for (int i = 0; i < gameArray.length; i++){
                     for (int j = 0; j < gameArray[i].length; j++){
                         if (!input.hasNextLine()) {
                             input.close();
-                            Greenfoot.setWorld(new ErrorScreen());
+                            loadFailed = true;
                             return;
                         }
                         gameArray[i][j] = Integer.parseInt(input.nextLine());
@@ -817,7 +829,7 @@ public class TowerDefenseWorld extends World
                 wave = Integer.parseInt(input.nextLine());
                 input.close();
             } catch (IOException e) {
-                Greenfoot.setWorld(new ErrorScreen());
+                loadFailed = true;
             }
         }
     }
