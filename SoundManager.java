@@ -5,7 +5,7 @@ import greenfoot.*;
  * 
  * Manages creating, playing and pausing of all game sounds
  * 
- * Some sound effects uses arrays to allow simultatneous playing of the same sound
+ * Some sound effects uses arrays to allow simultaneous playing of the same sound
  * 
  * Credits
  * BGM: https://pixabay.com/music/adventure-medieval-waltz-music-412748/
@@ -57,11 +57,11 @@ public class SoundManager
     
     private int menuClickLength = 3;
     private int arrowLength = 10;
-    private int errorLength = 5;
-    private int fireLength = 5;
+    private int errorLength = 10;
+    private int fireLength = 10;
     private int meleeLength = 10;
-    private int trapSetLength = 5;
-    private int trapStepLength = 5;
+    private int trapSetLength = 10;
+    private int trapStepLength = 10;
     private int spearLength = 10;
     
     
@@ -69,7 +69,7 @@ public class SoundManager
         setFiles();
     }    
 
-    public void setFiles(){
+    private void setFiles(){
         bgm = new GreenfootSound("bgm.mp3");
         bgm.setVolume(bgmVolume);
 
