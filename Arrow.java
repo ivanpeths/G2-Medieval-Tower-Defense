@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Ivan Ma
  */
 public class Arrow extends Projectiles
-{
+{   
     //ran when the arrow is created
     public Arrow (int angle, int damage) {
         image = new GreenfootImage("arrow.png");
@@ -17,7 +17,7 @@ public class Arrow extends Projectiles
         setRotation (angle); //saves angle, adds as current rotation
         this.damage = damage;
     }
-
+    
     //runs every act to move and check impact
     public void act()
     {
@@ -28,7 +28,7 @@ public class Arrow extends Projectiles
         } //get intersecting enemy
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class);
         if (target != null) { //if there is one, deal damage and remove arrow
-            SoundManager soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+            
             soundMan.playArrow(); //play sound
             target.hurt(damage);
             remove();

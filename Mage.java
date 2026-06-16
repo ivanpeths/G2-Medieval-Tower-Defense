@@ -11,6 +11,8 @@ public class Mage extends Tower
     public static final int DAMAGE = 150; //high damage
     public static final int RADIUS = 175; //medium radius
     public static final int COOLDOWN = 450; //high cooldown
+
+    private SoundManager soundMan;
     
     //constructor, commented in other towers
     public Mage () {
@@ -22,6 +24,10 @@ public class Mage extends Tower
         image.scale(40, 40);
         setImage(image);
         cooldownCounter = cooldown;
+    }
+
+    public void addedToWorld(World world){
+        soundMan = getSoundMan();
     }
     
     //attack with weapon, identical to spearman - commented
@@ -48,5 +54,6 @@ public class Mage extends Tower
         
         //adds a fireball going in that direction
         getWorld().addObject(new Fireball(angle, damage), getX(), getY());
+        soundMan.playFire();
     }
 }

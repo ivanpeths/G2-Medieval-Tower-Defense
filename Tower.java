@@ -14,6 +14,7 @@ public abstract class Tower extends Actor
     protected GreenfootImage image;
     protected int cooldown; //cooldown per attack
     protected int cooldownCounter; //counter to effect the cooldown
+    protected SoundManager soundMan;
 
     //runs every act to attempt an attack
     public void act () {
@@ -59,5 +60,9 @@ public abstract class Tower extends Actor
     
     public int getType(){
         return type;
+    }
+
+    public SoundManager getSoundMan(){
+        return ((TowerDefenseWorld) getWorld()).getSoundMan();
     }
 }

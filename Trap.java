@@ -10,6 +10,7 @@ public class Trap extends Actor
 {
     private GreenfootImage image;
     private int damage; //damage dealt on step
+    private SoundManager soundMan;
     
     //sets up the image and damage on creation
     public Trap (int damage) {
@@ -20,12 +21,17 @@ public class Trap extends Actor
         this.damage = damage; //save the damage given by the trapper
     }
 
+    public void addedToWorld(World world){
+        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+    }
+
     //runs every act to check if there is an enemy on it
     public void act()
     {
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class); //get the enemy touching the trap
         if (target != null) { //if it is valid
             target.hurt(damage); //deal damage
+            soundMan.playTrapStep();
             remove(); //remove from the world
         }
     }

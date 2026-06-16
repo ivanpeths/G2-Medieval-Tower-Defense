@@ -10,7 +10,7 @@ public class Trapper extends Tower
 {
     public static final int DAMAGE = 300; //high damage
     public static final int RADIUS = 75; //1 tile
-    public static final int COOLDOWN = 300; //5 seconds
+    public static final int COOLDOWN = 450; //7.5 seconds
     
     //sets the image and applies variables, run on creation
     public Trapper () {
@@ -23,13 +23,41 @@ public class Trapper extends Tower
         setImage(image);
         cooldownCounter = cooldown;
     }
-    
+
+    public void addedToWorld(World world){
+        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+    }
+
+    public void act(){
+        if (cooldownCounter < Integer.MAX_VALUE){
+            cooldownCounter++;
+        }
+        if (cooldownCounter >= cooldown){
+            putTrap();
+            cooldownCounter = 0;
+        }
+    }
+
+    // Place traps whenever cooldown is done,
+    // not only when enemy is near
+    protected void attack(){
+        return;
+    }
+
     //attack using ability
-    protected void attack () {
+    private void putTrap(){
         List<Path> paths = getObjectsInRange(75, Path.class); //get all paths nearby
         Path nearestPath = null; //initializes a path variable
+        double nearestDist = Double.MAX_VALUE;
         for (Path path : paths) { //loops through
-            nearestPath = path; //finds the nearest path
+            if (!getWorld().getObjectsAt(path.getX(), path.getY(), Trap.class).isEmpty()){
+                continue;
+            }
+            double dist = Math.hypot(path.getX() - getX(), path.getY() - getY());
+            if (dist < nearestDist){
+                nearestDist = dist;
+                nearestPath = path;
+            }
             break; //ends the loop
         }
         
@@ -45,5 +73,6 @@ public class Trapper extends Tower
         
         //adds the trap on the tile
         getWorld().addObject(new Trap(damage), nearestPath.getX(), nearestPath.getY());
+        soundMan.playTrapSet();
     }
 }

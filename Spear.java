@@ -22,7 +22,6 @@ public class Spear extends Projectiles
         maxHits = 3; //3 enemies hit
         hitEnemies = new ArrayList<Enemy>(maxHits); //new array list with set length
     }
-    
     //ran every act to check for impact
     public void act()
     {
@@ -35,6 +34,7 @@ public class Spear extends Projectiles
         if (target != null && !hitEnemies.contains(target)) {
             hitEnemies.add(target); //makes sure the spear only impacts with enemies not previously hit
             target.hurt(damage);
+            soundMan.playSpear();
             maxHits--; //removes 1 max hit
         }
         
