@@ -18,6 +18,10 @@ public class Arrow extends Projectiles
         this.damage = damage;
     }
 
+    public void addedToWorld(World world){
+        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+    }
+
     //runs every act to move and check impact
     public void act()
     {
@@ -28,7 +32,7 @@ public class Arrow extends Projectiles
         } //get intersecting enemy
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class);
         if (target != null) { //if there is one, deal damage and remove arrow
-            SoundManager soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+            
             soundMan.playArrow(); //play sound
             target.hurt(damage);
             remove();

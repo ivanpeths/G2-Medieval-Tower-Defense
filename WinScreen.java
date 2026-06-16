@@ -28,12 +28,12 @@ public class WinScreen extends World
     }
     
     // Start and stop menu music as needed
-    public void stopped(){
-        // soundMan.pauseMenu();
-    }
-    
     public void started(){
-        // soundMan.playMenu();
+        soundMan.playBgm();
+    }
+
+    public void stopped(){
+        soundMan.pauseBgm();
     }
     
     public void setupButton(){
