@@ -25,9 +25,9 @@ public class Mage extends Tower
         image = new GreenfootImage("mage.png");
         image.scale(40, 40);
         setImage(image);
-        cooldownCown;
+        cooldownCounter = cooldown;
     }
-
+    
     @Override
     public void addedToWorld(World world){
         soundMan = getSoundMan();
