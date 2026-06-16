@@ -13,7 +13,9 @@ import java.util.Scanner;
  * the flag at the end of the path. It takes 20 goblins to lift up and take it away
  * from you and back to Goblinland. 
  * 
- * You borrowed $200 from the bank to hire Towers to protect your kingdom. 
+ * You were desperate, and you borrowed $200 
+ * from the bank to hire Towers to protect your kingdom. 
+ * 
  * Archer shoots arrows, Knights stabs with his sword, 
  * Mage casts his magic fireball, Spearman throws his spear, 
  * and Trapper sets his bear traps. 
@@ -29,6 +31,7 @@ import java.util.Scanner;
  * "These goblins stink"
  * "I wish the king would teach me Computer Science"
  * "NO NOT THE FLAG, WHAT WOULD WE DO WITHOUT IT"
+ * "Guaranteed victory or our money back!"
  * 
  * Win the war for them. There are no cheats. 
  * 
