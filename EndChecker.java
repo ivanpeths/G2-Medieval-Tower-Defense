@@ -1,6 +1,6 @@
 import greenfoot.*;
 /**
- * Write a description of class EndChecker here.
+ * Used as hitbox for checking enemies going to the end
  * 
  * @author Kolby Ng
  * @version (a version number or a date)

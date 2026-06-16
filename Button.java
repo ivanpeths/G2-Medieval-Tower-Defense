@@ -1,6 +1,5 @@
 /**
  * Button class for arrow buttons and start buttons
- * Used in TitleScreen, SettingsWorld and WinScreen
  * 
  * @author Kolby Ng
  */

@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 import java.util.List;
 
 /**
@@ -12,7 +12,9 @@ public class Trapper extends Tower
     public static final int RADIUS = 75; //1 tile
     public static final int COOLDOWN = 450; //7.5 seconds
     
-    //sets the image and applies variables, run on creation
+    /**
+    * Sets the iamge and applies variables, run on creation
+    */
     public Trapper () {
         damage = DAMAGE;
         radius = RADIUS;

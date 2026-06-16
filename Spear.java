@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 import java.util.ArrayList;
 
 /**
@@ -10,7 +10,12 @@ public class Spear extends Projectiles
 {
     private int maxHits; //max amount of times it can penetrate
     private ArrayList<Enemy> hitEnemies; //enemies hit
-    //ran on creation
+    /**
+    * Ran on creation
+    * 
+    * @param angle The angle the spear is shot at
+    * @param damage The damage the spear can do
+    */
     public Spear (int angle, int damage) {
         image = new GreenfootImage("spear.png");
         image.scale(40, 4);
@@ -22,7 +27,9 @@ public class Spear extends Projectiles
         maxHits = 3; //3 enemies hit
         hitEnemies = new ArrayList<Enemy>(maxHits); //new array list with set length
     }
-    //ran every act to check for impact
+    /**
+    * Ran every act to check for impact
+    */
     public void act()
     {
         super.act();

@@ -1,4 +1,4 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;
 import java.util.List;
 
 /**
@@ -14,7 +14,9 @@ public class Mage extends Tower
 
     private SoundManager soundMan;
     
-    //constructor, commented in other towers
+    /**
+    * Constructor, commented in other towers
+    */
     public Mage () {
         damage = DAMAGE;
         radius = RADIUS;
@@ -23,9 +25,10 @@ public class Mage extends Tower
         image = new GreenfootImage("mage.png");
         image.scale(40, 40);
         setImage(image);
-        cooldownCounter = cooldown;
+        cooldownCown;
     }
 
+    @Override
     public void addedToWorld(World world){
         soundMan = getSoundMan();
     }

@@ -10,7 +10,7 @@ public class GoblinBuff extends Enemy
         super(300, 0.75);
     }
     
-    public void setImages(){
+    protected void setImages(){
         front = new GreenfootImage("buff_front.png");
         back = new GreenfootImage("buff_back.png");
         left = new GreenfootImage("buff_left.png");
@@ -22,11 +22,14 @@ public class GoblinBuff extends Enemy
         right.scale(50, 50);
     }
     
+    /**
+    * Checks if HP is 0, then add money and remove itself
+    */
     public void act () {
         super.act();
         if (hp <= 0) {
             TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
-            world.addMoney(30); // reward amount
+            world.addMoney(40); // reward amount
             world.removeObject(this);
         }
     }

@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 /**
- * Exit screen
+ * Win screen after passing some amount of money
  * 
  * @author Kolby Ng
  */
@@ -27,21 +27,25 @@ public class WinScreen extends World
         setBackground();
     }
     
-    // Start and stop menu music as needed
+    /**
+    * Starts music when game is started
+    */
     public void started(){
         soundMan.playBgm();
     }
-
+    /**
+    * Stops music when game is stopped
+    */
     public void stopped(){
         soundMan.pauseBgm();
     }
     
-    public void setupButton(){
+    private void setupButton(){
         GreenfootImage buttonImg = new GreenfootImage("button.png");
-        winLabel = new Label("You won!", 100);
+        winLabel = new Label("Your kingdom is saved!", 100);
         addObject(winLabel, getWidth() / 2, getHeight() / 4);
 
-        livesLabel = new Label("You had " + lives + " lives left!", 100);
+        livesLabel = new Label("You had " + lives + " lives left", 100);
         addObject(livesLabel, getWidth() / 2, getHeight() / 2);
 
         restartButton = new Button(buttonImg);
@@ -56,11 +60,14 @@ public class WinScreen extends World
         addObject(exitLabel, getWidth() / 4 * 3, getHeight() / 4 * 3 - 10);
     }
     
-    public void setBackground(){
+    private void setBackground(){
         background = new GreenfootImage ("background.png");
         setBackground(background);
     }
 
+    /**
+    * Navigates to game world or exit screen depending on button pressed
+    */
     public void act(){
         if (Greenfoot.mouseClicked(restartButton) || Greenfoot.mouseClicked(restartLabel)){
             Greenfoot.setWorld(new TowerDefenseWorld(soundMan, true));
