@@ -17,7 +17,7 @@ import java.util.Scanner;
  * You are desperate, and you borrow $200 
  * from the bank to hire Towers to protect your kingdom. 
  * 
- * Archer shoots arrows, Knights stabs with his sword, 
+ * Archer shoots arrows, Knight stabs with his sword, 
  * Mage casts his magic fireball, Spearman throws his spear, 
  * and Trapper sets his bear traps. 
  * Every tower does something different.
@@ -37,7 +37,7 @@ import java.util.Scanner;
  * Win the war for your people.
  * 
  * If you believe you are incapable of defeating the goblin hoard, click 'P'
- * and the kingdom gods will bestow $100 upon your kingdom to help you fight.
+ * and the monetary gods will bestow $100 upon your kingdom to help you fight.
  * 
  * Features:
  * Procedurally generated game path: Path is different every time and always works
