@@ -9,11 +9,12 @@ import java.util.Scanner;
  * Main Game World
  * 
  * This is a medieval tower defense simulator game. 
- * You are the king of a kingdom, and the kingdom's most prized possession is
- * the flag at the end of the path. It takes 20 goblins to lift up and take it away
- * from you and back to Goblinland. 
  * 
- * You were desperate, and you borrowed $200 
+ * You are the king of a kingdom, and the kingdom's most prized possession is
+ * the flag at the end of the path. It takes 20 goblins to carry and take it back 
+ * to Goblinland. 
+ * 
+ * You are desperate, and you borrow $200 
  * from the bank to hire Towers to protect your kingdom. 
  * 
  * Archer shoots arrows, Knights stabs with his sword, 
@@ -21,12 +22,11 @@ import java.util.Scanner;
  * and Trapper sets his bear traps. 
  * Every tower does something different.
  * 
- * The more enemies you slaughter, the more the bank trusts you
- * and pays you as credit. As you reach $5k, you will have enough to 
- * hire a bunch of goons to fight off ALL of the goblins, saving your kingdom.
+ * The more enemies you slaughter, the more the public believes in your ability
+ * and donate to you. As you reach $5k, you will have enough to hire
+ * a bunch of goons to fight off the remaining goblins, saving your kingdom.
  * 
  * Listen to the pleas of your peasants:
- * 
  * "Please save us, King Cohen :("
  * "These goblins stink"
  * "I wish the king would teach me Computer Science"
