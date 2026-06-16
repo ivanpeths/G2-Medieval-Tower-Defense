@@ -519,7 +519,7 @@ public class TowerDefenseWorld extends World
         }
         
         waveCounter++;
-        if ((wave % 1320) == 0) {
+        if ((waveCounter % 1320) == 0) {
             wave++;
             newWavePause = true;
             maxChanceBounds[0] -= 0.1;
@@ -548,7 +548,7 @@ public class TowerDefenseWorld extends World
     }
 
     private void spawnEnemy(){
-        int tempSpawnRate = spawnRate - (wave * 5);
+        int tempSpawnRate = Math.max(10, spawnRate - (wave * 5));
         if (Greenfoot.getRandomNumber(tempSpawnRate) == 0) {
             double type = Math.random();
             Enemy enemy;
@@ -689,7 +689,7 @@ public class TowerDefenseWorld extends World
                 endX = Integer.parseInt(input.nextLine());
                 endY = Integer.parseInt(input.nextLine());
                 startingDirection = input.nextLine().charAt(0); 
-                //wave = Integer.parseInt(input.nextLine());
+                wave = Integer.parseInt(input.nextLine());
                 input.close();
             } catch (IOException e) {
                 Greenfoot.setWorld(new ErrorScreen());
