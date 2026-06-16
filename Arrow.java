@@ -7,7 +7,12 @@ import greenfoot.*;
  */
 public class Arrow extends Projectiles
 {   
-    //ran when the arrow is created
+    /**
+    * Ran when the arrow is created
+    * 
+    * @param angle The angle the arrow is shot towards
+    * @param damage The damage the arrow can cause
+    */
     public Arrow (int angle, int damage) {
         image = new GreenfootImage("arrow.png");
         image.scale(20, 3); //image size
@@ -18,7 +23,9 @@ public class Arrow extends Projectiles
         this.damage = damage;
     }
     
-    //runs every act to move and check impact
+    /**
+    * Runs every act to move and check impact
+    */
     public void act()
     {
         super.act();

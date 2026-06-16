@@ -12,7 +12,9 @@ public class Archer extends Tower
     public static final int RADIUS = 175; //medium range
     public static final int COOLDOWN = 90; //medium cooldown
 
-    //constructor, commented in other towers
+    /**
+    * Constructor for Archer, commented in other towers
+    */
     public Archer () {
         damage = DAMAGE;
         radius = RADIUS;

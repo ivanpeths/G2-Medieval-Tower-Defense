@@ -6,25 +6,34 @@ import greenfoot.*;
  */
 public abstract class Enemy extends SuperSmoothMover
 {
-    private int tileSize = 50;
     // L, R, U, D
     protected char direction = 'R';
     
+    // Game world variables
     private int[][] gameGrid;
+    private int tileSize = 50;
+    protected int gridX;
+    protected int gridY;
     
+    // Directional images
     protected GreenfootImage front;
     protected GreenfootImage back;
     protected GreenfootImage left;
     protected GreenfootImage right;
     
+    // Instance variables
     protected int hp;
     protected int maxHp;
-    protected int gridX;
-    protected int gridY;
     protected double step;
     
     protected SuperStatBar healthBar;
 
+    /**
+    * Called by specific subclass of enemy
+    * 
+    * @param hp Max health of enemy
+    * @param step How far they move in one frame
+    */
     public Enemy(int hp, double step){
         TowerDefenseWorld w = (TowerDefenseWorld) getWorld();
         this.hp = hp;
@@ -34,6 +43,7 @@ public abstract class Enemy extends SuperSmoothMover
     }
 
     @Override
+    // Get variables from world after being added to it
     protected void addedToWorld(World world){
         TowerDefenseWorld w = (TowerDefenseWorld) world;
         gameGrid = w.getGrid();
@@ -45,6 +55,7 @@ public abstract class Enemy extends SuperSmoothMover
         updateImage();
     }
 
+    // Get the opposite of direction to prevent walking backwards
     private char opposite(char dir){
         switch (dir){
             case 'L': return 'R';
@@ -55,42 +66,27 @@ public abstract class Enemy extends SuperSmoothMover
         }
     }
     
-    public abstract void setImages();
+    // Each subclasses sets their own images
+    protected abstract void setImages();
     
+    /**
+    * Removes health from current enemy
+    * 
+    * @param dmgAmt How much health to deduct from current enemy
+    */
     public void hurt(int dmgAmt){
         hp -= dmgAmt;
         updateBar();
     }
-    
-    public void heal(int healAmt){
-        hp += healAmt;
-        updateBar();
-    }
-    
-    public int getHp(){
-        return hp;
-    }
-    
-    public int getMaxHp(){
-        return maxHp;
-    }
-    
-    public int getGridX(){
-        return gridX;
-    }
-    
-    public int getGridY(){
-        return gridY;
-    }
-    
-    public char getDirection(){
-        return direction;
-    }
-    
+
+    /**
+    * Runs continuously to move enemies along the path
+    */
     public void act(){
         // Recalculate actual position and clamp
         gridX = Math.max(0, Math.min((int) Math.round((getPreciseX() - tileSize / 2.0) / tileSize), gameGrid[0].length - 1));
         gridY = Math.max(0, Math.min((int) Math.round((getPreciseY() - tileSize / 2.0) / tileSize), gameGrid.length - 1));
+        // Turn towards path when on the edge
         if (onEdge()) {
             setLocation(gridX * tileSize + tileSize / 2, gridY * tileSize + tileSize / 2);
             turn();
@@ -99,6 +95,7 @@ public abstract class Enemy extends SuperSmoothMover
         checkOob();
     }
     
+    // Move enemies according to their direction
     private void walk(){
         if (direction == 'L'){
             setLocation(getPreciseX() - step, getPreciseY());
@@ -111,6 +108,7 @@ public abstract class Enemy extends SuperSmoothMover
         }
     }
     
+    // Check if enemy is on the edge of a path tile
     private boolean onEdge() {
         double xMod = (getPreciseX() - 25) % tileSize;
         double yMod = (getPreciseY() - 25) % tileSize;
@@ -123,6 +121,7 @@ public abstract class Enemy extends SuperSmoothMover
         return xMod < step && yMod < step;
     }
     
+    // Updates the image of enemy based on direction
     private void updateImage(){
         if (direction == 'L') setImage(left);
         else if (direction == 'R') setImage(right);
@@ -130,12 +129,14 @@ public abstract class Enemy extends SuperSmoothMover
         else setImage(front);
     }
 
+    // Turn enemies to follow the path
     private void turn(){
         // Prevent enemies drifting away, snaps them back to grid center
         setLocation(gridX * tileSize + tileSize / 2, gridY * tileSize + tileSize / 2);
         
         char excluded = opposite(direction);
         
+        // Do not go backwards, path is not out of bounds, cell is a path
         if (excluded != 'L' && gridX - 1 >= 0 && gameGrid[gridY][gridX - 1] == 1){
             direction = 'L';
             gridX--;
@@ -153,6 +154,7 @@ public abstract class Enemy extends SuperSmoothMover
         updateImage();
     }
     
+    // Check if enemies are touching the hitbox for the end path
     private void checkOob(){
         if (isTouching(EndChecker.class)){
             TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
@@ -161,6 +163,7 @@ public abstract class Enemy extends SuperSmoothMover
         }
     }
 
+    // Update the health bar
     private void updateBar(){
         healthBar.update(hp);
     }

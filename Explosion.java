@@ -10,7 +10,13 @@ public class Explosion extends Actor
     private GreenfootImage image;
     private int duration, actsLeft;
     private int diameter;
-    
+
+    /**
+    * Creates an Explosion which is called from Fireball
+    * 
+    * @param diameter Diameter of the explosion hits
+    * @param seconds How long the explosion stays for
+    */
     public Explosion (int diameter, int seconds) {
         duration = seconds * 60;
         actsLeft = duration;
@@ -20,6 +26,7 @@ public class Explosion extends Actor
         drawExplosion (image, (double)actsLeft/duration);
     }
     
+    // Draw an orange circle indicating the explosion area
     private void drawExplosion (GreenfootImage image, double percent){
         image.clear();
         Color drawColor = new Color (255, 191, 0, (int)(255 * percent));
@@ -29,9 +36,8 @@ public class Explosion extends Actor
     }
     
     /**
-     * Act - do whatever the Explosion wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    * Countdown till 0 then removes it from world
+    */
     public void act()
     {
         actsLeft--;

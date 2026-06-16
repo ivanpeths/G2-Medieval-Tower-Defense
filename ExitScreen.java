@@ -1,9 +1,9 @@
 import greenfoot.*;
 
 /**
- * Exit screen
+ * Exit screen thanking user for playing
  * 
- * @author Ivan Ma
+ * @author Ivan Ma, Kolby Ng
  */
 public class ExitScreen extends World
 {
@@ -29,16 +29,19 @@ public class ExitScreen extends World
         soundMan.pauseBgm();
     }
     
-    public void setupButton(){
+    private void setupButton(){
         saveLabel = new Label("Thanks for playing!", 100);
         addObject(saveLabel, getWidth() / 2, getHeight() / 2);
     }
     
-    public void setBackground(){
+    private void setBackground(){
         background = new GreenfootImage ("background.png");
         setBackground(background);
     }
 
+    /**
+    * Stops the game after a 3 second countdown
+    */
     public void act(){
         if(cooldown <= 0){
             Greenfoot.stop();
