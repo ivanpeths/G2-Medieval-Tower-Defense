@@ -29,7 +29,7 @@ public class GoblinHorse extends Enemy
         super.act();
         if (hp <= 0) {
             TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
-            world.addMoney(30); // reward amount
+            world.addMoney(15); // reward amount
             world.removeObject(this);
         }
     }

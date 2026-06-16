@@ -10,7 +10,7 @@ public class Trapper extends Tower
 {
     public static final int DAMAGE = 300; //high damage
     public static final int RADIUS = 75; //1 tile
-    public static final int COOLDOWN = 450; //7.5 seconds
+    public static final int COOLDOWN = 300; //5 seconds
     
     /**
     * Sets the iamge and applies variables, run on creation

@@ -34,7 +34,10 @@ import java.util.Scanner;
  * "NO NOT THE FLAG, WHAT WOULD WE DO WITHOUT IT"
  * "Guaranteed victory or our money back!"
  * 
- * Win the war for your people. There are no cheats. 
+ * Win the war for your people.
+ * 
+ * If you believe you are incapable of defeating the goblin hoard, click 'P'
+ * and the kingdom gods will bestow $100 upon your kingdom to help you fight.
  * 
  * Features:
  * Procedurally generated game path: Path is different every time and always works
@@ -73,13 +76,16 @@ public class TowerDefenseWorld extends World
     private int endXCoord;
     private int endYCoord;
     private char startingDirection = 'N';
+    private int tempSpawnRate;
+    
+    private int finalWave = 0;
     
     // Tower costs
-    private int archerCost = 50;
-    private int knightCost = 50;
-    private int mageCost = 100;
-    private int spearmanCost = 80;
-    private int trapperCost = 80;
+    private int archerCost = 60;
+    private int knightCost = 75;
+    private int mageCost = 150;
+    private int spearmanCost = 90;
+    private int trapperCost = 90;
     
     // Enemy spawn variables
     private int spawnRate = 90;
@@ -628,7 +634,9 @@ public class TowerDefenseWorld extends World
 
         // If not paused because of wave, spawn enemy
         if (!newWavePause) {
-            spawnEnemy();
+            if (finalWave < 5) {
+                spawnEnemy();
+            }
         } else {
             newWavePauseCounter++;
         }
@@ -645,12 +653,18 @@ public class TowerDefenseWorld extends World
         }
         
         waveCounter++;
-        if ((waveCounter % 1320) == 0) {
+        if ((waveCounter % 1020) == 0) {
             wave++;
             newWavePause = true;
             maxChanceBounds[0] -= 0.1;
             maxChanceBounds[1] -= 0.05;
             maxChanceBounds[2] += 0.15;
+            if (tempSpawnRate <= 10) {
+                finalWave++;
+                if (finalWave >= 6) {
+                    tempSpawnRate--;
+                }
+            }
         }
 
         if (saveCountdown > 0){
@@ -662,6 +676,10 @@ public class TowerDefenseWorld extends World
         // Check game ending conditions
         checkLose();
         checkWin();
+        
+        if ("p".equals(Greenfoot.getKey())) {
+            addMoney(100);
+        } 
     }
 
     private void checkLose(){
@@ -674,11 +692,15 @@ public class TowerDefenseWorld extends World
         if (money >= winCond){
             Greenfoot.setWorld(new WinScreen(soundMan, health));
         }
+        
+        if (tempSpawnRate <= 9) {
+            Greenfoot.setWorld(new WinScreen(soundMan, health));
+        }
     }
 
     private void spawnEnemy(){
         // Spawn rate changes based on whether waves are coming
-        int tempSpawnRate = Math.max(10, spawnRate - (wave * 5));
+        tempSpawnRate = Math.max(10, spawnRate - (wave * 8));
         if (Greenfoot.getRandomNumber(tempSpawnRate) == 0) {
             double type = Math.random();
             Enemy enemy;

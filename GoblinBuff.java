@@ -29,7 +29,7 @@ public class GoblinBuff extends Enemy
         super.act();
         if (hp <= 0) {
             TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
-            world.addMoney(40); // reward amount
+            world.addMoney(20); // reward amount
             world.removeObject(this);
         }
     }

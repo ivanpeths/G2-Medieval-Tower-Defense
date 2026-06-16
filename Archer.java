@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Archer extends Tower
 {
-    public static final int DAMAGE = 50; //low damage
+    public static final int DAMAGE = 40; //low damage
     public static final int RADIUS = 175; //medium range
     public static final int COOLDOWN = 90; //medium cooldown
 
