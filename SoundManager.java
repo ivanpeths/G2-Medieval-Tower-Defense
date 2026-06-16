@@ -15,6 +15,8 @@ import greenfoot.*;
  * Melee: https://pixabay.com/sound-effects/film-special-effects-violent-sword-slice-393839/
  * Trap set: https://pixabay.com/sound-effects/film-special-effects-spinning-steampunk-gadget-open-close-188050/
  * Trap step: https://pixabay.com/sound-effects/film-special-effects-axe-hit-head-beheaded-548103/
+ * Arrow: https://pixabay.com/sound-effects/film-special-effects-arrow-swish-03-306040/
+ * Spear: https://pixabay.com/sound-effects/film-special-effects-arrow-body-impact-146419/
  * 
  * @author Kolby Ng
  */
@@ -30,6 +32,7 @@ public class SoundManager
     private GreenfootSound[] meleeSounds;
     private GreenfootSound[] trapSetSounds;
     private GreenfootSound[] trapStepSounds;
+    private GreenfootSound[] spearSounds;
     
 
     private int menuClickIndex = 0;
@@ -39,16 +42,18 @@ public class SoundManager
     private int meleeIndex = 0;
     private int trapSetIndex = 0;
     private int trapStepIndex = 0;
+    private int spearIndex = 0;
     
     private int bgmVolume = 40;
     private int menuClickVolume = 70;
-    private int arrowVolume = 30;
+    private int arrowVolume = 40;
     private int towerVolume = 30;
     private int errorVolume = 50;
-    private int fireVolume = 40;
+    private int fireVolume = 50;
     private int meleeVolume = 40;
     private int trapSetVolume = 40;
-    private int trapStepVolume = 40;
+    private int trapStepVolume = 20;
+    private int spearVolume = 40;
     
     private int menuClickLength = 3;
     private int arrowLength = 10;
@@ -57,6 +62,7 @@ public class SoundManager
     private int meleeLength = 10;
     private int trapSetLength = 5;
     private int trapStepLength = 5;
+    private int spearLength = 10;
     
     
     public SoundManager(){
@@ -109,6 +115,12 @@ public class SoundManager
         for (int i = 0; i < trapStepLength; i++){
             trapStepSounds[i] = new GreenfootSound("trapstep.mp3");
             trapStepSounds[i].setVolume(trapStepVolume);
+        }
+
+        spearSounds = new GreenfootSound[spearLength];
+        for (int i = 0; i < spearLength; i++){
+            spearSounds[i] = new GreenfootSound("spear.mp3");
+            spearSounds[i].setVolume(spearVolume);
         }
     }
 
@@ -166,5 +178,10 @@ public class SoundManager
     public void playTrapStep(){
         trapStepSounds[trapStepIndex].play();
         trapStepIndex = (trapStepIndex + 1) % trapStepLength;
+    }
+
+    public void playSpear(){
+        spearSounds[spearIndex].play();
+        spearIndex = (spearIndex + 1) % spearLength;
     }
 }

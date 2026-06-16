@@ -23,10 +23,6 @@ public class Spearman extends Tower
         setImage(image);
         cooldownCounter = cooldown;
     }
-
-    public void addedToWorld(World world){
-        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
-    }
     
     //attacks with weapon
     protected void attack () {
@@ -54,6 +50,5 @@ public class Spearman extends Tower
         
         //add a spear going at that angle
         getWorld().addObject(new Spear(angle, damage), getX(), getY());
-        //soundMan.playSpear();
     }
 }

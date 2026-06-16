@@ -51,6 +51,5 @@ public class Archer extends Tower
         setRotation(angle - 90);
         
         getWorld().addObject(new Arrow(angle, damage), getX(), getY());
-        soundMan.playArrow();
     }
 }

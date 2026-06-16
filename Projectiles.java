@@ -10,6 +10,11 @@ public abstract class Projectiles extends SuperSmoothMover
     protected GreenfootImage image;
     protected double speed; //speed of projectile
     protected int damage; //damage of projectile
+    protected SoundManager soundMan;
+    
+    public void addedToWorld(World world){
+        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+    }
     
     //moves in the direction of where the projectile is facing
     public void move() {
