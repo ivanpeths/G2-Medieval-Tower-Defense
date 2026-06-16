@@ -23,8 +23,9 @@ import java.util.Scanner;
  * Every tower does something different.
  * 
  * The more enemies you slaughter, the more the public believes in your ability
- * and donate to you. As you reach $5k, you will have enough to hire
- * a bunch of goons to fight off the remaining goblins, saving your kingdom.
+ * and donate to you. As you reach $5k, you will have enough to pay off the predatory
+ * compound interest from the bank (100% per minute) and hire a bunch of goons 
+ * to fight off the remaining goblins, saving your kingdom.
  * 
  * Listen to the pleas of your peasants:
  * "Please save us, King Cohen :("
@@ -33,7 +34,7 @@ import java.util.Scanner;
  * "NO NOT THE FLAG, WHAT WOULD WE DO WITHOUT IT"
  * "Guaranteed victory or our money back!"
  * 
- * Win the war for them. There are no cheats. 
+ * Win the war for your people. There are no cheats. 
  * 
  * Features:
  * Procedurally generated game path: Path is different every time and always works
