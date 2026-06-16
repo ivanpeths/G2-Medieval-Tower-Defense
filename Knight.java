@@ -12,7 +12,9 @@ public class Knight extends Tower
     public static final int RADIUS = 75; //low range
     public static final int COOLDOWN = 60; //low cooldown
     
-    //constructor, commented in other towers
+    /**
+    * Constructor, commented in other towers
+    */
     public Knight () {
         damage = DAMAGE;
         radius = RADIUS;

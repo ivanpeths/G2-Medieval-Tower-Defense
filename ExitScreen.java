@@ -20,11 +20,16 @@ public class ExitScreen extends World
         setBackground();
     }
     
-    // Start and stop menu music as needed
+    /**
+    * Starts music when game is started
+    */
     public void started(){
         soundMan.playBgm();
     }
 
+    /**
+    * Pauses music when game is stopped
+    */
     public void stopped(){
         soundMan.pauseBgm();
     }

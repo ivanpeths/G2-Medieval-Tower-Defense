@@ -16,12 +16,16 @@ public abstract class Projectiles extends SuperSmoothMover
         soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
     }
     
-    //moves in the direction of where the projectile is facing
+    /**
+    * Moves in the direction of where the projectile is facing
+    */
     public void move() {
         move (speed);
     }
     
-    //runs every act to check if it is off the map
+    /**
+    * Runs every act to check if it is off the map
+    */
     public void act () {
         if (getX() >= 790 || getX() <= 10 || getY() >= 790 || getY() <= 10) {
             remove();
@@ -29,7 +33,7 @@ public abstract class Projectiles extends SuperSmoothMover
     }
     
     //removes the projectile
-    public void remove() {
+    protected void remove() {
         getWorld().removeObject(this);
     }
 }

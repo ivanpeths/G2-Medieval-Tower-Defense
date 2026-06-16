@@ -1,7 +1,7 @@
 import greenfoot.*;
 
 /**
- * Exit screen
+ * Lose screen when 20 goblins get past
  * 
  * @author Ivan Ma, Kolby Ng
  */
@@ -23,18 +23,22 @@ public class LoseScreen extends World
         setBackground();
     }
     
-    // Start and stop menu music as needed
+    /**
+    * Starts music when game is started
+    */
     public void started(){
         soundMan.playBgm();
     }
-
+    /**
+    * Stops music when game is stopped
+    */
     public void stopped(){
         soundMan.pauseBgm();
     }
     
-    public void setupButton(){
+    private void setupButton(){
         GreenfootImage buttonImg = new GreenfootImage("button.png");
-        saveLabel = new Label("You lost!", 100);
+        saveLabel = new Label("Goblins have taken over your kingdom!", 75);
         addObject(saveLabel, getWidth() / 2, getHeight() / 4);
 
         restartButton = new Button(buttonImg);
@@ -49,11 +53,14 @@ public class LoseScreen extends World
         addObject(exitLabel, getWidth() / 4 * 3, getHeight() / 4 * 3 - 10);
     }
     
-    public void setBackground(){
+    private void setBackground(){
         background = new GreenfootImage ("background.png");
         setBackground(background);
     }
 
+    /**
+    * Redirects to game world or exit screen depends on what is pressed
+    */
     public void act(){
         if (Greenfoot.mouseClicked(restartButton) || Greenfoot.mouseClicked(restartLabel)){
             Greenfoot.setWorld(new TowerDefenseWorld(soundMan, true));

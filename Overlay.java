@@ -1,19 +1,8 @@
 import greenfoot.*;
 
 /**
- * Write a description of class Overlay here.
+ * used for grid above game world and tower indicator square
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Kolby Ng
  */
-public class Overlay extends Actor
-{
-    /**
-     * Act - do whatever the Overlay wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
-    }
-}
+public class Overlay extends Actor{}

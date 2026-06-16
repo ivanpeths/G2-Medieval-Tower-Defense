@@ -10,7 +10,7 @@ public class GoblinHorse extends Enemy
         super(100, 1.50);
     }
 
-    public void setImages(){
+    protected void setImages(){
         front = new GreenfootImage("horse_front.png");
         back = new GreenfootImage("horse_back.png");
         left = new GreenfootImage("horse_left.png");
@@ -21,12 +21,15 @@ public class GoblinHorse extends Enemy
         left.scale(50, 50);
         right.scale(50, 50);
     }
-    
+
+    /**
+    * Checks if HP is 0, then add money and remove itself
+    */
     public void act () {
         super.act();
         if (hp <= 0) {
             TowerDefenseWorld world = (TowerDefenseWorld) getWorld();
-            world.addMoney(20); // reward amount
+            world.addMoney(30); // reward amount
             world.removeObject(this);
         }
     }

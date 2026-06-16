@@ -8,7 +8,12 @@ import java.util.List;
  */
 public class Fireball extends Projectiles
 {
-    //ran on creation
+    /**
+    * Ran on creation
+    * 
+    * @param angle The angle the fireball is shot at
+    * @param damage The damage the fireball can cause
+    */
     public Fireball (int angle, int damage) {
         image = new GreenfootImage("fireball.png");
         image.scale(30, 30);
@@ -19,7 +24,9 @@ public class Fireball extends Projectiles
         this.damage = damage;
     }
 
-    //ran every act to check impact
+    /**
+    * Ran every act to check impact
+    */
     public void act()
     {
         super.act(); //edge of world
