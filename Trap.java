@@ -12,7 +12,11 @@ public class Trap extends Actor
     private int damage; //damage dealt on step
     private SoundManager soundMan;
     
-    //sets up the image and damage on creation
+    /**
+    * Sets up the image and damage on creation
+    * 
+    * @param damage The damage this trap can do
+    */
     public Trap (int damage) {
         image = new GreenfootImage("beartrap.png");
         image.scale(40, 40); //slightly smaller than a normal path
@@ -25,7 +29,9 @@ public class Trap extends Actor
         soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
     }
 
-    //runs every act to check if there is an enemy on it
+    /**
+    * Runs every act to check if there is an enemy on it
+    */
     public void act()
     {
         Enemy target = (Enemy)getOneIntersectingObject(Enemy.class); //get the enemy touching the trap
@@ -36,7 +42,9 @@ public class Trap extends Actor
         }
     }
     
-    //removes the trap
+    /**
+    * Removes the trap from the world
+    */
     public void remove() {
         getWorld().removeObject(this);
     }

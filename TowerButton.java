@@ -4,21 +4,18 @@ import greenfoot.*;
  * Buttons for towers
  * 
  * @author Isaac
- * @version (a version number or a date)
  */
 public class TowerButton extends Actor
 {
-    private String towerName;
-    
-    public TowerButton (String towerName, String imageFile) {
-        this.towerName = towerName;
+    /**
+    * Creates a button with given file name
+    * 
+    * @param imageFile Image filename to set as its image
+    */
+    public TowerButton (String imageFile) {
         GreenfootImage img = new GreenfootImage(imageFile);
         img.scale(75, 75);
 
         setImage(img);
     }
-
-    public String getTowerName() {
-        return towerName;
-    }    
 }

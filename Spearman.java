@@ -12,7 +12,9 @@ public class Spearman extends Tower
     public static final int RADIUS = 275; //high range
     public static final int COOLDOWN = 300; //high cooldown
     
-    //applies image and variables
+    /**
+    * Applies images and variables
+    */
     public Spearman () {
         damage = DAMAGE;
         radius = RADIUS;

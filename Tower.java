@@ -16,7 +16,9 @@ public abstract class Tower extends Actor
     protected int cooldownCounter; //counter to effect the cooldown
     protected SoundManager soundMan;
 
-    //runs every act to attempt an attack
+    /**
+    * Runs every act to attempt an attack
+    */
     public void act () {
         if (cooldownCounter < Integer.MAX_VALUE) { //if cooldown is up
             cooldownCounter++;
@@ -43,25 +45,10 @@ public abstract class Tower extends Actor
     
     //abstract method to force all subclasses to have an attack
     protected abstract void attack ();
-    
-    //the following are getters that return different variables
-    
-    public int getRadius(){
-        return radius;
-    }
-    
-    public int getDmg(){
-        return damage;
-    }
 
-    public int getCd(){
-        return cooldown;
-    }
-    
-    public int getType(){
-        return type;
-    }
-
+    /**
+    * Grabs SoundManager from the world, easier than typing the whole thing over and over
+    */
     public SoundManager getSoundMan(){
         return ((TowerDefenseWorld) getWorld()).getSoundMan();
     }

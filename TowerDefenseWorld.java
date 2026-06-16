@@ -502,12 +502,12 @@ public class TowerDefenseWorld extends World
         addObject(sidebarTitle, 1000, 50);
 
         // Tower selection buttons
-        archerButton = new TowerButton("Archer", "archer.png");
-        knightButton = new TowerButton("Knight", "knight.png");
-        mageButton = new TowerButton("Mage", "mage.png");
-        spearmanButton = new TowerButton("Spearman", "spearman.png");
-        trapperButton = new TowerButton("Trapper", "trapper.png");
-        clearSelectedButton = new TowerButton("Clear", "cross.png");
+        archerButton = new TowerButton("archer.png");
+        knightButton = new TowerButton("knight.png");
+        mageButton = new TowerButton("mage.png");
+        spearmanButton = new TowerButton("spearman.png");
+        trapperButton = new TowerButton("trapper.png");
+        clearSelectedButton = new TowerButton("cross.png");
 
         addObject(archerButton, towerButtonCol1, towerButtonRow1);
         addObject(knightButton, towerButtonCol3, towerButtonRow1);

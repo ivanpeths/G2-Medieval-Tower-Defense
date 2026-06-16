@@ -2,7 +2,7 @@ import greenfoot.*;
 
 /**
  * First screen of the game
- * Navigates to SettingsWorld
+ * Navigates to the game world, TowerDefenseWorld
  * 
  * @author Kolby Ng and Ivan Ma
  */
@@ -24,16 +24,21 @@ public class TitleScreen extends World
         setBackground();
     }
     
-    // Start and stop menu music as needed
+    /**
+    * Starts music when game is started
+    */
     public void started(){
         soundMan.playBgm();
     }
 
+    /**
+    * Stops music when game is stopped
+    */
     public void stopped(){
         soundMan.pauseBgm();
     }
     
-    public void setupButton(){
+    private void setupButton(){
         buttonImg = new GreenfootImage("button.png");
         buttonImg.scale(321, 115);
         startButton = new Button(buttonImg);
@@ -46,12 +51,14 @@ public class TitleScreen extends World
         addObject(continueLabel,  getWidth() / 2, getHeight() / 8 * 7 - 10);
     }
     
-    public void setBackground(){
+    private void setBackground(){
         background = new GreenfootImage ("titlescreen.png");
         setBackground(background);
     }
     
-    // Change world to SettingsWorld with a SoundManager passed
+    /**
+    * Change world to TowerDefenseWorld, passing a SoundManager and whether new game is started
+    */
     public void act(){
         if(Greenfoot.mouseClicked(startButton) || Greenfoot.mouseClicked(startLabel)){
             soundMan.playMenuClick();
