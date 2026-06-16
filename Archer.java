@@ -24,6 +24,10 @@ public class Archer extends Tower
         cooldownCounter = cooldown;
     }
     
+    public void addedToWorld(World world){
+        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+    }
+
     //attacks, uses the same algorithm as spearman - commented
     protected void attack () {
         List<Enemy> enemies = getEnemies();
@@ -47,5 +51,6 @@ public class Archer extends Tower
         setRotation(angle - 90);
         
         getWorld().addObject(new Arrow(angle, damage), getX(), getY());
+        soundMan.playArrow();
     }
 }

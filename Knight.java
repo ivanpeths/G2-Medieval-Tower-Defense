@@ -24,6 +24,10 @@ public class Knight extends Tower
         cooldownCounter = cooldown;
     }
     
+    public void addedToWorld(World world){
+        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+    }
+
     //attack using sword
     protected void attack () {
         List<Enemy> enemies = getEnemies(); //get enemies in range
@@ -44,5 +48,6 @@ public class Knight extends Tower
         setRotation(angle - 90);
         
         doDmg (closest, damage); //deals the damage
+        soundMan.playMelee();
     }
 }

@@ -12,6 +12,7 @@ import greenfoot.*;
  * Error: https://pixabay.com/sound-effects/film-special-effects-ui-error-pop-515668/
  * Settings click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/ but tuned down
  * Fireball: https://pixabay.com/sound-effects/film-special-effects-fireball-whoosh-3-179127/ and https://pixabay.com/sound-effects/film-special-effects-explosion-fx-343683/ mixed
+ * Melee: https://pixabay.com/sound-effects/film-special-effects-violent-sword-slice-393839/
  * 
  * @author Kolby Ng
  */
@@ -24,11 +25,13 @@ public class SoundManager
     private GreenfootSound[] arrowSounds;
     private GreenfootSound[] errorSounds;
     private GreenfootSound[] fireSounds;
+    private GreenfootSound[] meleeSounds;
 
     private int menuClickIndex = 0;
     private int arrowIndex = 0;
     private int errorIndex = 0;
     private int fireIndex = 0;
+    private int meleeIndex = 0;
     
     private int bgmVolume = 40;
     private int menuClickVolume = 70;
@@ -36,11 +39,13 @@ public class SoundManager
     private int towerVolume = 30;
     private int errorVolume = 50;
     private int fireVolume = 40;
+    private int meleeVolume = 40;
     
     private int menuClickLength = 3;
     private int arrowLength = 10;
     private int errorLength = 5;
     private int fireLength = 5;
+    private int meleeLength = 10;
     
     
     public SoundManager(){
@@ -75,6 +80,12 @@ public class SoundManager
         for (int i = 0; i < fireLength; i++){
             fireSounds[i] = new GreenfootSound("fireball.mp3");
             fireSounds[i].setVolume(fireVolume);
+        }
+
+        meleeSounds = new GreenfootSound[meleeLength];
+        for (int i = 0; i < meleeLength; i++){
+            meleeSounds[i] = new GreenfootSound("melee.mp3");
+            meleeSounds[i].setVolume(meleeVolume);
         }
     }
 
@@ -113,8 +124,14 @@ public class SoundManager
         errorIndex = (errorIndex + 1) % errorLength;
     }
 
+    // Fireball from mage
     public void playFire(){
-            fireSounds[fireIndex].play();
-            fireIndex = (fireIndex + 1) % fireLength;
+        fireSounds[fireIndex].play();
+        fireIndex = (fireIndex + 1) % fireLength;
+    }
+
+    public void playMelee(){
+        meleeSounds[meleeIndex].play();
+        meleeIndex = (meleeIndex + 1) % meleeLength;
     }
 }

@@ -23,6 +23,10 @@ public class Trapper extends Tower
         setImage(image);
         cooldownCounter = cooldown;
     }
+
+    public void addedToWorld(World world){
+        soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
+    }
     
     //attack using ability
     protected void attack () {
@@ -45,5 +49,6 @@ public class Trapper extends Tower
         
         //adds the trap on the tile
         getWorld().addObject(new Trap(damage), nearestPath.getX(), nearestPath.getY());
+        //soundMan.playPlaceTrap();
     }
 }

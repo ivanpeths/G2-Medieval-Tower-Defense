@@ -6,7 +6,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Ivan Ma
  */
 public class Arrow extends Projectiles
-{
+{   
+    private SoundManager soundMan;
     //ran when the arrow is created
     public Arrow (int angle, int damage) {
         image = new GreenfootImage("arrow.png");
@@ -17,11 +18,11 @@ public class Arrow extends Projectiles
         setRotation (angle); //saves angle, adds as current rotation
         this.damage = damage;
     }
-
+    
     public void addedToWorld(World world){
         soundMan = ((TowerDefenseWorld) getWorld()).getSoundMan();
     }
-
+    
     //runs every act to move and check impact
     public void act()
     {
