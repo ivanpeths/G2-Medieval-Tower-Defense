@@ -13,6 +13,8 @@ import greenfoot.*;
  * Settings click: https://pixabay.com/sound-effects/film-special-effects-mouse-click-290204/ but tuned down
  * Fireball: https://pixabay.com/sound-effects/film-special-effects-fireball-whoosh-3-179127/ and https://pixabay.com/sound-effects/film-special-effects-explosion-fx-343683/ mixed
  * Melee: https://pixabay.com/sound-effects/film-special-effects-violent-sword-slice-393839/
+ * Trap set: https://pixabay.com/sound-effects/film-special-effects-spinning-steampunk-gadget-open-close-188050/
+ * Trap step: https://pixabay.com/sound-effects/film-special-effects-axe-hit-head-beheaded-548103/
  * 
  * @author Kolby Ng
  */
@@ -26,12 +28,17 @@ public class SoundManager
     private GreenfootSound[] errorSounds;
     private GreenfootSound[] fireSounds;
     private GreenfootSound[] meleeSounds;
+    private GreenfootSound[] trapSetSounds;
+    private GreenfootSound[] trapStepSounds;
+    
 
     private int menuClickIndex = 0;
     private int arrowIndex = 0;
     private int errorIndex = 0;
     private int fireIndex = 0;
     private int meleeIndex = 0;
+    private int trapSetIndex = 0;
+    private int trapStepIndex = 0;
     
     private int bgmVolume = 40;
     private int menuClickVolume = 70;
@@ -40,12 +47,16 @@ public class SoundManager
     private int errorVolume = 50;
     private int fireVolume = 40;
     private int meleeVolume = 40;
+    private int trapSetVolume = 40;
+    private int trapStepVolume = 40;
     
     private int menuClickLength = 3;
     private int arrowLength = 10;
     private int errorLength = 5;
     private int fireLength = 5;
     private int meleeLength = 10;
+    private int trapSetLength = 5;
+    private int trapStepLength = 5;
     
     
     public SoundManager(){
@@ -86,6 +97,18 @@ public class SoundManager
         for (int i = 0; i < meleeLength; i++){
             meleeSounds[i] = new GreenfootSound("melee.mp3");
             meleeSounds[i].setVolume(meleeVolume);
+        }
+
+        trapSetSounds = new GreenfootSound[trapSetLength];
+        for (int i = 0; i < trapSetLength; i++){
+            trapSetSounds[i] = new GreenfootSound("trapset.mp3");
+            trapSetSounds[i].setVolume(trapSetVolume);
+        }
+
+        trapStepSounds = new GreenfootSound[trapStepLength];
+        for (int i = 0; i < trapStepLength; i++){
+            trapStepSounds[i] = new GreenfootSound("trapstep.mp3");
+            trapStepSounds[i].setVolume(trapStepVolume);
         }
     }
 
@@ -133,5 +156,15 @@ public class SoundManager
     public void playMelee(){
         meleeSounds[meleeIndex].play();
         meleeIndex = (meleeIndex + 1) % meleeLength;
+    }
+
+    public void playTrapSet(){
+        trapSetSounds[trapSetIndex].play();
+        trapSetIndex = (trapSetIndex + 1) % trapSetLength;
+    }
+
+    public void playTrapStep(){
+        trapStepSounds[trapStepIndex].play();
+        trapStepIndex = (trapStepIndex + 1) % trapStepLength;
     }
 }
