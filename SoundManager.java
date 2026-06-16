@@ -23,6 +23,7 @@ import greenfoot.*;
 
 public class SoundManager
 {
+    // Audio file variables
     private GreenfootSound bgm;
     private GreenfootSound tower;
     private GreenfootSound[] menuClickSounds;
@@ -34,7 +35,7 @@ public class SoundManager
     private GreenfootSound[] trapStepSounds;
     private GreenfootSound[] spearSounds;
     
-
+    // Index variables
     private int menuClickIndex = 0;
     private int arrowIndex = 0;
     private int errorIndex = 0;
@@ -44,6 +45,7 @@ public class SoundManager
     private int trapStepIndex = 0;
     private int spearIndex = 0;
     
+    // Volume variables
     private int bgmVolume = 40;
     private int menuClickVolume = 70;
     private int arrowVolume = 40;
@@ -55,6 +57,7 @@ public class SoundManager
     private int trapStepVolume = 20;
     private int spearVolume = 40;
     
+    // Length for sounds with arrays
     private int menuClickLength = 3;
     private int arrowLength = 10;
     private int errorLength = 10;
@@ -64,11 +67,15 @@ public class SoundManager
     private int trapStepLength = 10;
     private int spearLength = 10;
     
+    /**
+    * Creates an instance of SoundManager, then set needed files
+    */
     
     public SoundManager(){
         setFiles();
     }    
 
+    // Set files in variables or arrays
     private void setFiles(){
         bgm = new GreenfootSound("bgm.mp3");
         bgm.setVolume(bgmVolume);
@@ -124,62 +131,93 @@ public class SoundManager
         }
     }
 
-    // Button clicks
+    /**
+    * Plays click sound for buttons
+    */
     public void playMenuClick(){
         menuClickSounds[menuClickIndex].play();
         menuClickIndex = (menuClickIndex + 1) % menuClickLength;
     }
 
-    // Menu music
+    /**
+    * Plays background music
+    */
     public void playBgm(){
         bgm.playLoop();
     }
     
+    /**
+    * Pauses background music
+    */
     public void pauseBgm(){
         bgm.pause();
     }
     
+    /**
+    * Stops background music
+    */
     public void stopBgm(){
         bgm.stop();
     }
 
+    /**
+    * Plays thud on tower building
+    */
     public void playTower(){
         tower.play();
     }   
 
-    // Arrow impact
+    /**
+    * Plays sound for arrow impact on hit from Archer
+    */
     public void playArrow(){
         arrowSounds[arrowIndex].play();
         arrowIndex = (arrowIndex + 1) % arrowLength;
     }
 
-    // Error
+    /**
+    * Play error sound for incorrect button inputs
+    */
     public void playError(){
         errorSounds[errorIndex].play();
         errorIndex = (errorIndex + 1) % errorLength;
     }
 
-    // Fireball from mage
+    /**
+    * Plays whoosh and explosion for Mage's fireball
+    */
     public void playFire(){
         fireSounds[fireIndex].play();
         fireIndex = (fireIndex + 1) % fireLength;
     }
 
+    /**
+    * Plays sound for Knight stabbing with his sword
+    */
     public void playMelee(){
         meleeSounds[meleeIndex].play();
         meleeIndex = (meleeIndex + 1) % meleeLength;
     }
 
+    /**
+    * Plays metal sound when trap is set by Trapper
+    */
     public void playTrapSet(){
         trapSetSounds[trapSetIndex].play();
         trapSetIndex = (trapSetIndex + 1) % trapSetLength;
     }
 
+    /**
+    * Plays sound when goblins step on trap
+    */
     public void playTrapStep(){
         trapStepSounds[trapStepIndex].play();
         trapStepIndex = (trapStepIndex + 1) % trapStepLength;
     }
 
+    /**
+    * Plays sound for spear impact on hit from Spearman
+    */
     public void playSpear(){
         spearSounds[spearIndex].play();
         spearIndex = (spearIndex + 1) % spearLength;
