@@ -4,6 +4,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
 import java.util.Scanner;
+import java.lang.NumberFormatException;
+import java.util.NoSuchElementException;
+import java.lang.IndexOutOfBoundsException;
 
 /**
  * Main Game World
@@ -141,8 +144,9 @@ public class TowerDefenseWorld extends World
     private double[] maxChanceBounds= new double[spawnChance.length];
     
     private int winCond = 5000;
-    // Catch exceptions of load since it doesn't change worlds when called from constructor
+    // Catch exceptions of load
     private boolean loadFailed = false;
+    private String failReason;
 
     /**
     * Creates the game world
@@ -159,6 +163,9 @@ public class TowerDefenseWorld extends World
         this.newGame = newGame;
         
         load();
+        if (loadFailed) {
+            return;
+        }
         setMaxBounds();
         fillStatsArray();
         setBackground();
@@ -179,11 +186,6 @@ public class TowerDefenseWorld extends World
         setPaintOrder(SuperStatBar.class, Explosion.class, Enemy.class, Projectiles.class, Trap.class, StartPath.class, EndPath.class, Path.class, Overlay.class);
     }
     
-    public void addedToWorld(World w){
-        if (loadFailed) {
-            Greenfoot.setWorld(new ErrorScreen(soundMan));
-        }
-    }
     /**
     * Starts music when game is started
     */
@@ -626,6 +628,12 @@ public class TowerDefenseWorld extends World
     * @return void
     */
     public void act(){
+        // Catch save loading fails
+        if (loadFailed)
+        {
+            Greenfoot.setWorld(new ErrorScreen(soundMan, failReason));
+            return;
+        }
         // Identify button clicked
         handleTowerSelection();
 
@@ -821,7 +829,7 @@ public class TowerDefenseWorld extends World
             saveLabel.setValue("Saved!");
             saveCountdown = 180;
         } catch (IOException e) {
-            Greenfoot.setWorld(new ErrorScreen(soundMan));
+            Greenfoot.setWorld(new ErrorScreen(soundMan, "Unable to save"));
         }
     }
     
@@ -856,6 +864,16 @@ public class TowerDefenseWorld extends World
                 input.close();
             } catch (IOException e) {
                 loadFailed = true;
+                failReason = "Save file not found or could not be read";
+            } catch (NumberFormatException e) {
+                loadFailed = true;
+                failReason = "Save file contains invalid value";
+            } catch (NoSuchElementException e) {
+                loadFailed = true;
+                failReason = "Save file missing lines";
+            } catch (IndexOutOfBoundsException e) {
+                loadFailed = true;
+                failReason = "Save file missing lines";
             }
         }
     }
